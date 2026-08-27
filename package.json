@@ -1,0 +1,9 @@
+{
+  "name": "rocketgpt",
+  "version": "1.0.0",
+  "private": true,
+  "description": "RocketGPT AI chat workspace",
+  "scripts": {
+    "start": "node server.js"
+  }
+}

@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>RocketGPT | AI workspace</title>
+  <link rel="stylesheet" href="rocketgpt.css" />
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar">
+      <div class="brand"><div class="brand-mark"><span>R</span></div><div class="brand-copy"><div class="brand-name">RocketGPT</div><div class="brand-credit">by Trey Thompson</div></div></div>
+      <button class="new-chat" id="newChat"><span class="plus">+</span> New conversation</button>
+      <div class="side-bottom">
+        <div class="local-status"><span class="status-dot"></span><div><strong>Local workspace</strong><small>Powered by Ollama</small></div></div>
+      </div>
+    </aside>
+
+    <main class="main">
+      <header class="topbar"><div class="breadcrumb">Flight deck <span>/</span> <strong>New conversation</strong></div><div class="topbar-brand"><span class="topbar-rocket" aria-hidden="true"></span><strong>RocketGPT</strong><span class="status"><span class="status-dot"></span>Online</span></div></header>
+      <div class="chat-wrap">
+        <section class="intro"><div><div class="eyebrow">Mission control / your thinking co-pilot</div><h1>Where should we<br><em>go next?</em></h1></div><div class="intro-note">Ask anything. Build something useful. Make the next move count.</div></section>
+        <section class="messages" id="messages">
+          <div class="message assistant"><div class="message-avatar">↗</div><div class="bubble"><p>Welcome to RocketGPT.</p><p>Your local AI workspace is ready.</p></div></div>
+        </section>
+        <div class="composer-area"><form class="composer" id="composer"><textarea id="prompt" rows="1" placeholder="Message RocketGPT..." aria-label="Message RocketGPT"></textarea><button class="send" aria-label="Send message">↗</button></form><div class="composer-meta"><span>Rocket can make mistakes. Check important info.</span><span>⌘ ↵ to send</span></div></div>
+      </div>
+    </main>
+  </div>
+  <script src="rocketgpt.js" defer></script>
+</body>
+</html>
