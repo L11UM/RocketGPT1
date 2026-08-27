@@ -6,11 +6,27 @@
     prompt: document.getElementById('prompt'),
     composer: document.getElementById('composer'),
     history: document.getElementById('history'),
-    newChat: document.getElementById('newChat')
+    newChat: document.getElementById('newChat'),
+    launchScreen: document.getElementById('launchScreen'),
+    launchStatus: document.getElementById('launchStatus'),
+    launchProgress: document.getElementById('launchProgress'),
+    launchBar: document.getElementById('launchBar')
   };
   const apiBaseUrl = document.querySelector('meta[name="api-base-url"]')?.content.replace(/\/$/, '') || '';
   const conversation = [];
   let activeRequest;
+
+  function startLaunchSequence() {
+    const stages = ['Initializing flight deck', 'Checking local connection', 'Ready for liftoff'];
+    stages.forEach((stage, index) => {
+      window.setTimeout(() => {
+        elements.launchStatus.textContent = stage;
+        elements.launchProgress.textContent = `0${index + 1}`;
+        elements.launchBar.style.width = `${Math.round(((index + 1) / stages.length) * 100)}%`;
+      }, index * 260);
+    });
+    window.setTimeout(() => elements.launchScreen.classList.add('is-hidden'), 900);
+  }
 
   function createMessage(text, type) {
     const message = document.createElement('div');
@@ -33,6 +49,17 @@
     elements.messages.appendChild(message);
     message.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
     return message;
+  }
+
+  function addNextVector() {
+    const action = document.createElement('div');
+    const button = document.createElement('button');
+    action.className = 'vector-action';
+    button.className = 'next-vector';
+    button.type = 'button';
+    button.textContent = 'Next Vector  ↗';
+    action.appendChild(button);
+    elements.messages.appendChild(action);
   }
 
   function showTyping() {
@@ -75,6 +102,7 @@
       typingMessage.remove();
       conversation.push({ role: 'assistant', content: reply });
       addMessage(reply, 'assistant');
+      addNextVector();
     } catch (error) {
       if (error.name === 'AbortError') return;
       typingMessage.remove();
@@ -109,6 +137,12 @@
       return;
     }
 
+    if (event.target.closest('.next-vector')) {
+      elements.prompt.value = 'What is the next concrete action I should take based on your last answer?';
+      elements.prompt.focus();
+      return;
+    }
+
     if (thread) {
       elements.history.querySelector('.active')?.classList.remove('active');
       thread.classList.add('active');
@@ -121,4 +155,6 @@
     elements.messages.replaceChildren(createMessage('New conversation ready.', 'assistant'));
     elements.prompt.focus();
   });
+
+  startLaunchSequence();
 })();
