@@ -1,0 +1,13 @@
+services:
+  - type: web
+    name: rocketgpt-api
+    runtime: node
+    buildCommand: npm install
+    startCommand: node server.js
+    envVars:
+      - key: GEMINI_API_KEY
+        sync: false
+      - key: GEMINI_MODEL
+        value: gemini-2.0-flash
+      - key: ALLOWED_ORIGIN
+        value: https://l11um.github.io

@@ -8,6 +8,7 @@
     history: document.getElementById('history'),
     newChat: document.getElementById('newChat')
   };
+  const apiBaseUrl = document.querySelector('meta[name="api-base-url"]')?.content.replace(/\/$/, '') || '';
   const conversation = [];
   let activeRequest;
 
@@ -48,7 +49,7 @@
   async function requestReply() {
     activeRequest?.abort();
     activeRequest = new AbortController();
-    const response = await fetch('/api/chat', {
+    const response = await fetch(`${apiBaseUrl}/api/chat`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ messages: conversation }),

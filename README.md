@@ -19,3 +19,7 @@ npm start
 5. Open http://localhost:3000/rocketgpt.html.
 
 RocketGPT uses Ollama locally, so no API key, payment method, or cloud account is required. To use a different installed model, set `OLLAMA_MODEL` before starting the server.
+
+## Publish AI chat
+
+GitHub Pages hosts the frontend only. To make AI chat available publicly, deploy `server.js` to Render using `render.yaml`, add a Gemini API key as a private Render environment variable, then set the `api-base-url` meta tag in `rocketgpt.html` to the Render service URL before publishing the frontend update.

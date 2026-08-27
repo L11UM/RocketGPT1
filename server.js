@@ -4,6 +4,7 @@ const path = require('node:path');
 
 const PORT = Number(process.env.PORT || 3000);
 const ROOT = __dirname;
+const ALLOWED_ORIGIN = process.env.ALLOWED_ORIGIN || '*';
 const MIME_TYPES = {
   '.css': 'text/css; charset=utf-8',
   '.html': 'text/html; charset=utf-8',
@@ -14,6 +15,9 @@ function sendJson(response, status, body) {
   const payload = JSON.stringify(body);
   response.writeHead(status, {
     'Content-Type': 'application/json; charset=utf-8',
+    'Access-Control-Allow-Origin': ALLOWED_ORIGIN,
+    'Access-Control-Allow-Headers': 'Content-Type',
+    'Access-Control-Allow-Methods': 'POST, OPTIONS',
     'Content-Length': Buffer.byteLength(payload)
   });
   response.end(payload);
@@ -46,7 +50,17 @@ async function handleChat(request, response) {
       return;
     }
 
-    const ollamaResponse = await fetch('http://127.0.0.1:11434/api/chat', {
+    const providerResponse = process.env.GEMINI_API_KEY
+      ? await fetch(`https://generativelanguage.googleapis.com/v1beta/models/${process.env.GEMINI_MODEL || 'gemini-2.0-flash'}:generateContent?key=${process.env.GEMINI_API_KEY}`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          systemInstruction: { parts: [{ text: 'You are Rocket, a concise, thoughtful AI co-pilot. Give practical answers with a warm, forward-moving tone.' }] },
+          contents: input.map(({ role, content }) => ({ role: role === 'assistant' ? 'model' : 'user', parts: [{ text: content }] })),
+          generationConfig: { maxOutputTokens: 700 }
+        })
+      })
+      : await fetch('http://127.0.0.1:11434/api/chat', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
@@ -60,13 +74,16 @@ async function handleChat(request, response) {
       })
     });
 
-    const result = await ollamaResponse.json();
-    if (!ollamaResponse.ok) {
-      sendJson(response, ollamaResponse.status, { error: result.error || 'Ollama returned an error.' });
+    const result = await providerResponse.json();
+    if (!providerResponse.ok) {
+      sendJson(response, providerResponse.status, { error: result.error?.message || result.error || 'The AI provider returned an error.' });
       return;
     }
 
-    sendJson(response, 200, { reply: result.message?.content || 'I could not produce a response this time.' });
+    const reply = process.env.GEMINI_API_KEY
+      ? result.candidates?.[0]?.content?.parts?.map((part) => part.text || '').join('')
+      : result.message?.content;
+    sendJson(response, 200, { reply: reply || 'I could not produce a response this time.' });
   } catch (error) {
     const message = error.cause?.code === 'ECONNREFUSED'
       ? 'Ollama is not running. Start Ollama, then download a model with: ollama pull llama3.2'
@@ -90,6 +107,15 @@ function serveStatic(request, response) {
 }
 
 const server = http.createServer((request, response) => {
+  if (request.method === 'OPTIONS') {
+    response.writeHead(204, {
+      'Access-Control-Allow-Origin': ALLOWED_ORIGIN,
+      'Access-Control-Allow-Headers': 'Content-Type',
+      'Access-Control-Allow-Methods': 'POST, OPTIONS'
+    });
+    response.end();
+    return;
+  }
   if (request.method === 'POST' && request.url === '/api/chat') {
     handleChat(request, response);
     return;
