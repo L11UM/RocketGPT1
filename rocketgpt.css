@@ -28,7 +28,7 @@ body {
 button, textarea { font: inherit; }
 button { border: 0; cursor: pointer; }
 
-.launch-screen { position: fixed; inset: 0; z-index: 10; display: grid; place-content: center; justify-items: center; gap: 16px; background: var(--navy); color: #f8f7f2; transition: opacity .45s ease, visibility .45s ease; }
+.launch-screen { position: fixed; inset: 0; z-index: 10; display: grid; grid-template-columns: minmax(260px, 320px); grid-auto-rows: max-content; place-content: center; justify-items: center; gap: 16px; background: var(--navy); color: #f8f7f2; transition: opacity .45s ease, visibility .45s ease; }
 .launch-screen.is-hidden { opacity: 0; visibility: hidden; pointer-events: none; }
 .launch-visual { width: 92px; height: 92px; display: grid; place-items: center; position: relative; }
 .launch-orbit { position: absolute; inset: 8px -8px; border: 1px solid #4a6477; border-radius: 50%; transform: rotate(-30deg); }
