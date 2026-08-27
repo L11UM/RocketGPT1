@@ -4,7 +4,7 @@ const path = require('node:path');
 
 const PORT = Number(process.env.PORT || 3000);
 const ROOT = __dirname;
-const ALLOWED_ORIGIN = process.env.ALLOWED_ORIGIN || '*';
+const ALLOWED_ORIGINS = (process.env.ALLOWED_ORIGIN || '*').split(',').map((origin) => origin.trim());
 const MIME_TYPES = {
   '.css': 'text/css; charset=utf-8',
   '.html': 'text/html; charset=utf-8',
@@ -13,9 +13,13 @@ const MIME_TYPES = {
 
 function sendJson(response, status, body) {
   const payload = JSON.stringify(body);
+  const requestOrigin = response.req?.headers.origin;
+  const allowedOrigin = ALLOWED_ORIGINS.includes('*') || ALLOWED_ORIGINS.includes(requestOrigin)
+    ? requestOrigin || '*'
+    : ALLOWED_ORIGINS[0];
   response.writeHead(status, {
     'Content-Type': 'application/json; charset=utf-8',
-    'Access-Control-Allow-Origin': ALLOWED_ORIGIN,
+    'Access-Control-Allow-Origin': allowedOrigin,
     'Access-Control-Allow-Headers': 'Content-Type',
     'Access-Control-Allow-Methods': 'POST, OPTIONS',
     'Content-Length': Buffer.byteLength(payload)
@@ -108,8 +112,11 @@ function serveStatic(request, response) {
 
 const server = http.createServer((request, response) => {
   if (request.method === 'OPTIONS') {
+    const allowedOrigin = ALLOWED_ORIGINS.includes('*') || ALLOWED_ORIGINS.includes(request.headers.origin)
+      ? request.headers.origin || '*'
+      : ALLOWED_ORIGINS[0];
     response.writeHead(204, {
-      'Access-Control-Allow-Origin': ALLOWED_ORIGIN,
+      'Access-Control-Allow-Origin': allowedOrigin,
       'Access-Control-Allow-Headers': 'Content-Type',
       'Access-Control-Allow-Methods': 'POST, OPTIONS'
     });

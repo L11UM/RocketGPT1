@@ -10,4 +10,4 @@ services:
       - key: GEMINI_MODEL
         value: gemini-3.6-flash
       - key: ALLOWED_ORIGIN
-        value: https://l11um.github.io
+        value: https://rocketgpt.net,https://l11um.github.io
