@@ -64,27 +64,34 @@ async function handleChat(request, response) {
     if (process.env.GEMINI_SEARCH_ENABLED === 'true') tools.push({ googleSearch: {} });
     if (process.env.GEMINI_CODE_EXECUTION_ENABLED === 'true') tools.push({ codeExecution: {} });
 
-    const providerResponse = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/${process.env.GEMINI_MODEL || 'gemini-4-argon'}:generateContent`, {
+    const requestBody = {
+      systemInstruction: {
+        parts: [{ text: 'You are Rocket, a capable and thoughtful AI copilot. Answer the user directly and accurately. For difficult requests, reason carefully before responding, but provide only useful conclusions and concise explanations, never private chain-of-thought. Use clear structure when it improves understanding. State uncertainty, distinguish facts from assumptions, and ask a focused clarifying question only when needed. Use web search for current or verifiable facts and code execution for calculations when available. Keep the response proportional to the request.' }]
+      },
+      contents: input.map(({ role, content }) => ({ role: role === 'assistant' ? 'model' : 'user', parts: [{ text: content }] })),
+      ...(tools.length ? { tools } : {}),
+      generationConfig: {
+        maxOutputTokens: Number(process.env.GEMINI_MAX_OUTPUT_TOKENS || 8192),
+        thinkingConfig: { thinkingLevel: process.env.GEMINI_THINKING_LEVEL || 'HIGH' }
+      }
+    };
+    const requestModel = (model) => fetch(`https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
         'x-goog-api-key': process.env.GEMINI_API_KEY
       },
-      body: JSON.stringify({
-        systemInstruction: {
-          parts: [{ text: 'You are Rocket, a capable and thoughtful AI copilot. Answer the user directly and accurately. For difficult requests, reason carefully before responding, but provide only useful conclusions and concise explanations, never private chain-of-thought. Use clear structure when it improves understanding. State uncertainty, distinguish facts from assumptions, and ask a focused clarifying question only when needed. Use web search for current or verifiable facts and code execution for calculations when available. Keep the response proportional to the request.' }]
-        },
-        contents: input.map(({ role, content }) => ({ role: role === 'assistant' ? 'model' : 'user', parts: [{ text: content }] })),
-        ...(tools.length ? { tools } : {}),
-        generationConfig: {
-          maxOutputTokens: Number(process.env.GEMINI_MAX_OUTPUT_TOKENS || 8192),
-          thinkingConfig: { thinkingLevel: process.env.GEMINI_THINKING_LEVEL || 'HIGH' }
-        }
-      }),
+      body: JSON.stringify(requestBody),
       signal: AbortSignal.timeout(120_000)
     });
-
-    const result = await providerResponse.json().catch(() => ({}));
+    const primaryModel = process.env.GEMINI_MODEL || 'gemini-4-argon';
+    const fallbackModel = process.env.GEMINI_FALLBACK_MODEL || 'gemini-3.6-flash';
+    let providerResponse = await requestModel(primaryModel);
+    let result = await providerResponse.json().catch(() => ({}));
+    if ([429, 503].includes(providerResponse.status) && fallbackModel !== primaryModel) {
+      providerResponse = await requestModel(fallbackModel);
+      result = await providerResponse.json().catch(() => ({}));
+    }
     if (!providerResponse.ok) {
       sendJson(response, 502, { error: result.error?.message || result.error || `The AI provider returned HTTP ${providerResponse.status}.` });
       return;
