@@ -21,7 +21,14 @@
 
     message.className = `message ${type}`;
     avatar.className = 'message-avatar';
-    avatar.textContent = type === 'user' ? 'LM' : '↗';
+    if (type === 'assistant') {
+      const logo = document.createElement('img');
+      logo.src = 'rocketgpt-logo.svg';
+      logo.alt = '';
+      avatar.appendChild(logo);
+    } else {
+      avatar.textContent = 'You';
+    }
     bubble.className = 'bubble';
     paragraph.textContent = text;
     bubble.appendChild(paragraph);
