@@ -1,4 +1,4 @@
-# RocketGPT
+# RocketGPT 2.0
 
 ## Run locally
 

@@ -3,30 +3,14 @@
 
   const elements = {
     messages: document.getElementById('messages'),
+    emptyState: document.getElementById('emptyState'),
     prompt: document.getElementById('prompt'),
     composer: document.getElementById('composer'),
-    history: document.getElementById('history'),
-    newChat: document.getElementById('newChat'),
-    launchScreen: document.getElementById('launchScreen'),
-    launchStatus: document.getElementById('launchStatus'),
-    launchProgress: document.getElementById('launchProgress'),
-    launchBar: document.getElementById('launchBar')
+    newChat: document.getElementById('newChat')
   };
   const apiBaseUrl = document.querySelector('meta[name="api-base-url"]')?.content.replace(/\/$/, '') || '';
   const conversation = [];
   let activeRequest;
-
-  function startLaunchSequence() {
-    const stages = ['Initializing flight deck', 'Checking local connection', 'Ready for liftoff'];
-    stages.forEach((stage, index) => {
-      window.setTimeout(() => {
-        elements.launchStatus.textContent = stage;
-        elements.launchProgress.textContent = `0${index + 1}`;
-        elements.launchBar.style.width = `${Math.round(((index + 1) / stages.length) * 100)}%`;
-      }, index * 260);
-    });
-    window.setTimeout(() => elements.launchScreen.classList.add('is-hidden'), 900);
-  }
 
   function createMessage(text, type) {
     const message = document.createElement('div');
@@ -91,6 +75,7 @@
     const text = elements.prompt.value.trim();
     if (!text) return;
 
+    elements.emptyState.hidden = true;
     addMessage(text, 'user');
     conversation.push({ role: 'user', content: text });
     elements.prompt.value = '';
@@ -129,10 +114,8 @@
 
   document.addEventListener('click', (event) => {
     const suggestion = event.target.closest('.suggestion');
-    const thread = event.target.closest('.thread');
-
     if (suggestion) {
-      elements.prompt.value = suggestion.textContent;
+      elements.prompt.value = suggestion.dataset.prompt || suggestion.textContent.trim();
       elements.prompt.focus();
       return;
     }
@@ -143,18 +126,13 @@
       return;
     }
 
-    if (thread) {
-      elements.history.querySelector('.active')?.classList.remove('active');
-      thread.classList.add('active');
-    }
   });
 
   elements.newChat.addEventListener('click', () => {
     activeRequest?.abort();
     conversation.length = 0;
-    elements.messages.replaceChildren(createMessage('New conversation ready.', 'assistant'));
+    elements.messages.replaceChildren();
+    elements.emptyState.hidden = false;
     elements.prompt.focus();
   });
-
-  startLaunchSequence();
 })();
