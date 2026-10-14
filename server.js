@@ -8,7 +8,8 @@ const ALLOWED_ORIGINS = (process.env.ALLOWED_ORIGIN || '*').split(',').map((orig
 const MIME_TYPES = {
   '.css': 'text/css; charset=utf-8',
   '.html': 'text/html; charset=utf-8',
-  '.js': 'text/javascript; charset=utf-8'
+  '.js': 'text/javascript; charset=utf-8',
+  '.svg': 'image/svg+xml; charset=utf-8'
 };
 
 function sendJson(response, status, body) {
