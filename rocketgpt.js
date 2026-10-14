@@ -6,13 +6,14 @@
     emptyState: document.getElementById('emptyState'),
     prompt: document.getElementById('prompt'),
     composer: document.getElementById('composer'),
-    newChat: document.getElementById('newChat')
+    newChat: document.getElementById('newChat'),
+    send: document.querySelector('#composer .send')
   };
   const apiBaseUrl = document.querySelector('meta[name="api-base-url"]')?.content.replace(/\/$/, '') || '';
   const conversation = [];
   let activeRequest;
 
-  function createMessage(text, type) {
+  function createMessage(text, type, citations = []) {
     const message = document.createElement('div');
     const avatar = document.createElement('div');
     const bubble = document.createElement('div');
@@ -24,12 +25,34 @@
     bubble.className = 'bubble';
     paragraph.textContent = text;
     bubble.appendChild(paragraph);
+    if (citations.length) {
+      const sources = document.createElement('div');
+      sources.className = 'message-sources';
+      const label = document.createElement('span');
+      label.textContent = 'Sources';
+      sources.appendChild(label);
+      citations.forEach((citation) => {
+        try {
+          const url = new URL(citation.url);
+          if (!['http:', 'https:'].includes(url.protocol)) return;
+          const link = document.createElement('a');
+          link.href = url.href;
+          link.target = '_blank';
+          link.rel = 'noopener noreferrer';
+          link.textContent = citation.title || url.hostname;
+          sources.appendChild(link);
+        } catch {
+          return;
+        }
+      });
+      if (sources.childElementCount > 1) bubble.appendChild(sources);
+    }
     message.append(avatar, bubble);
     return message;
   }
 
-  function addMessage(text, type) {
-    const message = createMessage(text, type);
+  function addMessage(text, type, citations = []) {
+    const message = createMessage(text, type, citations);
     elements.messages.appendChild(message);
     message.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
     return message;
@@ -58,17 +81,26 @@
   }
 
   async function requestReply() {
-    activeRequest?.abort();
-    activeRequest = new AbortController();
-    const response = await fetch(`${apiBaseUrl}/api/chat`, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ messages: conversation }),
-      signal: activeRequest.signal
-    });
-    const data = await response.json();
-    if (!response.ok) throw new Error(data.error || 'Rocket could not respond.');
-    return data.reply;
+    const controller = new AbortController();
+    activeRequest = controller;
+    try {
+      const response = await fetch(`${apiBaseUrl}/api/chat`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ messages: conversation }),
+        signal: controller.signal
+      });
+      const data = await response.json().catch(() => null);
+      if (!response.ok) {
+        throw new Error(data?.error || `The chat server is unavailable (HTTP ${response.status}).`);
+      }
+      if (typeof data?.reply !== 'string' || !data.reply.trim()) {
+        throw new Error('The AI returned an empty response. Please try again.');
+      }
+      return data;
+    } finally {
+      if (activeRequest === controller) activeRequest = undefined;
+    }
   }
 
   async function sendMessage() {
@@ -80,18 +112,21 @@
     conversation.push({ role: 'user', content: text });
     elements.prompt.value = '';
     elements.prompt.style.height = 'auto';
+    elements.send.disabled = true;
     const typingMessage = showTyping();
 
     try {
-      const reply = await requestReply();
+      const { reply, citations } = await requestReply();
       typingMessage.remove();
       conversation.push({ role: 'assistant', content: reply });
-      addMessage(reply, 'assistant');
+      addMessage(reply, 'assistant', citations);
       addNextVector();
     } catch (error) {
       if (error.name === 'AbortError') return;
       typingMessage.remove();
       addMessage(`Connection issue: ${error.message}`, 'assistant');
+    } finally {
+      elements.send.disabled = false;
     }
   }
 
@@ -130,6 +165,8 @@
 
   elements.newChat.addEventListener('click', () => {
     activeRequest?.abort();
+    activeRequest = undefined;
+    elements.send.disabled = false;
     conversation.length = 0;
     elements.messages.replaceChildren();
     elements.emptyState.hidden = false;

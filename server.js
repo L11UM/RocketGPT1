@@ -43,6 +43,11 @@ function readBody(request) {
 
 async function handleChat(request, response) {
   try {
+    if (!process.env.GEMINI_API_KEY) {
+      sendJson(response, 503, { error: 'AI is not configured. Add GEMINI_API_KEY to the server environment.' });
+      return;
+    }
+
     const body = JSON.parse(await readBody(request));
     const messages = Array.isArray(body.messages) ? body.messages : [];
     const input = messages
@@ -55,45 +60,47 @@ async function handleChat(request, response) {
       return;
     }
 
-    const providerResponse = process.env.GEMINI_API_KEY
-      ? await fetch(`https://generativelanguage.googleapis.com/v1beta/models/${process.env.GEMINI_MODEL || 'gemini-3.6-flash'}:generateContent?key=${process.env.GEMINI_API_KEY}`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          systemInstruction: { parts: [{ text: 'You are Rocket, a concise, thoughtful AI co-pilot. Give practical answers with a warm, forward-moving tone.' }] },
-          contents: input.map(({ role, content }) => ({ role: role === 'assistant' ? 'model' : 'user', parts: [{ text: content }] })),
-          generationConfig: { maxOutputTokens: 700 }
-        })
-      })
-      : await fetch('http://127.0.0.1:11434/api/chat', {
+    const tools = [];
+    if (process.env.GEMINI_SEARCH_ENABLED === 'true') tools.push({ googleSearch: {} });
+    if (process.env.GEMINI_CODE_EXECUTION_ENABLED === 'true') tools.push({ codeExecution: {} });
+
+    const providerResponse = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/${process.env.GEMINI_MODEL || 'gemini-4-argon'}:generateContent`, {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
+      headers: {
+        'Content-Type': 'application/json',
+        'x-goog-api-key': process.env.GEMINI_API_KEY
+      },
       body: JSON.stringify({
-        model: process.env.OLLAMA_MODEL || 'llama3.2',
-        stream: false,
-        messages: [
-          { role: 'system', content: 'You are Rocket, a concise, thoughtful AI co-pilot. Give practical answers with a warm, forward-moving tone.' },
-          ...input
-        ],
-        options: { num_predict: 700 }
-      })
+        systemInstruction: {
+          parts: [{ text: 'You are Rocket, a capable and thoughtful AI copilot. Answer the user directly and accurately. For difficult requests, reason carefully before responding, but provide only useful conclusions and concise explanations, never private chain-of-thought. Use clear structure when it improves understanding. State uncertainty, distinguish facts from assumptions, and ask a focused clarifying question only when needed. Use web search for current or verifiable facts and code execution for calculations when available. Keep the response proportional to the request.' }]
+        },
+        contents: input.map(({ role, content }) => ({ role: role === 'assistant' ? 'model' : 'user', parts: [{ text: content }] })),
+        ...(tools.length ? { tools } : {}),
+        generationConfig: {
+          maxOutputTokens: Number(process.env.GEMINI_MAX_OUTPUT_TOKENS || 8192),
+          thinkingConfig: { thinkingLevel: process.env.GEMINI_THINKING_LEVEL || 'HIGH' }
+        }
+      }),
+      signal: AbortSignal.timeout(120_000)
     });
 
-    const result = await providerResponse.json();
+    const result = await providerResponse.json().catch(() => ({}));
     if (!providerResponse.ok) {
-      sendJson(response, providerResponse.status, { error: result.error?.message || result.error || 'The AI provider returned an error.' });
+      sendJson(response, 502, { error: result.error?.message || result.error || `The AI provider returned HTTP ${providerResponse.status}.` });
       return;
     }
 
-    const reply = process.env.GEMINI_API_KEY
-      ? result.candidates?.[0]?.content?.parts?.map((part) => part.text || '').join('')
-      : result.message?.content;
-    sendJson(response, 200, { reply: reply || 'I could not produce a response this time.' });
+    const candidate = result.candidates?.[0];
+    const reply = candidate?.content?.parts?.map((part) => part.text || '').join('');
+    const citations = [...new Map((candidate?.groundingMetadata?.groundingChunks || [])
+      .filter((chunk) => chunk.web?.uri)
+      .map((chunk) => [chunk.web.uri, { title: chunk.web.title || chunk.web.uri, url: chunk.web.uri }])).values()];
+    sendJson(response, 200, { reply: reply || 'I could not produce a response this time.', citations });
   } catch (error) {
-    const message = error.cause?.code === 'ECONNREFUSED'
-      ? 'Ollama is not running. Start Ollama, then download a model with: ollama pull llama3.2'
+    const message = error.name === 'TimeoutError'
+      ? 'The AI request timed out. Please try again.'
       : error.message || 'Invalid chat request.';
-    sendJson(response, 502, { error: message });
+    sendJson(response, error.name === 'TimeoutError' ? 504 : 502, { error: message });
   }
 }
 

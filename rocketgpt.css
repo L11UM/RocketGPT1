@@ -202,6 +202,10 @@ button, textarea { color: inherit; }
 .bubble { padding: 1px 0; border: 0; border-radius: 0; color: #ececf1; background: transparent; box-shadow: none; font-size: 15px; line-height: 1.7; }
 .user .bubble { color: #ececf1; background: transparent; }
 .bubble ul { color: #d1d5dc; }
+.message-sources { display: flex; flex-wrap: wrap; align-items: center; gap: 7px 12px; margin-top: 12px; font-size: 12px; line-height: 1.4; }
+.message-sources span { color: #a0a0a9; }
+.message-sources a { color: #a8d8be; text-decoration: underline; text-underline-offset: 2px; }
+.message-sources a:hover { color: #e0f2e8; }
 .vector-action { width: min(720px, calc(100% - 48px)); margin: 10px auto; }
 .next-vector { border-color: #565869; border-radius: 6px; color: #d4d4dc; background: #40414f; }
 .next-vector:hover { color: #fff; background: #4a4b58; }

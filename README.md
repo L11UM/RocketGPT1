@@ -3,23 +3,17 @@
 ## Run locally
 
 1. Install Node.js 18 or newer from https://nodejs.org.
-2. Install Ollama from https://ollama.com/download.
-3. Open PowerShell in this folder and download the free local model:
+2. Create a Gemini API key at https://aistudio.google.com/apikey.
+3. Set `GEMINI_API_KEY` in your shell, then start RocketGPT:
 
-```powershell
-ollama pull llama3.2
-```
-
-4. Start RocketGPT:
-
-```powershell
+```sh
 npm start
 ```
 
-5. Open http://localhost:3000/rocketgpt.html.
+4. Open http://localhost:3000/rocketgpt.html.
 
-RocketGPT uses Ollama locally, so no API key, payment method, or cloud account is required. To use a different installed model, set `OLLAMA_MODEL` before starting the server.
+The API key stays on the server and must never be placed in the frontend. The example settings in `.env.example` are a reference; the app does not load `.env` files automatically.
 
 ## Publish AI chat
 
-GitHub Pages hosts the frontend only. To make AI chat available publicly, deploy `server.js` to Render using `render.yaml`, add a Gemini API key as a private Render environment variable, then set the `api-base-url` meta tag in `rocketgpt.html` to the Render service URL before publishing the frontend update.
+GitHub Pages hosts the frontend only. Render runs the API using `render.yaml`; add `GEMINI_API_KEY` as a private Render environment variable and deploy the service. The frontend's `api-base-url` must match the Render service URL. The blueprint uses Gemini 4 Argon with high reasoning, Google Search grounding, and code execution. Search grounding may incur Google API charges; local `.env.example` settings leave search disabled by default.
