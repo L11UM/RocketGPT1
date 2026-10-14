@@ -3,35 +3,35 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>RocketGPT 2.0 | AI workspace</title>
+  <title>RocketGPT | Flight Deck</title>
   <meta name="api-base-url" content="https://rocketgpt1.onrender.com" />
   <link rel="stylesheet" href="rocketgpt.css" />
 </head>
 <body>
   <div class="app-shell">
     <aside class="sidebar">
-      <div class="brand"><img class="brand-mark" src="rocketgpt-logo.svg" alt="" /><div class="brand-copy"><div class="brand-name">RocketGPT <span>2.0</span></div><div class="brand-credit">AI workspace</div></div></div>
+      <div class="brand"><img class="brand-mark" src="rocketgpt-logo.svg" alt="" /><div class="brand-copy"><div class="brand-name">RocketGPT <span>FLIGHT DECK</span></div><div class="brand-credit">INTELLIGENCE WORKSPACE</div></div></div>
       <button class="new-chat" id="newChat"><span class="plus" aria-hidden="true">+</span><span>New chat</span><kbd>⌘ K</kbd></button>
       <div class="side-bottom">
-        <div class="local-status"><span class="status-dot"></span><div><strong>RocketGPT 2.0</strong><small>AI workspace</small></div></div>
+        <div class="local-status"><span class="status-dot"></span><div><strong>Gemini engine</strong><small>HIGH-REASONING MODE</small></div></div>
       </div>
     </aside>
 
     <main class="main">
-      <header class="topbar"><button class="model-menu" type="button" aria-label="Current model">RocketGPT 2.0 <span aria-hidden="true">⌄</span></button></header>
+      <header class="topbar"><div class="topbar-kicker"><span>ROCKETGPT</span><span class="topbar-divider">/</span><span>MISSION CONTROL</span></div><div class="topbar-model"><span class="model-dot" aria-hidden="true"></span>GEMINI AI <span class="topbar-index">SESSION 01</span></div></header>
       <div class="chat-wrap">
         <section class="empty-state" id="emptyState">
-          <img class="welcome-logo" src="rocketgpt-logo.svg" alt="" />
-          <h1>RocketGPT 2.0</h1>
-          <p>How can I help you today?</p>
+          <div class="welcome-mark"><img class="welcome-logo" src="rocketgpt-logo.svg" alt="" /><span>01 / OPEN SESSION</span></div>
+          <h1>Bring the hard<br /><em>question.</em></h1>
+          <p class="empty-copy">What are you working through?</p>
           <div class="prompt-grid" aria-label="Prompt ideas">
-            <button class="suggestion" type="button" data-prompt="Help me plan a week of focused work."><strong>Make a plan</strong><span>Turn a goal into clear steps</span></button>
-            <button class="suggestion" type="button" data-prompt="Explain this idea in simple terms: "><strong>Explore an idea</strong><span>Get a clear, useful explanation</span></button>
-            <button class="suggestion" type="button" data-prompt="Help me write a concise project update."><strong>Write something</strong><span>Start with a first draft</span></button>
+            <button class="suggestion" type="button" data-prompt="Help me turn this goal into a focused plan with clear next steps: "><span class="suggestion-index">01</span><strong>Map a launch plan</strong><span class="suggestion-detail">Break a goal into decisive steps</span></button>
+            <button class="suggestion" type="button" data-prompt="Help me reason through this problem, compare options, and recommend a path: "><span class="suggestion-index">02</span><strong>Untangle a problem</strong><span class="suggestion-detail">Compare options and tradeoffs</span></button>
+            <button class="suggestion" type="button" data-prompt="Help me create a strong first draft from this brief: "><span class="suggestion-index">03</span><strong>Draft something real</strong><span class="suggestion-detail">Turn a rough brief into a first pass</span></button>
           </div>
         </section>
         <section class="messages" id="messages" aria-live="polite"></section>
-        <div class="composer-area"><form class="composer" id="composer"><textarea id="prompt" rows="1" placeholder="Message RocketGPT..." aria-label="Message RocketGPT"></textarea><button class="send" aria-label="Send message">↑</button></form><div class="composer-meta"><span>RocketGPT can make mistakes. Check important info.</span><span>⌘ ↵ to send</span></div></div>
+        <div class="composer-area"><form class="composer" id="composer"><textarea id="prompt" rows="1" placeholder="Ask RocketGPT anything..." aria-label="Message RocketGPT"></textarea><button class="send" aria-label="Send message">↑</button></form><div class="composer-meta"><span>AI can make mistakes. Check important info.</span><span>⌘ ↵ TO SEND</span></div></div>
       </div>
     </main>
   </div>
