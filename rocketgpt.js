@@ -65,14 +65,38 @@
     return message;
   }
 
-  function addNextVector() {
+  async function shareAnswer(text, button) {
+    const shareUrl = document.querySelector('meta[property="og:url"]')?.content || window.location.href;
+    const shareText = `${text}\n\n— Rocket 2.0`;
+    try {
+      if (navigator.share) {
+        await navigator.share({ title: 'Rocket 2.0', text: shareText, url: shareUrl });
+        return;
+      }
+      await navigator.clipboard.writeText(`${shareText}\n${shareUrl}`);
+      button.textContent = 'Link copied';
+      window.setTimeout(() => { button.textContent = 'Share answer ↗'; }, 1800);
+    } catch (error) {
+      if (error.name === 'AbortError') return;
+      button.textContent = 'Copy unavailable';
+      window.setTimeout(() => { button.textContent = 'Share answer ↗'; }, 1800);
+    }
+  }
+
+  function addNextVector(answer) {
     const action = document.createElement('div');
-    const button = document.createElement('button');
+    const nextButton = document.createElement('button');
+    const shareButton = document.createElement('button');
     action.className = 'vector-action';
-    button.className = 'next-vector';
-    button.type = 'button';
-    button.textContent = 'Next Vector  ↗';
-    action.appendChild(button);
+    nextButton.className = 'next-vector';
+    nextButton.type = 'button';
+    nextButton.textContent = 'Next Vector  ↗';
+    shareButton.className = 'share-answer';
+    shareButton.type = 'button';
+    shareButton.textContent = 'Share answer ↗';
+    shareButton.setAttribute('aria-label', 'Share this Rocket 2.0 answer');
+    shareButton.addEventListener('click', () => shareAnswer(answer, shareButton));
+    action.append(nextButton, shareButton);
     elements.messages.appendChild(action);
   }
 
@@ -127,7 +151,7 @@
       typingMessage.remove();
       conversation.push({ role: 'assistant', content: reply });
       addMessage(reply, 'assistant', citations);
-      addNextVector();
+      addNextVector(reply);
     } catch (error) {
       if (error.name === 'AbortError') return;
       typingMessage.remove();

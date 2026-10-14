@@ -431,8 +431,12 @@ button, textarea { color: inherit; font-family: inherit; }
 .message-sources a { color: #b6d99b; }
 .message-sources a:hover { color: #d7edc7; }
 .vector-action { width: min(768px, calc(100% - 48px)); margin: 8px auto; padding-left: 50px; }
+.vector-action { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; }
 .next-vector { padding: 7px 10px; border: 1px solid #444; border-radius: 6px; color: #aaa; background: #222; font: 9px 'IBM Plex Mono', monospace; letter-spacing: 0; }
 .next-vector:hover { color: #fff; background: #303030; }
+.share-answer { padding: 7px 10px; border: 1px solid #444; border-radius: 6px; color: #c9c9c9; background: transparent; font-size: 11px; }
+.share-answer:hover { border-color: #777; color: #fff; background: #222; }
+.share-answer:focus-visible, .next-vector:focus-visible { outline: 2px solid #a9cf8d; outline-offset: 2px; }
 .composer-area { width: min(820px, 100%); flex: none; align-self: center; margin: 0 auto; padding: 14px 24px 17px; }
 .composer { gap: 10px; padding: 9px 10px 9px 15px; border: 1px solid #444; border-radius: 12px; background: #292929; box-shadow: 0 4px 18px rgba(0, 0, 0, .2); }
 textarea { color: #ededed; font-size: 14px; }
