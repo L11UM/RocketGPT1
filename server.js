@@ -85,12 +85,17 @@ async function handleChat(request, response) {
       signal: AbortSignal.timeout(120_000)
     });
     const primaryModel = process.env.GEMINI_MODEL || 'gemini-4-argon';
-    const fallbackModel = process.env.GEMINI_FALLBACK_MODEL || 'gemini-3.6-flash';
-    let providerResponse = await requestModel(primaryModel);
-    let result = await providerResponse.json().catch(() => ({}));
-    if ([429, 503].includes(providerResponse.status) && fallbackModel !== primaryModel) {
-      providerResponse = await requestModel(fallbackModel);
+    const fallbackModels = (process.env.GEMINI_FALLBACK_MODELS || 'gemini-3.8-flash,gemini-3.6-flash,gemini-3.5-flash-lite')
+      .split(',')
+      .map((model) => model.trim())
+      .filter((model) => model && model !== primaryModel);
+    const models = [primaryModel, ...new Set(fallbackModels)];
+    let providerResponse;
+    let result = {};
+    for (const model of models) {
+      providerResponse = await requestModel(model);
       result = await providerResponse.json().catch(() => ({}));
+      if (providerResponse.ok || ![429, 500, 502, 503].includes(providerResponse.status)) break;
     }
     if (!providerResponse.ok) {
       sendJson(response, 502, { error: result.error?.message || result.error || `The AI provider returned HTTP ${providerResponse.status}.` });
