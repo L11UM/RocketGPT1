@@ -7,11 +7,155 @@
     prompt: document.getElementById('prompt'),
     composer: document.getElementById('composer'),
     newChat: document.getElementById('newChat'),
-    send: document.querySelector('#composer .send')
+    send: document.querySelector('#composer .send'),
+    historySearch: document.getElementById('historySearch'),
+    threadList: document.getElementById('threadList'),
+    mobileHistory: document.getElementById('mobileHistory'),
+    sidebar: document.querySelector('.sidebar'),
+    sidebarBackdrop: document.getElementById('sidebarBackdrop')
   };
   const apiBaseUrl = document.querySelector('meta[name="api-base-url"]')?.content.replace(/\/$/, '') || '';
+  const storageKey = 'rocket2-chat-library-v1';
   const conversation = [];
+  let savedThreads = loadSavedThreads();
+  let activeThreadId;
   let activeRequest;
+
+  function loadSavedThreads() {
+    try {
+      const stored = JSON.parse(localStorage.getItem(storageKey) || '[]');
+      if (!Array.isArray(stored)) return [];
+      return stored.filter((thread) => thread && typeof thread.id === 'string' && Array.isArray(thread.messages))
+        .map((thread) => ({
+          id: thread.id,
+          title: typeof thread.title === 'string' ? thread.title : 'Untitled chat',
+          updatedAt: Number(thread.updatedAt) || 0,
+          messages: thread.messages
+            .filter((message) => ['user', 'assistant'].includes(message?.role) && typeof message.content === 'string')
+            .slice(-60)
+            .map((message) => ({
+              role: message.role,
+              content: message.content,
+              citations: Array.isArray(message.citations) ? message.citations : []
+            }))
+        }));
+    } catch {
+      return [];
+    }
+  }
+
+  function persistSavedThreads() {
+    try {
+      localStorage.setItem(storageKey, JSON.stringify(savedThreads));
+    } catch {
+      const notice = document.querySelector('.history-privacy');
+      if (notice) notice.textContent = 'Browser storage is full';
+    }
+  }
+
+  function renderThreadList() {
+    const query = elements.historySearch.value.trim().toLowerCase();
+    const matches = savedThreads.filter((thread) => !query
+      || thread.title.toLowerCase().includes(query)
+      || thread.messages.some((message) => message.content.toLowerCase().includes(query)));
+    elements.threadList.replaceChildren();
+    if (!matches.length) {
+      const empty = document.createElement('p');
+      empty.className = 'history-empty';
+      empty.textContent = query ? 'No matching chats' : 'Your saved chats will appear here';
+      elements.threadList.appendChild(empty);
+      return;
+    }
+
+    matches.forEach((thread) => {
+      const row = document.createElement('div');
+      const openButton = document.createElement('button');
+      const title = document.createElement('span');
+      const deleteButton = document.createElement('button');
+      row.className = 'thread-row';
+      openButton.className = `thread${thread.id === activeThreadId ? ' active' : ''}`;
+      openButton.type = 'button';
+      openButton.setAttribute('role', 'listitem');
+      if (thread.id === activeThreadId) openButton.setAttribute('aria-current', 'true');
+      title.className = 'thread-title';
+      title.textContent = thread.title;
+      openButton.appendChild(title);
+      openButton.addEventListener('click', () => openSavedThread(thread.id));
+      deleteButton.className = 'thread-delete';
+      deleteButton.type = 'button';
+      deleteButton.textContent = '×';
+      deleteButton.title = 'Delete chat';
+      deleteButton.setAttribute('aria-label', `Delete chat: ${thread.title}`);
+      deleteButton.addEventListener('click', () => deleteSavedThread(thread.id));
+      row.append(openButton, deleteButton);
+      elements.threadList.appendChild(row);
+    });
+  }
+
+  function saveActiveThread() {
+    if (!conversation.length) return;
+    activeThreadId ||= globalThis.crypto?.randomUUID?.() || `${Date.now()}-${Math.random().toString(36).slice(2)}`;
+    const firstUserMessage = conversation.find((message) => message.role === 'user')?.content || 'New chat';
+    const title = firstUserMessage.trim().replace(/\s+/g, ' ').slice(0, 48);
+    const thread = {
+      id: activeThreadId,
+      title: title || 'New chat',
+      updatedAt: Date.now(),
+      messages: conversation.slice(-60)
+    };
+    savedThreads = [thread, ...savedThreads.filter((saved) => saved.id !== activeThreadId)].slice(0, 50);
+    persistSavedThreads();
+    renderThreadList();
+  }
+
+  function closeHistoryDrawer() {
+    elements.sidebar.classList.remove('is-open');
+    elements.sidebarBackdrop.hidden = true;
+    elements.mobileHistory.setAttribute('aria-expanded', 'false');
+  }
+
+  function startNewChat() {
+    activeRequest?.abort();
+    activeRequest = undefined;
+    activeThreadId = undefined;
+    elements.send.disabled = false;
+    conversation.length = 0;
+    elements.messages.replaceChildren();
+    elements.emptyState.hidden = false;
+    renderThreadList();
+    closeHistoryDrawer();
+    elements.prompt.focus();
+  }
+
+  function openSavedThread(threadId) {
+    const thread = savedThreads.find((saved) => saved.id === threadId);
+    if (!thread) return;
+    activeRequest?.abort();
+    activeRequest = undefined;
+    activeThreadId = thread.id;
+    elements.send.disabled = false;
+    conversation.splice(0, conversation.length, ...thread.messages.map((message) => ({ ...message })));
+    elements.messages.replaceChildren();
+    conversation.forEach((message) => {
+      addMessage(message.content, message.role, message.citations);
+      if (message.role === 'assistant') addNextVector(message.content);
+    });
+    elements.prompt.value = '';
+    elements.emptyState.hidden = conversation.length > 0;
+    renderThreadList();
+    closeHistoryDrawer();
+    elements.prompt.focus();
+  }
+
+  function deleteSavedThread(threadId) {
+    savedThreads = savedThreads.filter((thread) => thread.id !== threadId);
+    persistSavedThreads();
+    if (activeThreadId === threadId) {
+      startNewChat();
+    } else {
+      renderThreadList();
+    }
+  }
 
   function createMessage(text, type, citations = []) {
     const message = document.createElement('div');
@@ -141,6 +285,7 @@
     elements.emptyState.hidden = true;
     addMessage(text, 'user');
     conversation.push({ role: 'user', content: text });
+    saveActiveThread();
     elements.prompt.value = '';
     elements.prompt.style.height = 'auto';
     elements.send.disabled = true;
@@ -149,7 +294,8 @@
     try {
       const { reply, citations } = await requestReply();
       typingMessage.remove();
-      conversation.push({ role: 'assistant', content: reply });
+      conversation.push({ role: 'assistant', content: reply, citations: Array.isArray(citations) ? citations : [] });
+      saveActiveThread();
       addMessage(reply, 'assistant', citations);
       addNextVector(reply);
     } catch (error) {
@@ -195,12 +341,17 @@
   });
 
   elements.newChat.addEventListener('click', () => {
-    activeRequest?.abort();
-    activeRequest = undefined;
-    elements.send.disabled = false;
-    conversation.length = 0;
-    elements.messages.replaceChildren();
-    elements.emptyState.hidden = false;
-    elements.prompt.focus();
+    startNewChat();
   });
+
+  elements.historySearch.addEventListener('input', renderThreadList);
+  elements.mobileHistory.addEventListener('click', () => {
+    const isOpen = elements.sidebar.classList.toggle('is-open');
+    elements.sidebarBackdrop.hidden = !isOpen;
+    elements.mobileHistory.setAttribute('aria-expanded', String(isOpen));
+    if (isOpen) elements.historySearch.focus();
+  });
+  elements.sidebarBackdrop.addEventListener('click', closeHistoryDrawer);
+
+  renderThreadList();
 })();

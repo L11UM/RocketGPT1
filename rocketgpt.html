@@ -4,28 +4,35 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Rocket 2.0 | AI Chat</title>
-  <meta name="description" content="Ask anything with Rocket 2.0. Share useful answers in one tap." />
+  <meta name="description" content="Ask anything, keep chats organized, and share useful answers with Rocket 2.0." />
   <meta property="og:type" content="website" />
   <meta property="og:title" content="Rocket 2.0 | AI Chat" />
-  <meta property="og:description" content="Ask anything with Rocket 2.0. Share useful answers in one tap." />
+  <meta property="og:description" content="Ask anything, keep chats organized, and share useful answers with Rocket 2.0." />
   <meta property="og:url" content="https://rocketgpt.net/" />
   <meta name="twitter:card" content="summary" />
   <link rel="icon" type="image/svg+xml" href="rocketgpt-logo.svg" />
   <meta name="api-base-url" content="https://rocketgpt1.onrender.com" />
-  <link rel="stylesheet" href="rocketgpt.css?v=rocket-share" />
+  <link rel="stylesheet" href="rocketgpt.css?v=chat-library" />
 </head>
 <body>
   <div class="app-shell">
     <aside class="sidebar">
       <div class="brand"><img class="brand-mark" src="rocketgpt-logo.svg" alt="" /><div class="brand-copy"><div class="brand-name">Rocket 2.0</div><div class="brand-credit">AI CHAT WORKSPACE</div></div></div>
       <button class="new-chat" id="newChat"><span class="plus" aria-hidden="true">+</span><span>New chat</span><kbd>⌘ K</kbd></button>
+      <section class="history-section" aria-label="Chat history">
+        <label class="history-search"><span aria-hidden="true">⌕</span><input id="historySearch" type="search" placeholder="Search chats" aria-label="Search chats" /></label>
+        <div class="history-heading">RECENT</div>
+        <div class="thread-list" id="threadList" role="list"></div>
+        <p class="history-privacy">Saved only in this browser</p>
+      </section>
       <div class="side-bottom">
         <div class="local-status"><span class="status-dot"></span><div><strong>Gemini engine</strong><small>HIGH-REASONING MODE</small></div></div>
       </div>
     </aside>
+    <button class="sidebar-backdrop" id="sidebarBackdrop" type="button" aria-label="Close chat history" hidden></button>
 
     <main class="main">
-      <header class="topbar"><div class="topbar-kicker"><span>ROCKET 2.0</span><span class="topbar-divider">/</span><span>AI CHAT</span></div><div class="topbar-model"><span class="model-dot" aria-hidden="true"></span>GEMINI AI</div></header>
+      <header class="topbar"><div class="topbar-kicker"><button class="mobile-history" id="mobileHistory" type="button" aria-expanded="false" aria-controls="threadList">Chats</button><span>ROCKET 2.0</span><span class="topbar-divider">/</span><span>AI CHAT</span></div><div class="topbar-model"><span class="model-dot" aria-hidden="true"></span>GEMINI AI</div></header>
       <div class="chat-wrap">
         <section class="empty-state" id="emptyState">
           <div class="welcome-mark"><img class="welcome-logo" src="rocketgpt-logo.svg" alt="Rocket 2.0 logo" /><span>ROCKET 2.0</span></div>
@@ -42,6 +49,6 @@
       </div>
     </main>
   </div>
-  <script src="rocketgpt.js?v=rocket-share" defer></script>
+  <script src="rocketgpt.js?v=chat-library" defer></script>
 </body>
 </html>
