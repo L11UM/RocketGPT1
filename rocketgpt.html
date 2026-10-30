@@ -12,7 +12,7 @@
   <meta name="twitter:card" content="summary" />
   <link rel="icon" type="image/svg+xml" href="rocketgpt-logo.svg" />
   <meta name="api-base-url" content="https://rocketgpt1.onrender.com" />
-  <link rel="stylesheet" href="rocketgpt.css?v=openai-label" />
+  <link rel="stylesheet" href="rocketgpt.css?v=free-ai-chat" />
 </head>
 <body>
   <div class="app-shell">
@@ -26,13 +26,13 @@
         <p class="history-privacy">Saved only in this browser</p>
       </section>
       <div class="side-bottom">
-        <div class="local-status"><span class="status-dot"></span><div><strong>OpenAI</strong><small>OPENAI API</small></div></div>
+        <div class="local-status"><span class="status-dot"></span><div><strong>GPT-OSS</strong><small>FREE AI CHAT</small></div></div>
       </div>
     </aside>
     <button class="sidebar-backdrop" id="sidebarBackdrop" type="button" aria-label="Close chat history" hidden></button>
 
     <main class="main">
-      <header class="topbar"><div class="topbar-kicker"><button class="mobile-history" id="mobileHistory" type="button" aria-expanded="false" aria-controls="threadList">Chats</button><span>ROCKET 2.0</span><span class="topbar-divider">/</span><span>AI CHAT</span></div><button class="topbar-model" id="apiKeySettings" type="button" aria-label="OpenAI settings" title="Click to add your OpenAI API key"><span class="model-dot" aria-hidden="true"></span><span id="apiKeyStatus">OPENAI</span></button></header>
+      <header class="topbar"><div class="topbar-kicker"><button class="mobile-history" id="mobileHistory" type="button" aria-expanded="false" aria-controls="threadList">Chats</button><span>ROCKET 2.0</span><span class="topbar-divider">/</span><span>AI CHAT</span></div><div class="topbar-model"><span class="model-dot" aria-hidden="true"></span>GPT-OSS</div></header>
       <div class="chat-wrap">
         <section class="empty-state" id="emptyState">
           <div class="welcome-mark"><img class="welcome-logo" src="rocketgpt-logo.svg" alt="Rocket 2.0 logo" /><span>ROCKET 2.0</span></div>
@@ -69,23 +69,10 @@
           </div>
         </section>
         <section class="messages" id="messages" aria-live="polite"></section>
-        <div class="composer-area"><form class="composer" id="composer"><textarea id="prompt" rows="1" placeholder="Message Rocket 2.0" aria-label="Message Rocket 2.0"></textarea><button class="send" aria-label="Send message">↑</button></form><div class="composer-options"><label for="webSearch"><input id="webSearch" type="checkbox" /> Search the web</label><button class="viral-toggle" id="viralMode" type="button" aria-pressed="false">Viral mode: Off</button><span>May incur extra usage charges</span></div><div class="composer-meta"><span>AI can make mistakes. Check important info.</span><span>⌘ ↵ to send</span></div></div>
+        <div class="composer-area"><form class="composer" id="composer"><textarea id="prompt" rows="1" placeholder="Message Rocket 2.0" aria-label="Message Rocket 2.0"></textarea><button class="send" aria-label="Send message">↑</button></form><div class="composer-options"><button class="viral-toggle" id="viralMode" type="button" aria-pressed="false">Viral mode: Off</button><span>Free AI · one reply per IP every 30 seconds · don't send sensitive info</span></div><div class="composer-meta"><span>AI can make mistakes. Check important info.</span><span>⌘ ↵ to send</span></div></div>
       </div>
     </main>
   </div>
-  <dialog class="api-key-dialog" id="apiKeyDialog" aria-labelledby="apiKeyTitle">
-    <form id="apiKeyForm">
-      <h2 id="apiKeyTitle">Connect to OpenAI</h2>
-      <p>Your key is kept only in this tab's memory and sent directly to OpenAI. It is not saved or sent to Rocket's server. API usage may be billed to your OpenAI account.</p>
-      <label for="apiKeyInput">OpenAI API key</label>
-      <input id="apiKeyInput" type="password" autocomplete="off" autocapitalize="off" spellcheck="false" required />
-      <div class="api-key-actions">
-        <button id="clearApiKey" type="button">Remove key</button>
-        <button id="cancelApiKey" type="button">Cancel</button>
-        <button type="submit">Use key</button>
-      </div>
-    </form>
-  </dialog>
-  <script src="rocketgpt.js?v=openai-label" defer></script>
+  <script src="rocketgpt.js?v=free-ai-chat" defer></script>
 </body>
 </html>
