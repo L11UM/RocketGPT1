@@ -14,7 +14,8 @@
     threadList: document.getElementById('threadList'),
     mobileHistory: document.getElementById('mobileHistory'),
     sidebar: document.querySelector('.sidebar'),
-    sidebarBackdrop: document.getElementById('sidebarBackdrop')
+    sidebarBackdrop: document.getElementById('sidebarBackdrop'),
+    shareApp: document.getElementById('shareApp')
   };
   const apiBaseUrl = document.querySelector('meta[name="api-base-url"]')?.content.replace(/\/$/, '') || '';
   const storageKey = 'rocket2-chat-library-v1';
@@ -49,6 +50,31 @@ ${viralInstructions}`;
     elements.viralModeCallout.setAttribute('aria-pressed', String(enabled));
     elements.viralModeCallout.classList.toggle('is-active', enabled);
     elements.viralModeCallout.querySelector('.callout-action').textContent = enabled ? 'Turn off ↗' : 'Turn on ↗';
+  }
+
+  async function shareApp() {
+    const shareData = {
+      title: 'Rocket 2.0 — Turn ideas into attention',
+      text: 'Try Rocket 2.0, a free AI chat workspace for sharper ideas and shareable content.',
+      url: 'https://rocketgpt.net/rocketgpt.html?utm_source=share&utm_medium=link'
+    };
+    try {
+      if (navigator.share) {
+        await navigator.share(shareData);
+        return;
+      }
+      await navigator.clipboard.writeText(shareData.url);
+      elements.shareApp.classList.add('is-copied');
+      elements.shareApp.setAttribute('aria-label', 'Rocket 2.0 link copied');
+    } catch (error) {
+      if (error.name === 'AbortError') return;
+      elements.shareApp.classList.add('is-unavailable');
+      elements.shareApp.setAttribute('aria-label', 'Rocket 2.0 sharing unavailable');
+    }
+    window.setTimeout(() => {
+      elements.shareApp.classList.remove('is-copied', 'is-unavailable');
+      elements.shareApp.setAttribute('aria-label', 'Share Rocket 2.0');
+    }, 2200);
   }
 
   function loadSavedThreads() {
@@ -241,19 +267,21 @@ ${viralInstructions}`;
   }
 
   async function shareAnswer(text, button) {
-    const shareUrl = document.querySelector('meta[property="og:url"]')?.content || window.location.href;
+    const shareUrl = new URL(document.querySelector('meta[property="og:url"]')?.content || window.location.href);
+    shareUrl.searchParams.set('utm_source', 'share');
+    shareUrl.searchParams.set('utm_medium', 'answer');
     const shareText = `${text}\n\n— Rocket 2.0`;
     try {
       if (navigator.share) {
-        await navigator.share({ title: 'Rocket 2.0', text: shareText, url: shareUrl });
+        await navigator.share({ title: 'Rocket 2.0', text: shareText, url: shareUrl.toString() });
         return;
       }
-      await navigator.clipboard.writeText(`${shareText}\n${shareUrl}`);
-      button.textContent = 'Link copied';
+      await navigator.clipboard.writeText(`${shareText}\n${shareUrl.toString()}`);
+      button.textContent = 'Answer copied';
       window.setTimeout(() => { button.textContent = 'Share answer ↗'; }, 1800);
     } catch (error) {
       if (error.name === 'AbortError') return;
-      button.textContent = 'Copy unavailable';
+      button.textContent = 'Share unavailable';
       window.setTimeout(() => { button.textContent = 'Share answer ↗'; }, 1800);
     }
   }
@@ -415,6 +443,7 @@ ${viralInstructions}`;
     sendMessage();
   });
 
+  elements.shareApp.addEventListener('click', shareApp);
   elements.viralMode.addEventListener('click', () => {
     setViralMode(elements.viralMode.getAttribute('aria-pressed') !== 'true');
   });

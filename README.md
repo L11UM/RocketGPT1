@@ -15,6 +15,8 @@ Rocket chat uses the free anonymous GPT-OSS model from Pollinations, directly fr
 
 The public homepage contains search-friendly information about RocketGPT, with an XML sitemap at `https://rocketgpt.net/sitemap.xml`. To request Google indexing, verify `rocketgpt.net` in Google Search Console and submit that sitemap. Google decides whether and when to index or rank pages; no code change can guarantee viral reach or instant results.
 
+The homepage and chat page include native sharing with a clipboard fallback, and use a 1200×630 branded social preview image when shared. Share links include UTM tags for basic referral attribution.
+
 Enable **Viral mode** from the welcome callout or composer to ask the model for more shareable, platform-aware content with stronger hooks and concise wording. The feature changes the model instructions; it cannot guarantee that content will go viral.
 
 Recent chats are saved in the current browser only. They are not uploaded or synced between devices.

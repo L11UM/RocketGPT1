@@ -479,6 +479,13 @@ button, textarea { color: inherit; font-family: inherit; }
 .next-vector:hover { color: #fff; background: #303030; }
 .share-answer { padding: 7px 10px; border: 1px solid #444; border-radius: 6px; color: #c9c9c9; background: transparent; font-size: 11px; }
 .share-answer:hover { border-color: #777; color: #fff; background: #222; }
+.topbar-actions { display: flex; align-items: center; gap: 18px; }
+.share-app { padding: 7px 10px; border: 1px solid #444; border-radius: 6px; color: #c9c9c9; background: transparent; font-size: 11px; }
+.share-app:hover { border-color: #a9cf8d; color: #d7edc7; background: #222; }
+.share-app:focus-visible { outline: 2px solid #a9cf8d; outline-offset: 2px; }
+.share-app-short, .share-app-copied, .share-app-unavailable { display: none; }
+.share-app.is-copied .share-app-label, .share-app.is-unavailable .share-app-label { display: none; }
+.share-app.is-copied .share-app-copied, .share-app.is-unavailable .share-app-unavailable { display: inline; }
 .viral-toggle { padding: 6px 9px; border: 1px solid #444; border-radius: 6px; color: #c9c9c9; background: transparent; font-size: 11px; }
 .viral-toggle:hover, .viral-toggle.is-active { border-color: #a9cf8d; color: #d7edc7; background: rgba(169, 207, 141, .1); }
 .viral-toggle:focus-visible { outline: 2px solid #a9cf8d; outline-offset: 2px; }
@@ -512,6 +519,11 @@ textarea::placeholder { color: #999; }
   .topbar { height: 54px; padding: 0 15px; }
   .mobile-history { display: inline-flex; align-items: center; padding: 5px 8px; border: 1px solid #3e3e3e; border-radius: 5px; color: #ddd; background: #222; font-size: 11px; }
   .topbar-kicker { gap: 8px; }
+  .topbar-actions { gap: 8px; }
+  .share-app { padding: 6px 7px; font-size: 9px; }
+  .share-app-label { display: none; }
+  .share-app-short { display: inline; }
+  .share-app.is-copied .share-app-short, .share-app.is-unavailable .share-app-short { display: none; }
   .topbar-model { font-size: 9px; }
   .sidebar.is-open { position: fixed; inset: 0 auto 0 0; z-index: 12; display: flex; width: min(300px, 86vw); height: 100dvh; box-shadow: 16px 0 40px rgba(0, 0, 0, .55); }
   .sidebar-backdrop:not([hidden]) { position: fixed; inset: 0; z-index: 11; display: block; background: rgba(0, 0, 0, .62); }

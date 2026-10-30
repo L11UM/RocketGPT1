@@ -11,13 +11,18 @@
   <link rel="icon" type="image/svg+xml" href="/rocketgpt-logo.svg" />
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="RocketGPT" />
-  <meta property="og:title" content="RocketGPT — Free AI Chatbot" />
-  <meta property="og:description" content="Ask questions, improve writing, plan projects, and create shareable content with RocketGPT's free AI chatbot." />
+  <meta property="og:title" content="Rocket 2.0 — Turn ideas into attention" />
+  <meta property="og:description" content="A free AI chat workspace for sharper ideas, better hooks, and shareable content. No account or API key required." />
   <meta property="og:url" content="https://rocketgpt.net/" />
-  <meta property="og:image" content="https://rocketgpt.net/rocketgpt-logo.svg" />
-  <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="RocketGPT — Free AI Chatbot" />
-  <meta name="twitter:description" content="Ask questions, improve writing, plan projects, and create shareable content with RocketGPT's free AI chatbot." />
+  <meta property="og:image" content="https://rocketgpt.net/rocketgpt-share.png" />
+  <meta property="og:image:type" content="image/png" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:image:alt" content="Rocket 2.0 — a free AI chat workspace for sharper ideas and shareable content." />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Rocket 2.0 — Turn ideas into attention" />
+  <meta name="twitter:description" content="A free AI chat workspace for sharper ideas, better hooks, and shareable content. No account or API key required." />
+  <meta name="twitter:image" content="https://rocketgpt.net/rocketgpt-share.png" />
   <script type="application/ld+json">
     {
       "@context": "https://schema.org",
@@ -53,6 +58,9 @@
     .lead { max-width: 690px; margin: 0; color: #b6b6b6; font-size: clamp(17px, 2.5vw, 20px); line-height: 1.65; }
     .cta { display: inline-flex; min-height: 48px; align-items: center; justify-content: center; gap: 10px; margin-top: 26px; padding: 0 20px; border: 1px solid #a9cf8d; border-radius: 7px; background: #a9cf8d; color: #171717; font-weight: 700; text-decoration: none; transition: background .18s, transform .18s; }
     .cta:hover { transform: translateY(-1px); background: #c1e3a8; }
+    .share-cta { min-height: 44px; margin: 0 0 0 12px; padding: 0 16px; border: 1px solid #555; background: transparent; color: #ededed; }
+    .share-cta:hover { border-color: #a9cf8d; background: #202020; color: #ededed; }
+    .share-status { min-height: 20px; margin: 10px 0 0; color: #a9cf8d; font-size: 13px; }
     h2 { margin: 34px 0 10px; font-size: 22px; letter-spacing: -.02em; }
     p, li { color: #b6b6b6; font-size: 15px; line-height: 1.75; }
     .features { display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 12px; margin: 0 0 40px; }
@@ -62,7 +70,7 @@
     a { color: #a9cf8d; }
     .cta, .cta:hover { color: #171717; }
     footer { margin-top: 54px; padding-top: 18px; border-top: 1px solid #383838; color: #898989; font-size: 12px; line-height: 1.6; }
-    @media (max-width: 600px) { main { width: calc(100% - 36px); padding-top: 18px; } .hero { padding: 64px 0 46px; } .brand img { width: 30px; height: 38px; } .brand-copy strong { font-size: 17px; } .model { font-size: 9px; } }
+    @media (max-width: 600px) { main { width: calc(100% - 36px); padding-top: 18px; } .hero { padding: 64px 0 46px; } .brand img { width: 30px; height: 38px; } .brand-copy strong { font-size: 17px; } .model { font-size: 9px; } .share-cta { margin: 10px 0 0; } }
   </style>
 </head>
 <body>
@@ -80,6 +88,8 @@
       <h1 id="hero-title">A useful AI chat, ready when you are.</h1>
       <p class="lead">Ask a question, make a plan, improve a draft, or turn an idea into something worth sharing. RocketGPT is a free AI chatbot that works in your browser—no account or API key needed.</p>
       <a class="cta" href="/rocketgpt.html">Start chatting with RocketGPT <span aria-hidden="true">&nbsp;→</span></a>
+      <button class="cta share-cta" id="shareRocket" type="button">Share Rocket 2.0 <span aria-hidden="true">↗</span></button>
+      <p class="share-status" id="shareStatus" role="status" aria-live="polite"></p>
     </section>
 
     <section aria-label="What you can do with RocketGPT">
@@ -120,5 +130,27 @@
       <a href="/rocketgpt.html">Open the RocketGPT chatbot</a>
     </footer>
   </main>
+  <script>
+    const shareButton = document.getElementById('shareRocket');
+    const shareStatus = document.getElementById('shareStatus');
+    shareButton.addEventListener('click', async () => {
+      const shareData = {
+        title: 'Rocket 2.0 — Turn ideas into attention',
+        text: 'Try Rocket 2.0, a free AI chat workspace for sharper ideas and shareable content.',
+        url: 'https://rocketgpt.net/?utm_source=share&utm_medium=link'
+      };
+      try {
+        if (navigator.share) {
+          await navigator.share(shareData);
+          shareStatus.textContent = 'Ready to share Rocket 2.0.';
+          return;
+        }
+        await navigator.clipboard.writeText(shareData.url);
+        shareStatus.textContent = 'Rocket 2.0 link copied. Send it to a friend.';
+      } catch (error) {
+        if (error.name !== 'AbortError') shareStatus.textContent = 'Sharing is unavailable in this browser.';
+      }
+    });
+  </script>
 </body>
 </html>
