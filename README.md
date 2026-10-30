@@ -13,6 +13,8 @@ npm start
 
 Rocket chat uses the free anonymous GPT-OSS model from Pollinations, directly from the browser; no account or API key is required. The free service is best-effort and rate-limited to one response per public IP every 30 seconds. Do not send sensitive information. Web search is not available in this mode.
 
+The public homepage contains search-friendly information about RocketGPT, with an XML sitemap at `https://rocketgpt.net/sitemap.xml`. To request Google indexing, verify `rocketgpt.net` in Google Search Console and submit that sitemap. Google decides whether and when to index or rank pages; no code change can guarantee viral reach or instant results.
+
 Enable **Viral mode** from the welcome callout or composer to ask the model for more shareable, platform-aware content with stronger hooks and concise wording. The feature changes the model instructions; it cannot guarantee that content will go viral.
 
 Recent chats are saved in the current browser only. They are not uploaded or synced between devices.

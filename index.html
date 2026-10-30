@@ -2,10 +2,113 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta http-equiv="refresh" content="0; url=rocketgpt.html" />
-  <title>RocketGPT</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Free AI Chatbot | RocketGPT</title>
+  <meta name="description" content="Chat with RocketGPT, a free AI chatbot powered by GPT-OSS. Get help with questions, writing, ideas, planning, and shareable content—no account or API key required." />
+  <meta name="robots" content="index, follow, max-image-preview:large" />
+  <meta name="theme-color" content="#171717" />
+  <link rel="canonical" href="https://rocketgpt.net/" />
+  <link rel="icon" type="image/svg+xml" href="/rocketgpt-logo.svg" />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="RocketGPT" />
+  <meta property="og:title" content="RocketGPT — Free AI Chatbot" />
+  <meta property="og:description" content="Ask questions, improve writing, plan projects, and create shareable content with RocketGPT's free AI chatbot." />
+  <meta property="og:url" content="https://rocketgpt.net/" />
+  <meta property="og:image" content="https://rocketgpt.net/rocketgpt-logo.svg" />
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="RocketGPT — Free AI Chatbot" />
+  <meta name="twitter:description" content="Ask questions, improve writing, plan projects, and create shareable content with RocketGPT's free AI chatbot." />
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebApplication",
+      "name": "RocketGPT",
+      "url": "https://rocketgpt.net/",
+      "description": "A free browser-based AI chatbot for questions, writing, planning, and creative ideas, powered by GPT-OSS.",
+      "applicationCategory": "UtilitiesApplication",
+      "operatingSystem": "Any",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+      }
+    }
+  </script>
+  <style>
+    :root { color-scheme: dark; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; background: #171717; color: #ededed; }
+    * { box-sizing: border-box; }
+    body { min-height: 100vh; margin: 0; background: radial-gradient(ellipse at 50% 0, #26352a 0, #171717 54rem); }
+    main { width: min(920px, calc(100% - 36px)); margin: 0 auto; padding: 48px 0 64px; }
+    header { display: flex; align-items: center; gap: 12px; margin-bottom: 76px; }
+    header img { width: 38px; height: 48px; object-fit: contain; }
+    header strong { font-size: 15px; letter-spacing: .04em; }
+    .eyebrow { color: #a9cf8d; font-size: 12px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; }
+    h1 { max-width: 720px; margin: 14px 0; font-size: clamp(42px, 8vw, 72px); line-height: 1.02; letter-spacing: -.055em; }
+    .lead { max-width: 660px; color: #b6b6b6; font-size: clamp(17px, 2.8vw, 20px); line-height: 1.65; }
+    .cta { display: inline-flex; min-height: 48px; align-items: center; justify-content: center; margin: 16px 0 64px; padding: 0 20px; border-radius: 8px; background: #a9cf8d; color: #171717; font-weight: 700; text-decoration: none; }
+    .cta:hover { background: #c1e3a8; }
+    h2 { margin: 34px 0 10px; font-size: 22px; letter-spacing: -.02em; }
+    p, li { color: #b6b6b6; font-size: 15px; line-height: 1.75; }
+    .features { display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 12px; margin: 24px 0 40px; }
+    .feature { padding: 18px; border: 1px solid #383838; border-radius: 10px; background: rgba(32, 32, 32, .8); }
+    .feature h2 { margin: 0 0 8px; font-size: 16px; }
+    .feature p { margin: 0; font-size: 13px; }
+    a { color: #b6d99b; }
+    footer { margin-top: 54px; padding-top: 18px; border-top: 1px solid #383838; color: #898989; font-size: 12px; line-height: 1.6; }
+    @media (max-width: 600px) { main { padding-top: 28px; } header { margin-bottom: 56px; } .cta { margin-bottom: 44px; } }
+  </style>
 </head>
 <body>
-  <p>Opening RocketGPT...</p>
+  <main>
+    <header>
+      <img src="/rocketgpt-logo.svg" alt="" />
+      <strong>ROCKETGPT</strong>
+    </header>
+
+    <section aria-labelledby="hero-title">
+      <p class="eyebrow">Free AI chatbot · GPT-OSS</p>
+      <h1 id="hero-title">A useful AI chat, ready when you are.</h1>
+      <p class="lead">Ask a question, make a plan, improve a draft, or turn an idea into something worth sharing. RocketGPT is a free AI chatbot that works in your browser—no account or API key needed.</p>
+      <a class="cta" href="/rocketgpt.html">Start chatting with RocketGPT <span aria-hidden="true">&nbsp;→</span></a>
+    </section>
+
+    <section aria-label="What you can do with RocketGPT">
+      <div class="features">
+        <article class="feature">
+          <h2>Get clear answers</h2>
+          <p>Explore a topic, get an explanation, or think through a question with an AI assistant.</p>
+        </article>
+        <article class="feature">
+          <h2>Write and create</h2>
+          <p>Draft a post, sharpen an opening hook, shape a pitch, or adapt an idea for sharing.</p>
+        </article>
+        <article class="feature">
+          <h2>Plan your next step</h2>
+          <p>Turn a goal into practical steps, compare options, and organize a project.</p>
+        </article>
+      </div>
+    </section>
+
+    <section aria-labelledby="about-title">
+      <h2 id="about-title">What is RocketGPT?</h2>
+      <p>RocketGPT is a browser-based AI chatbot for everyday questions, writing help, project planning, and creative work. It uses the GPT-OSS model through Pollinations' free text service. Replies are generated by the AI service; they may be inaccurate and should be checked when the details matter.</p>
+      <p>The anonymous free service is best-effort and rate-limited to one reply per public IP address every 30 seconds. Availability and limits are controlled by the provider. Chat messages are sent to that provider to generate responses, so do not enter passwords, payment information, or other sensitive details. Chat history is saved in this browser only.</p>
+    </section>
+
+    <section aria-labelledby="faq-title">
+      <h2 id="faq-title">Frequently asked questions</h2>
+      <h3>Is RocketGPT free to use?</h3>
+      <p>RocketGPT uses the provider's anonymous free AI service. It requires no account or API key, but has a shared per-IP rate limit and may occasionally be unavailable.</p>
+      <h3>Do I need an OpenAI key?</h3>
+      <p>No. RocketGPT uses GPT-OSS through Pollinations, not the OpenAI API.</p>
+      <h3>Can RocketGPT browse the web?</h3>
+      <p>No. The current free chat does not have web search, so it cannot verify live news or current webpages.</p>
+    </section>
+
+    <footer>
+      <p>AI-generated answers can be wrong. Check important facts. RocketGPT chat is provided through a third-party AI service and is not affiliated with OpenAI.</p>
+      <a href="/rocketgpt.html">Open the RocketGPT chatbot</a>
+    </footer>
+  </main>
 </body>
 </html>
