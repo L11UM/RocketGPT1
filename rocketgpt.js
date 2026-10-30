@@ -6,6 +6,8 @@
     emptyState: document.getElementById('emptyState'),
     prompt: document.getElementById('prompt'),
     webSearch: document.getElementById('webSearch'),
+    viralMode: document.getElementById('viralMode'),
+    viralModeCallout: document.getElementById('viralModeCallout'),
     composer: document.getElementById('composer'),
     newChat: document.getElementById('newChat'),
     send: document.querySelector('#composer .send'),
@@ -21,6 +23,15 @@
   let savedThreads = loadSavedThreads();
   let activeThreadId;
   let activeRequest;
+
+  function setViralMode(enabled) {
+    elements.viralMode.setAttribute('aria-pressed', String(enabled));
+    elements.viralMode.classList.toggle('is-active', enabled);
+    elements.viralMode.textContent = `Viral mode: ${enabled ? 'On' : 'Off'}`;
+    elements.viralModeCallout.setAttribute('aria-pressed', String(enabled));
+    elements.viralModeCallout.classList.toggle('is-active', enabled);
+    elements.viralModeCallout.querySelector('.callout-action').textContent = enabled ? 'Turn off ↗' : 'Turn on ↗';
+  }
 
   function loadSavedThreads() {
     try {
@@ -320,7 +331,11 @@
       const response = await fetch(`${apiBaseUrl}/api/chat`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ messages: conversation, search: elements.webSearch.checked }),
+        body: JSON.stringify({
+          messages: conversation,
+          search: elements.webSearch.checked,
+          viralMode: elements.viralMode.getAttribute('aria-pressed') === 'true'
+        }),
         signal: controller.signal
       });
       const data = await response.json().catch(() => null);
@@ -371,6 +386,14 @@
     sendMessage();
   });
 
+  elements.viralMode.addEventListener('click', () => {
+    setViralMode(elements.viralMode.getAttribute('aria-pressed') !== 'true');
+  });
+  elements.viralModeCallout.addEventListener('click', () => {
+    setViralMode(elements.viralMode.getAttribute('aria-pressed') !== 'true');
+    elements.prompt.focus();
+  });
+
   elements.prompt.addEventListener('input', () => {
     elements.prompt.style.height = 'auto';
     elements.prompt.style.height = `${Math.min(elements.prompt.scrollHeight, 100)}px`;
@@ -386,6 +409,7 @@
   document.addEventListener('click', (event) => {
     const suggestion = event.target.closest('.suggestion');
     if (suggestion) {
+      if (suggestion.classList.contains('viral')) setViralMode(true);
       elements.prompt.value = suggestion.dataset.prompt || suggestion.textContent.trim();
       elements.prompt.focus();
       return;

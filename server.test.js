@@ -13,6 +13,7 @@ test('system instruction includes the current date in UTC', () => {
   assert.match(instruction, /Do not invent facts, sources, capabilities, or actions/);
   assert.match(instruction, /Web search is not enabled/);
   assert.match(buildSystemInstruction(new Date('2026-10-21T12:00:00.000Z'), true), /cite important factual claims with the provided source links/);
+  assert.match(buildSystemInstruction(new Date('2026-10-21T12:00:00.000Z'), false, true), /VIRAL MODE IS ON/);
 });
 
 test('buildCurrentDateReply gives the actual date for direct current date and year questions', () => {
@@ -140,7 +141,8 @@ test('handleChat sends Responses API requests to OpenAI and extracts web citatio
       { role: 'assistant', content: 'Earlier answer' },
       { role: 'user', content: 'Latest question' }
     ],
-    search: true
+    search: true,
+    viralMode: true
   })]);
   const response = {
     req: { headers: {} },
@@ -168,6 +170,7 @@ test('handleChat sends Responses API requests to OpenAI and extracts web citatio
     assert.deepEqual(requestBody.tools, [{ type: 'web_search' }]);
     assert.deepEqual(requestBody.input.map(({ role }) => role), ['user', 'assistant', 'user']);
     assert.match(requestBody.instructions, /Web search is enabled for this request/);
+    assert.match(requestBody.instructions, /VIRAL MODE IS ON/);
   } finally {
     global.fetch = originalFetch;
     if (previousEnvironment.apiKey === undefined) delete process.env.OPENAI_API_KEY;

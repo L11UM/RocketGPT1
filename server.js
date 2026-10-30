@@ -52,11 +52,14 @@ function buildFallbackReply(question) {
   return `I can help with that. Please give me a little more context, and I will give you a clear answer based on what you asked: "${text}".`;
 }
 
-function buildSystemInstruction(date = new Date(), searchEnabled = false) {
+function buildSystemInstruction(date = new Date(), searchEnabled = false, viralMode = false) {
   const currentDate = date.toISOString().slice(0, 10);
   const searchInstructions = searchEnabled
     ? 'Web search is enabled for this request. Use search results for current or disputed facts, cite important factual claims with the provided source links, prefer primary and reputable sources, and say when sources do not establish an answer.'
     : 'Web search is not enabled for this request. Do not claim to have checked current sources; be transparent when the answer may be outdated.';
+  const viralInstructions = viralMode
+    ? 'VIRAL MODE IS ON for this answer. Help the user create highly shareable content for the requested platform and audience: lead with a specific, attention-grabbing hook; make the core idea clear and emotionally resonant; use concrete details and tight wording; and end with a natural takeaway or call to action when appropriate. Keep it authentic and useful: do not fabricate claims, promise virality, or use deceptive engagement bait. Follow any requested format and give multiple distinct options when useful.'
+    : '';
   return `You are Rocket, a capable and thoughtful AI copilot. AUTHORITATIVE CURRENT DATE: ${currentDate} (UTC). If asked for today's date, the current date, or the current year, answer using this date; never substitute a date or year inferred from training data.
 
 Give the most useful correct answer you can:
@@ -67,7 +70,9 @@ Give the most useful correct answer you can:
 - Do not invent facts, sources, capabilities, or actions. Separate known facts from assumptions, note meaningful uncertainty, and ask one focused clarifying question only when missing information prevents a useful answer.
 - Keep the response proportional to the request; avoid generic filler and repeating points.
 
-${searchInstructions}`;
+${searchInstructions}
+
+${viralInstructions}`;
 }
 
 function buildCurrentDateReply(question, date = new Date()) {
@@ -137,7 +142,7 @@ async function handleChat(request, response) {
     const searchEnabled = body.search === true;
     const requestBody = {
       model: process.env.OPENAI_MODEL || 'gpt-6-luna',
-      instructions: buildSystemInstruction(new Date(), searchEnabled),
+      instructions: buildSystemInstruction(new Date(), searchEnabled, body.viralMode === true),
       input,
       store: false,
       ...(searchEnabled ? { tools: [{ type: 'web_search' }] } : {}),

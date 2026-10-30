@@ -14,6 +14,8 @@ npm start
 
 The API key stays on the server and must never be placed in the frontend. The example settings in `.env.example` are a reference; the app does not load `.env` files automatically. Rocket uses OpenAI's Responses API and defaults to `gpt-6-luna`; the model must be available to your OpenAI API account. API and web-search usage may incur charges. Responses API storage is disabled (`store: false`). To search the web for a message, select **Search the web** below the composer; returned sources appear below Rocket's answer. Without an API key, Rocket uses a limited local fallback that cannot answer general questions or search the web.
 
+Enable **Viral mode** from the welcome callout or composer to ask the model for more shareable, platform-aware content with stronger hooks and concise wording. The feature changes the model instructions; it cannot guarantee that content will go viral.
+
 Recent chats are saved in the current browser only. They are not uploaded or synced between devices.
 
 ## Answer feedback
