@@ -3,7 +3,7 @@
 ## Run locally
 
 1. Install Node.js 18 or newer from https://nodejs.org.
-2. Start RocketGPT:
+2. Start Rocket 2.0:
 
 ```sh
 npm start
@@ -13,7 +13,7 @@ npm start
 
 Rocket chat uses the free anonymous GPT-OSS model from Pollinations, directly from the browser; no account or API key is required. The free service is best-effort and rate-limited to one response per public IP every 30 seconds. Do not send sensitive information. Web search is not available in this mode.
 
-The public homepage contains search-friendly information about RocketGPT, with an XML sitemap at `https://rocketgpt.net/sitemap.xml`. To request Google indexing, verify `rocketgpt.net` in Google Search Console and submit that sitemap. Google decides whether and when to index or rank pages; no code change can guarantee viral reach or instant results.
+The public homepage contains search-friendly information about Rocket 2.0, with an XML sitemap at `https://rocketgpt.net/sitemap.xml`. To request Google indexing, verify `rocketgpt.net` in Google Search Console and submit that sitemap. Google decides whether and when to index or rank pages; no code change can guarantee viral reach or instant results.
 
 The homepage and chat page include native sharing with a clipboard fallback, and use a 1200×630 branded social preview image when shared. Share links include UTM tags for basic referral attribution.
 
