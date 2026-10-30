@@ -80,6 +80,33 @@ test('handleFeedback stores only a valid rating and server timestamp', async () 
   }
 });
 
+test('handleChat reports missing OpenAI configuration instead of returning a fake AI answer', async () => {
+  const previousApiKey = process.env.OPENAI_API_KEY;
+  delete process.env.OPENAI_API_KEY;
+  const request = Readable.from([JSON.stringify({
+    messages: [{ role: 'user', content: 'Make a project plan.' }]
+  })]);
+  const response = {
+    req: { headers: {} },
+    writeHead(status) {
+      this.status = status;
+    },
+    end(body) {
+      this.body = JSON.parse(body);
+    }
+  };
+
+  try {
+    await handleChat(request, response);
+    assert.equal(response.status, 503);
+    assert.match(response.body.error, /OPENAI_API_KEY/);
+    assert.equal(response.body.reply, undefined);
+  } finally {
+    if (previousApiKey === undefined) delete process.env.OPENAI_API_KEY;
+    else process.env.OPENAI_API_KEY = previousApiKey;
+  }
+});
+
 test('handleChat sends Responses API requests to OpenAI and extracts web citations', async () => {
   const previousEnvironment = {
     apiKey: process.env.OPENAI_API_KEY,

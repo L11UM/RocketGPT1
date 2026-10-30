@@ -130,7 +130,7 @@ async function handleChat(request, response) {
     }
 
     if (!process.env.OPENAI_API_KEY) {
-      sendJson(response, 200, { reply: buildFallbackReply(lastQuestion), citations: [] });
+      sendJson(response, 503, { error: 'AI chat is not configured. Add OPENAI_API_KEY to the server environment.' });
       return;
     }
 
