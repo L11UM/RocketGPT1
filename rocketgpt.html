@@ -12,7 +12,7 @@
   <meta name="twitter:card" content="summary" />
   <link rel="icon" type="image/svg+xml" href="rocketgpt-logo.svg" />
   <meta name="api-base-url" content="https://rocketgpt1.onrender.com" />
-  <link rel="stylesheet" href="rocketgpt.css?v=chat-library" />
+  <link rel="stylesheet" href="rocketgpt.css?v=openai-responses" />
 </head>
 <body>
   <div class="app-shell">
@@ -26,29 +26,52 @@
         <p class="history-privacy">Saved only in this browser</p>
       </section>
       <div class="side-bottom">
-        <div class="local-status"><span class="status-dot"></span><div><strong>Gemini engine</strong><small>HIGH-REASONING MODE</small></div></div>
+        <div class="local-status"><span class="status-dot"></span><div><strong>OpenAI</strong><small>HOSTED AI MODEL</small></div></div>
       </div>
     </aside>
     <button class="sidebar-backdrop" id="sidebarBackdrop" type="button" aria-label="Close chat history" hidden></button>
 
     <main class="main">
-      <header class="topbar"><div class="topbar-kicker"><button class="mobile-history" id="mobileHistory" type="button" aria-expanded="false" aria-controls="threadList">Chats</button><span>ROCKET 2.0</span><span class="topbar-divider">/</span><span>AI CHAT</span></div><div class="topbar-model"><span class="model-dot" aria-hidden="true"></span>GEMINI AI</div></header>
+      <header class="topbar"><div class="topbar-kicker"><button class="mobile-history" id="mobileHistory" type="button" aria-expanded="false" aria-controls="threadList">Chats</button><span>ROCKET 2.0</span><span class="topbar-divider">/</span><span>AI CHAT</span></div><div class="topbar-model"><span class="model-dot" aria-hidden="true"></span>OPENAI</div></header>
       <div class="chat-wrap">
         <section class="empty-state" id="emptyState">
           <div class="welcome-mark"><img class="welcome-logo" src="rocketgpt-logo.svg" alt="Rocket 2.0 logo" /><span>ROCKET 2.0</span></div>
-          <h1>What can I help with?</h1>
-          <p class="empty-copy">Ask anything, or start with a prompt.</p>
+          <h1>Turn ideas into attention.</h1>
+          <p class="empty-copy">Ask anything, create sharper content, or turn a rough thought into something shareable.</p>
+
+          <div class="hero-strip" aria-label="Creator features">
+            <div class="hero-card">
+              <span>Hook</span>
+              <strong>Make the first sentence impossible to ignore.</strong>
+            </div>
+            <div class="hero-card">
+              <span>Pitch</span>
+              <strong>Turn a messy idea into a clear founder-style story.</strong>
+            </div>
+            <div class="hero-card">
+              <span>Share</span>
+              <strong>Turn insights into posts, threads, and follow-ups.</strong>
+            </div>
+          </div>
+
+          <div class="viral-callout" aria-label="Launch prompt">
+            <span class="callout-badge">Viral mode</span>
+            <strong>Build a sharper story, hook, pitch, or post in one go.</strong>
+          </div>
           <div class="prompt-grid" aria-label="Prompt ideas">
             <button class="suggestion" type="button" data-prompt="Help me think through this problem and recommend a practical next step: "><span class="suggestion-index">01</span><strong>Think through a problem</strong><span class="suggestion-detail">Compare options and tradeoffs</span></button>
             <button class="suggestion" type="button" data-prompt="Help me make a clear project plan with milestones and next steps: "><span class="suggestion-index">02</span><strong>Plan a project</strong><span class="suggestion-detail">Turn a goal into concrete steps</span></button>
             <button class="suggestion" type="button" data-prompt="Help me write a clear first draft about: "><span class="suggestion-index">03</span><strong>Write a first draft</strong><span class="suggestion-detail">Start from a rough idea</span></button>
+            <button class="suggestion viral" type="button" data-prompt="Give me 5 punchy hooks for a viral post about: "><span class="suggestion-index">04</span><strong>Viral hooks</strong><span class="suggestion-detail">Turn an idea into attention</span></button>
+            <button class="suggestion viral" type="button" data-prompt="Turn this into a short founder-style pitch with a clear hook, proof, and CTA: "><span class="suggestion-index">05</span><strong>Pitch it better</strong><span class="suggestion-detail">Make it clear and memorable</span></button>
+            <button class="suggestion viral" type="button" data-prompt="Turn my rough idea into a tweet thread, a concise summary, and a shareable takeaway: "><span class="suggestion-index">06</span><strong>Share it wider</strong><span class="suggestion-detail">Make it instantly postable</span></button>
           </div>
         </section>
         <section class="messages" id="messages" aria-live="polite"></section>
-        <div class="composer-area"><form class="composer" id="composer"><textarea id="prompt" rows="1" placeholder="Message Rocket 2.0" aria-label="Message Rocket 2.0"></textarea><button class="send" aria-label="Send message">↑</button></form><div class="composer-meta"><span>AI can make mistakes. Check important info.</span><span>⌘ ↵ to send</span></div></div>
+        <div class="composer-area"><form class="composer" id="composer"><textarea id="prompt" rows="1" placeholder="Message Rocket 2.0" aria-label="Message Rocket 2.0"></textarea><button class="send" aria-label="Send message">↑</button></form><div class="composer-options"><label for="webSearch"><input id="webSearch" type="checkbox" /> Search the web</label><span>May incur extra usage charges</span></div><div class="composer-meta"><span>AI can make mistakes. Check important info.</span><span>⌘ ↵ to send</span></div></div>
       </div>
     </main>
   </div>
-  <script src="rocketgpt.js?v=chat-library" defer></script>
+  <script src="rocketgpt.js?v=openai-responses" defer></script>
 </body>
 </html>

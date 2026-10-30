@@ -5,6 +5,7 @@
     messages: document.getElementById('messages'),
     emptyState: document.getElementById('emptyState'),
     prompt: document.getElementById('prompt'),
+    webSearch: document.getElementById('webSearch'),
     composer: document.getElementById('composer'),
     newChat: document.getElementById('newChat'),
     send: document.querySelector('#composer .send'),
@@ -36,7 +37,8 @@
             .map((message) => ({
               role: message.role,
               content: message.content,
-              citations: Array.isArray(message.citations) ? message.citations : []
+              citations: Array.isArray(message.citations) ? message.citations : [],
+              feedbackSubmitted: message.feedbackSubmitted === true
             }))
         }));
     } catch {
@@ -138,7 +140,7 @@
     elements.messages.replaceChildren();
     conversation.forEach((message) => {
       addMessage(message.content, message.role, message.citations);
-      if (message.role === 'assistant') addNextVector(message.content);
+      if (message.role === 'assistant') addNextVector(message);
     });
     elements.prompt.value = '';
     elements.emptyState.hidden = conversation.length > 0;
@@ -227,10 +229,46 @@
     }
   }
 
-  function addNextVector(answer) {
+  async function submitFeedback(message, rating, buttons, status, threadId, messageIndex) {
+    buttons.forEach((button) => { button.disabled = true; });
+    status.textContent = 'Saving feedback...';
+    try {
+      const response = await fetch(`${apiBaseUrl}/api/feedback`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ rating })
+      });
+      const data = await response.json().catch(() => null);
+      if (!response.ok || data?.received !== true) {
+        throw new Error(data?.error || `Feedback could not be saved (HTTP ${response.status}).`);
+      }
+
+      message.feedbackSubmitted = true;
+      status.textContent = 'Thanks—your rating was saved.';
+      if (activeThreadId === threadId) {
+        saveActiveThread();
+      } else {
+        const savedThread = savedThreads.find((thread) => thread.id === threadId);
+        const savedMessage = savedThread?.messages[messageIndex];
+        if (savedMessage) savedMessage.feedbackSubmitted = true;
+        persistSavedThreads();
+      }
+    } catch {
+      buttons.forEach((button) => { button.disabled = false; });
+      status.textContent = 'Feedback could not be saved. Please try again.';
+    }
+  }
+
+  function addNextVector(message) {
     const action = document.createElement('div');
     const nextButton = document.createElement('button');
     const shareButton = document.createElement('button');
+    const helpfulButton = document.createElement('button');
+    const notHelpfulButton = document.createElement('button');
+    const feedbackStatus = document.createElement('span');
+    const feedbackButtons = [helpfulButton, notHelpfulButton];
+    const threadId = activeThreadId;
+    const messageIndex = conversation.indexOf(message);
     action.className = 'vector-action';
     nextButton.className = 'next-vector';
     nextButton.type = 'button';
@@ -239,8 +277,28 @@
     shareButton.type = 'button';
     shareButton.textContent = 'Share answer ↗';
     shareButton.setAttribute('aria-label', 'Share this Rocket 2.0 answer');
-    shareButton.addEventListener('click', () => shareAnswer(answer, shareButton));
-    action.append(nextButton, shareButton);
+    shareButton.addEventListener('click', () => shareAnswer(message.content, shareButton));
+    helpfulButton.className = 'feedback-vote';
+    helpfulButton.type = 'button';
+    helpfulButton.textContent = '👍 Helpful';
+    helpfulButton.setAttribute('aria-label', 'Rate this answer as helpful');
+    notHelpfulButton.className = 'feedback-vote';
+    notHelpfulButton.type = 'button';
+    notHelpfulButton.textContent = '👎 Not helpful';
+    notHelpfulButton.setAttribute('aria-label', 'Rate this answer as not helpful');
+    feedbackStatus.className = 'feedback-status';
+    feedbackStatus.setAttribute('role', 'status');
+    feedbackStatus.setAttribute('aria-live', 'polite');
+    feedbackStatus.textContent = message.feedbackSubmitted
+      ? 'Thanks—your rating was saved.'
+      : 'Only your rating and time are saved—not linked to this chat.';
+    if (message.feedbackSubmitted) {
+      feedbackButtons.forEach((button) => { button.disabled = true; });
+    } else {
+      helpfulButton.addEventListener('click', () => submitFeedback(message, 'helpful', feedbackButtons, feedbackStatus, threadId, messageIndex));
+      notHelpfulButton.addEventListener('click', () => submitFeedback(message, 'not_helpful', feedbackButtons, feedbackStatus, threadId, messageIndex));
+    }
+    action.append(nextButton, shareButton, ...feedbackButtons, feedbackStatus);
     elements.messages.appendChild(action);
   }
 
@@ -262,7 +320,7 @@
       const response = await fetch(`${apiBaseUrl}/api/chat`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ messages: conversation }),
+        body: JSON.stringify({ messages: conversation, search: elements.webSearch.checked }),
         signal: controller.signal
       });
       const data = await response.json().catch(() => null);
@@ -294,10 +352,11 @@
     try {
       const { reply, citations } = await requestReply();
       typingMessage.remove();
-      conversation.push({ role: 'assistant', content: reply, citations: Array.isArray(citations) ? citations : [] });
+      const assistantMessage = { role: 'assistant', content: reply, citations: Array.isArray(citations) ? citations : [] };
+      conversation.push(assistantMessage);
       saveActiveThread();
       addMessage(reply, 'assistant', citations);
-      addNextVector(reply);
+      addNextVector(assistantMessage);
     } catch (error) {
       if (error.name === 'AbortError') return;
       typingMessage.remove();
