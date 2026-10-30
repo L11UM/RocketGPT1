@@ -21,6 +21,8 @@ Enable **Viral mode** from the welcome callout or composer to ask the model for 
 
 Recent chats are saved in the current browser only. They are not uploaded or synced between devices.
 
+Chat requests time out after 90 seconds. When a request fails, Rocket keeps the unsent message in the composer and offers a retry action; failed turns are not included in later AI context. The AI provider still controls response quality and availability.
+
 ## Answer feedback
 
 Use the helpful/not helpful buttons below an answer to submit a rating. The feedback endpoint stores only the rating and server submission time in JSON Lines format; it does not link the rating to the chat or store the prompt or reply. By default, the file is written to the operating system's temporary directory as `rocketgpt-feedback.jsonl`; set `FEEDBACK_FILE` to change the path. Temporary storage can be lost when the service restarts or redeploys. These unlinked ratings can show aggregate sentiment, but they do not train the hosted model or provide examples for RLHF.

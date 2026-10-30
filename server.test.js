@@ -11,6 +11,7 @@ test('system instruction includes the current date in UTC', () => {
   assert.match(instruction, /current date is 2026-10-21 \(UTC\)/);
   assert.match(instruction, /never substitute a date or year inferred from training data/i);
   assert.match(instruction, /Do not invent facts, sources, capabilities, or actions/);
+  assert.match(instruction, /If the user corrects an earlier answer, re-check it/i);
   assert.match(instruction, /Web search is not enabled/);
   assert.match(buildSystemInstruction(new Date('2026-10-21T12:00:00.000Z'), true), /cite important factual claims with the provided source links/);
   assert.match(buildSystemInstruction(new Date('2026-10-21T12:00:00.000Z'), false, true), /VIRAL MODE IS ON/);

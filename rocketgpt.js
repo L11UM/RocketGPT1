@@ -19,6 +19,7 @@
   };
   const apiBaseUrl = document.querySelector('meta[name="api-base-url"]')?.content.replace(/\/$/, '') || '';
   const storageKey = 'rocket2-chat-library-v1';
+  const requestTimeoutMs = 90_000;
   const conversation = [];
   let savedThreads = loadSavedThreads();
   let activeThreadId;
@@ -36,6 +37,7 @@ Give the most useful correct answer you can:
 - Use relevant conversation context; do not make the user repeat information or restate the question unnecessarily.
 - Lead with the answer or requested deliverable. Add a short explanation, steps, or examples only when they help.
 - For complex tasks, break the work into clear parts and check the response for contradictions, missing requirements, and arithmetic errors before answering. Do not reveal private chain-of-thought.
+- If the user corrects an earlier answer, re-check it and clearly correct any mistake instead of defending it. If a request is ambiguous, make a reasonable assumption or ask one focused question.
 - Do not invent facts, sources, capabilities, or actions. Separate known facts from assumptions, note meaningful uncertainty, and ask one focused clarifying question only when missing information prevents a useful answer.
 - You do not have web search for this request; do not claim to have checked live sources.
 - Keep the response proportional to the request; avoid generic filler and repeating points.
@@ -373,6 +375,11 @@ ${viralInstructions}`;
   async function requestReply() {
     const controller = new AbortController();
     activeRequest = controller;
+    let timedOut = false;
+    const timeoutId = window.setTimeout(() => {
+      timedOut = true;
+      controller.abort();
+    }, requestTimeoutMs);
     try {
       const viralMode = elements.viralMode.getAttribute('aria-pressed') === 'true';
       const response = await fetch('https://text.pollinations.ai/openai', {
@@ -403,19 +410,64 @@ ${viralInstructions}`;
         throw new Error('The AI returned an empty response. Please try again.');
       }
       return { reply, citations: [] };
+    } catch (error) {
+      if (timedOut) throw new Error('The AI request took too long. Your message is ready to retry.');
+      throw error;
     } finally {
+      window.clearTimeout(timeoutId);
       if (activeRequest === controller) activeRequest = undefined;
+    }
+  }
+
+  function showRequestError(error) {
+    const message = createMessage(`Connection issue: ${error.message}`, 'assistant');
+    const bubble = message.querySelector('.bubble');
+    const retry = document.createElement('button');
+    message.setAttribute('role', 'status');
+    retry.className = 'retry-request';
+    retry.type = 'button';
+    retry.textContent = 'Retry message';
+    retry.addEventListener('click', () => {
+      message.remove();
+      elements.composer.requestSubmit();
+    });
+    bubble.appendChild(retry);
+    elements.messages.appendChild(message);
+    message.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+  }
+
+  function discardPendingMessage(threadId, pendingMessage, userElement) {
+    if (conversation.at(-1) === pendingMessage) conversation.pop();
+    userElement.remove();
+    const savedThread = savedThreads.find((thread) => thread.id === threadId);
+    if (savedThread?.messages.at(-1) === pendingMessage) {
+      savedThread.messages.pop();
+      if (savedThread.messages.length) {
+        savedThread.updatedAt = Date.now();
+      } else {
+        savedThreads = savedThreads.filter((thread) => thread.id !== threadId);
+      }
+      persistSavedThreads();
+    }
+
+    if (activeThreadId === threadId) {
+      if (conversation.length) saveActiveThread();
+      else activeThreadId = undefined;
+    } else {
+      renderThreadList();
     }
   }
 
   async function sendMessage() {
     const text = elements.prompt.value.trim();
-    if (!text) return;
+    if (!text || activeRequest) return;
 
     elements.emptyState.hidden = true;
-    addMessage(text, 'user');
-    conversation.push({ role: 'user', content: text });
+    const userMessage = { role: 'user', content: text };
+    const userElement = addMessage(text, 'user');
+    conversation.push(userMessage);
     saveActiveThread();
+    const requestThreadId = activeThreadId;
     elements.prompt.value = '';
     elements.prompt.style.height = 'auto';
     elements.send.disabled = true;
@@ -430,11 +482,18 @@ ${viralInstructions}`;
       addMessage(reply, 'assistant', citations);
       addNextVector(assistantMessage);
     } catch (error) {
-      if (error.name === 'AbortError') return;
+      if (error.name === 'AbortError') {
+        typingMessage.remove();
+        discardPendingMessage(requestThreadId, userMessage, userElement);
+        return;
+      }
       typingMessage.remove();
-      addMessage(`Connection issue: ${error.message}`, 'assistant');
+      discardPendingMessage(requestThreadId, userMessage, userElement);
+      elements.prompt.value = text;
+      elements.prompt.dispatchEvent(new Event('input', { bubbles: true }));
+      showRequestError(error);
     } finally {
-      elements.send.disabled = false;
+      if (!activeRequest) elements.send.disabled = false;
     }
   }
 

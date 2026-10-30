@@ -479,6 +479,9 @@ button, textarea { color: inherit; font-family: inherit; }
 .next-vector:hover { color: #fff; background: #303030; }
 .share-answer { padding: 7px 10px; border: 1px solid #444; border-radius: 6px; color: #c9c9c9; background: transparent; font-size: 11px; }
 .share-answer:hover { border-color: #777; color: #fff; background: #222; }
+.retry-request { display: block; margin-top: 10px; padding: 7px 10px; border: 1px solid #555; border-radius: 6px; color: #d7edc7; background: #222; font-size: 11px; }
+.retry-request:hover { border-color: #a9cf8d; background: #292929; }
+.retry-request:focus-visible { outline: 2px solid #a9cf8d; outline-offset: 2px; }
 .topbar-actions { display: flex; align-items: center; gap: 18px; }
 .share-app { padding: 7px 10px; border: 1px solid #444; border-radius: 6px; color: #c9c9c9; background: transparent; font-size: 11px; }
 .share-app:hover { border-color: #a9cf8d; color: #d7edc7; background: #222; }
