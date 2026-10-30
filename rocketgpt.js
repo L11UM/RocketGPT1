@@ -15,7 +15,14 @@
     threadList: document.getElementById('threadList'),
     mobileHistory: document.getElementById('mobileHistory'),
     sidebar: document.querySelector('.sidebar'),
-    sidebarBackdrop: document.getElementById('sidebarBackdrop')
+    sidebarBackdrop: document.getElementById('sidebarBackdrop'),
+    apiKeySettings: document.getElementById('apiKeySettings'),
+    apiKeyStatus: document.getElementById('apiKeyStatus'),
+    apiKeyDialog: document.getElementById('apiKeyDialog'),
+    apiKeyForm: document.getElementById('apiKeyForm'),
+    apiKeyInput: document.getElementById('apiKeyInput'),
+    clearApiKey: document.getElementById('clearApiKey'),
+    cancelApiKey: document.getElementById('cancelApiKey')
   };
   const apiBaseUrl = document.querySelector('meta[name="api-base-url"]')?.content.replace(/\/$/, '') || '';
   const storageKey = 'rocket2-chat-library-v1';
@@ -23,6 +30,35 @@
   let savedThreads = loadSavedThreads();
   let activeThreadId;
   let activeRequest;
+  let openAiApiKey = '';
+
+  function updateApiKeyStatus() {
+    elements.apiKeyStatus.textContent = openAiApiKey ? 'OPENAI · KEY READY' : 'OPENAI · ADD KEY';
+    elements.apiKeySettings.title = openAiApiKey ? 'Change or remove your OpenAI API key' : 'Add your OpenAI API key';
+  }
+
+  function buildDirectApiInstructions(searchEnabled, viralMode) {
+    const currentDate = new Date().toISOString().slice(0, 10);
+    const searchInstructions = searchEnabled
+      ? 'Web search is enabled for this request. Use search results for current or disputed facts, cite important factual claims with the provided source links, prefer primary and reputable sources, and say when sources do not establish an answer.'
+      : 'Web search is not enabled for this request. Do not claim to have checked current sources; be transparent when the answer may be outdated.';
+    const viralInstructions = viralMode
+      ? 'VIRAL MODE IS ON for this answer. Help the user create highly shareable content for the requested platform and audience: lead with a specific, attention-grabbing hook; make the core idea clear and emotionally resonant; use concrete details and tight wording; and end with a natural takeaway or call to action when appropriate. Keep it authentic and useful: do not fabricate claims, promise virality, or use deceptive engagement bait. Follow any requested format and give multiple distinct options when useful.'
+      : '';
+    return `You are Rocket, a capable and thoughtful AI copilot. AUTHORITATIVE CURRENT DATE: ${currentDate} (UTC). If asked for today's date, the current date, or the current year, answer using this date; never substitute a date or year inferred from training data.
+
+Give the most useful correct answer you can:
+- Address the user's actual goal and follow their requested format, scope, and constraints.
+- Use relevant conversation context; do not make the user repeat information or restate the question unnecessarily.
+- Lead with the answer or requested deliverable. Add a short explanation, steps, or examples only when they help.
+- For complex tasks, break the work into clear parts and check the response for contradictions, missing requirements, and arithmetic errors before answering. Do not reveal private chain-of-thought.
+- Do not invent facts, sources, capabilities, or actions. Separate known facts from assumptions, note meaningful uncertainty, and ask one focused clarifying question only when missing information prevents a useful answer.
+- Keep the response proportional to the request; avoid generic filler and repeating points.
+
+${searchInstructions}
+
+${viralInstructions}`;
+  }
 
   function setViralMode(enabled) {
     elements.viralMode.setAttribute('aria-pressed', String(enabled));
@@ -328,24 +364,66 @@
     const controller = new AbortController();
     activeRequest = controller;
     try {
-      const response = await fetch(`${apiBaseUrl}/api/chat`, {
+      const searchEnabled = elements.webSearch.checked;
+      const viralMode = elements.viralMode.getAttribute('aria-pressed') === 'true';
+      const directOpenAi = Boolean(openAiApiKey);
+      const response = await fetch(directOpenAi ? 'https://api.openai.com/v1/responses' : `${apiBaseUrl}/api/chat`, {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          messages: conversation,
-          search: elements.webSearch.checked,
-          viralMode: elements.viralMode.getAttribute('aria-pressed') === 'true'
-        }),
+        headers: directOpenAi
+          ? { 'Content-Type': 'application/json', Authorization: `Bearer ${openAiApiKey}` }
+          : { 'Content-Type': 'application/json' },
+        body: JSON.stringify(directOpenAi
+          ? {
+            model: 'gpt-4o-mini',
+            instructions: buildDirectApiInstructions(searchEnabled, viralMode),
+            input: conversation.map(({ role, content }) => ({ role, content })),
+            store: false,
+            ...(searchEnabled ? { tools: [{ type: 'web_search' }] } : {}),
+            max_output_tokens: 4096
+          }
+          : { messages: conversation, search: searchEnabled, viralMode }),
         signal: controller.signal
       });
       const data = await response.json().catch(() => null);
       if (!response.ok) {
-        throw new Error(data?.error || `The chat server is unavailable (HTTP ${response.status}).`);
+        const providerError = directOpenAi ? data?.error?.message : data?.error;
+        if (directOpenAi && response.status === 401) {
+          throw new Error('OpenAI rejected this key. Check that it is active and try entering it again.');
+        }
+        if (!directOpenAi && response.status === 503 && /OPENAI_API_KEY/.test(data?.error || '')) {
+          throw new Error('The hosted AI is not configured. Click OPENAI · ADD KEY above to connect your own key.');
+        }
+        throw new Error(providerError || `The AI service is unavailable (HTTP ${response.status}).`);
       }
-      if (typeof data?.reply !== 'string' || !data.reply.trim()) {
+      const reply = directOpenAi
+        ? (Array.isArray(data?.output) ? data.output : [])
+          .filter((item) => item?.type === 'message' && item.role === 'assistant')
+          .flatMap((message) => Array.isArray(message.content) ? message.content : [])
+          .filter((part) => part?.type === 'output_text' && typeof part.text === 'string')
+          .map((part) => part.text)
+          .join('')
+        : data?.reply;
+      const citations = directOpenAi
+        ? [...new Map((Array.isArray(data?.output) ? data.output : [])
+          .filter((item) => item?.type === 'message' && item.role === 'assistant')
+          .flatMap((message) => Array.isArray(message.content) ? message.content : [])
+          .flatMap((part) => Array.isArray(part.annotations) ? part.annotations : [])
+          .filter((annotation) => annotation?.type === 'url_citation' && typeof annotation.url === 'string')
+          .map((citation) => {
+            try {
+              const url = new URL(citation.url);
+              if (!['http:', 'https:'].includes(url.protocol)) return null;
+              return [url.href, { title: citation.title || url.hostname, url: url.href }];
+            } catch {
+              return null;
+            }
+          })
+          .filter(Boolean)).values()]
+        : data?.citations;
+      if (typeof reply !== 'string' || !reply.trim()) {
         throw new Error('The AI returned an empty response. Please try again.');
       }
-      return data;
+      return { reply, citations };
     } finally {
       if (activeRequest === controller) activeRequest = undefined;
     }
@@ -384,6 +462,32 @@
   elements.composer.addEventListener('submit', (event) => {
     event.preventDefault();
     sendMessage();
+  });
+
+  elements.apiKeySettings.addEventListener('click', () => {
+    elements.apiKeyInput.value = '';
+    elements.apiKeyDialog.showModal();
+    elements.apiKeyInput.focus();
+  });
+  elements.apiKeyForm.addEventListener('submit', (event) => {
+    event.preventDefault();
+    openAiApiKey = elements.apiKeyInput.value.trim();
+    elements.apiKeyInput.value = '';
+    updateApiKeyStatus();
+    elements.apiKeyDialog.close();
+  });
+  elements.clearApiKey.addEventListener('click', () => {
+    openAiApiKey = '';
+    elements.apiKeyInput.value = '';
+    updateApiKeyStatus();
+    elements.apiKeyDialog.close();
+  });
+  elements.cancelApiKey.addEventListener('click', () => {
+    elements.apiKeyInput.value = '';
+    elements.apiKeyDialog.close();
+  });
+  elements.apiKeyDialog.addEventListener('close', () => {
+    elements.apiKeyInput.value = '';
   });
 
   elements.viralMode.addEventListener('click', () => {

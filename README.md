@@ -12,7 +12,7 @@ npm start
 
 4. Open http://localhost:3000/rocketgpt.html.
 
-The API key stays on the server and must never be placed in the frontend. The example settings in `.env.example` are a reference; the app does not load `.env` files automatically. Rocket uses OpenAI's Responses API and defaults to `gpt-6-luna`; the model must be available to your OpenAI API account. API and web-search usage may incur charges. Responses API storage is disabled (`store: false`). To search the web for a message, select **Search the web** below the composer; returned sources appear below Rocket's answer. Without an API key, Rocket uses a limited local fallback that cannot answer general questions or search the web.
+To use Rocket without access to the hosted backend, click **OPENAI · ADD KEY** in the app and enter your OpenAI API key. This sends requests directly from your browser to OpenAI using `gpt-4o-mini`; the key is held in memory only until you refresh or close the tab, and is not saved or sent to Rocket's server. Keep the key private, and note that API and optional web-search usage may be billed to your OpenAI account. Responses API storage is disabled (`store: false`). To search the web, select **Search the web** below the composer; returned sources appear below Rocket's answer.
 
 Enable **Viral mode** from the welcome callout or composer to ask the model for more shareable, platform-aware content with stronger hooks and concise wording. The feature changes the model instructions; it cannot guarantee that content will go viral.
 
@@ -24,4 +24,4 @@ Use the helpful/not helpful buttons below an answer to submit a rating. The feed
 
 ## Publish AI chat
 
-GitHub Pages hosts the frontend only. Render runs the API using `render.yaml`; add `OPENAI_API_KEY` as a private Render environment variable and deploy the service. The frontend's `api-base-url` must match the Render service URL. You can change the model with `OPENAI_MODEL`.
+GitHub Pages hosts the frontend only. The optional hosted API uses `render.yaml` and needs `OPENAI_API_KEY` configured as a private Render environment variable. Alternatively, users can enter their own OpenAI key in the app for direct browser-to-OpenAI requests without access to Render.
