@@ -33,8 +33,10 @@
   let openAiApiKey = '';
 
   function updateApiKeyStatus() {
-    elements.apiKeyStatus.textContent = openAiApiKey ? 'OPENAI · KEY READY' : 'OPENAI · ADD KEY';
-    elements.apiKeySettings.title = openAiApiKey ? 'Change or remove your OpenAI API key' : 'Add your OpenAI API key';
+    elements.apiKeyStatus.textContent = 'OPENAI';
+    const label = openAiApiKey ? 'Change or remove your OpenAI API key' : 'Add your OpenAI API key';
+    elements.apiKeySettings.title = label;
+    elements.apiKeySettings.setAttribute('aria-label', label);
   }
 
   function buildDirectApiInstructions(searchEnabled, viralMode) {
@@ -391,7 +393,7 @@ ${viralInstructions}`;
           throw new Error('OpenAI rejected this key. Check that it is active and try entering it again.');
         }
         if (!directOpenAi && response.status === 503 && /OPENAI_API_KEY/.test(data?.error || '')) {
-          throw new Error('The hosted AI is not configured. Click OPENAI · ADD KEY above to connect your own key.');
+          throw new Error('The hosted AI is not configured. Click OPENAI above to connect your own key.');
         }
         throw new Error(providerError || `The AI service is unavailable (HTTP ${response.status}).`);
       }

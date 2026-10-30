@@ -12,7 +12,7 @@ npm start
 
 4. Open http://localhost:3000/rocketgpt.html.
 
-To use Rocket without access to the hosted backend, click **OPENAI · ADD KEY** in the app and enter your OpenAI API key. This sends requests directly from your browser to OpenAI using `gpt-4o-mini`; the key is held in memory only until you refresh or close the tab, and is not saved or sent to Rocket's server. Keep the key private, and note that API and optional web-search usage may be billed to your OpenAI account. Responses API storage is disabled (`store: false`). To search the web, select **Search the web** below the composer; returned sources appear below Rocket's answer.
+To use Rocket without access to the hosted backend, click **OPENAI** in the top-right corner and enter your OpenAI API key. This sends requests directly from your browser to OpenAI using `gpt-4o-mini`; the key is held in memory only until you refresh or close the tab, and is not saved or sent to Rocket's server. Keep the key private, and note that API and optional web-search usage may be billed to your OpenAI account. Responses API storage is disabled (`store: false`). To search the web, select **Search the web** below the composer; returned sources appear below Rocket's answer.
 
 Enable **Viral mode** from the welcome callout or composer to ask the model for more shareable, platform-aware content with stronger hooks and concise wording. The feature changes the model instructions; it cannot guarantee that content will go viral.
 

@@ -12,7 +12,7 @@
   <meta name="twitter:card" content="summary" />
   <link rel="icon" type="image/svg+xml" href="rocketgpt-logo.svg" />
   <meta name="api-base-url" content="https://rocketgpt1.onrender.com" />
-  <link rel="stylesheet" href="rocketgpt.css?v=browser-openai-key-2" />
+  <link rel="stylesheet" href="rocketgpt.css?v=openai-label" />
 </head>
 <body>
   <div class="app-shell">
@@ -32,7 +32,7 @@
     <button class="sidebar-backdrop" id="sidebarBackdrop" type="button" aria-label="Close chat history" hidden></button>
 
     <main class="main">
-      <header class="topbar"><div class="topbar-kicker"><button class="mobile-history" id="mobileHistory" type="button" aria-expanded="false" aria-controls="threadList">Chats</button><span>ROCKET 2.0</span><span class="topbar-divider">/</span><span>AI CHAT</span></div><button class="topbar-model" id="apiKeySettings" type="button"><span class="model-dot" aria-hidden="true"></span><span id="apiKeyStatus">OPENAI · ADD KEY</span></button></header>
+      <header class="topbar"><div class="topbar-kicker"><button class="mobile-history" id="mobileHistory" type="button" aria-expanded="false" aria-controls="threadList">Chats</button><span>ROCKET 2.0</span><span class="topbar-divider">/</span><span>AI CHAT</span></div><button class="topbar-model" id="apiKeySettings" type="button" aria-label="OpenAI settings" title="Click to add your OpenAI API key"><span class="model-dot" aria-hidden="true"></span><span id="apiKeyStatus">OPENAI</span></button></header>
       <div class="chat-wrap">
         <section class="empty-state" id="emptyState">
           <div class="welcome-mark"><img class="welcome-logo" src="rocketgpt-logo.svg" alt="Rocket 2.0 logo" /><span>ROCKET 2.0</span></div>
@@ -86,6 +86,6 @@
       </div>
     </form>
   </dialog>
-  <script src="rocketgpt.js?v=browser-openai-key-2" defer></script>
+  <script src="rocketgpt.js?v=openai-label" defer></script>
 </body>
 </html>
