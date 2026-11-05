@@ -1,4 +1,6 @@
-# Rocket 2.0
+# RocketGPT
+
+RocketGPT is an American artificial intelligence research and deployment company. Rocket 2.0 and NALL-E are RocketGPT products; they currently use third-party AI models and services rather than models trained from scratch by RocketGPT.
 
 ## Run locally
 
@@ -18,6 +20,8 @@ The public homepage contains search-friendly information about Rocket 2.0, with 
 The homepage and chat page include native sharing with a clipboard fallback, and use a 1200×630 branded social preview image when shared. Share links include UTM tags for basic referral attribution.
 
 Enable **Viral mode** from the welcome callout or composer to ask the model for more shareable, platform-aware content with stronger hooks and concise wording. The feature changes the model instructions; it cannot guarantee that content will go viral.
+
+`nall-e.html` is NALL-E's text-to-image experience for Rocket-3. It sends prompts directly from the browser to Pollinations' public image service and displays a downloadable result; no OpenAI key, Render image endpoint, or owner account is required. The provider controls availability and may rate-limit or reject requests. Prompts are sent to Pollinations, so users should not enter sensitive information. NALL-E is Rocket-3's experience and uses a third-party image service rather than a model trained from scratch by RocketGPT.
 
 Recent chats are saved in the current browser only. They are not uploaded or synced between devices.
 

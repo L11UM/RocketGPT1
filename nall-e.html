@@ -1,0 +1,296 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="index, follow, max-image-preview:large" />
+  <meta name="theme-color" content="#10120f" />
+  <title>NALL-E | AI Image Generator</title>
+  <meta name="description" content="Create an image from a text prompt with NALL-E, Rocket-3's text-to-image experience." />
+  <link rel="canonical" href="https://rocketgpt.net/nall-e.html" />
+  <link rel="icon" type="image/svg+xml" href="rocketgpt-logo.svg" />
+  <style>
+    :root {
+      color-scheme: dark;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: #10120f;
+      color: #f1f0e9;
+      font-synthesis: none;
+      text-rendering: optimizeLegibility;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    * { box-sizing: border-box; }
+    body { min-width: 320px; min-height: 100vh; margin: 0; background: radial-gradient(ellipse at 70% 8%, #20291e 0, #10120f 38rem); }
+    button, textarea { font: inherit; }
+    button { color: inherit; }
+    a { color: inherit; }
+    .page { width: min(1120px, calc(100% - 40px)); margin: 0 auto; padding: 28px 0 48px; }
+    .topbar { display: flex; align-items: center; justify-content: space-between; padding-bottom: 20px; border-bottom: 1px solid #33372f; }
+    .brand { display: flex; align-items: center; gap: 12px; text-decoration: none; }
+    .brand-mark { display: grid; width: 38px; height: 38px; place-items: center; border: 1px solid #63724f; border-radius: 12px; background: #1b2118; color: #c4ee9c; font-size: 19px; }
+    .brand-copy { display: grid; gap: 3px; }
+    .brand-name { font-size: 16px; font-weight: 720; letter-spacing: -.04em; }
+    .brand-caption, .eyebrow, .stage-label, .ratio-label { color: #9c9f93; font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 10px; letter-spacing: .12em; text-transform: uppercase; }
+    .brand-caption { margin-top: 3px; font-size: 9px; }
+    .top-link { color: #bdc1b4; font-size: 13px; text-decoration: none; }
+    .top-link:hover { color: #c4ee9c; }
+    .intro { max-width: 680px; padding: 58px 0 34px; }
+    .eyebrow { color: #b7dd91; }
+    h1 { margin: 12px 0; font-size: clamp(38px, 6vw, 58px); letter-spacing: -.06em; line-height: 1; }
+    .intro p { max-width: 600px; margin: 0; color: #b6b9af; font-size: 16px; line-height: 1.7; }
+    .service-tag { display: inline-flex; align-items: center; gap: 8px; margin-top: 19px; padding: 8px 11px; border: 1px solid #424638; border-radius: 999px; color: #d4d7cb; font-size: 11px; }
+    .service-tag::before { width: 7px; height: 7px; border-radius: 50%; background: #b7dd91; content: ""; }
+    .workspace { display: grid; grid-template-columns: minmax(270px, .78fr) minmax(0, 1.22fr); gap: 18px; align-items: start; }
+    .panel { border: 1px solid #363a32; border-radius: 14px; background: rgba(25, 28, 24, .92); }
+    .controls { padding: 22px; }
+    .field-label { display: block; margin-bottom: 9px; font-size: 13px; font-weight: 650; }
+    .prompt { width: 100%; min-height: 148px; resize: vertical; padding: 13px; border: 1px solid #44493f; border-radius: 8px; outline: none; background: #11130f; color: #f1f0e9; font-size: 14px; line-height: 1.6; }
+    .prompt:focus { border-color: #b7dd91; box-shadow: 0 0 0 3px rgba(183, 221, 145, .13); }
+    .prompt::placeholder { color: #797d72; }
+    .helper { min-height: 36px; margin: 8px 0 21px; color: #9fa397; font-size: 11px; line-height: 1.55; }
+    .ratio-label { display: block; margin-bottom: 9px; }
+    .ratios { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
+    .ratio-button { min-height: 39px; border: 1px solid #44493f; border-radius: 7px; background: #171a15; color: #c2c5bb; cursor: pointer; font-size: 12px; }
+    .ratio-button:hover { border-color: #778464; }
+    .ratio-button[aria-pressed="true"] { border-color: #b7dd91; background: #252e20; color: #d8f6bb; }
+    .preview-button { width: 100%; min-height: 46px; margin-top: 19px; border: 0; border-radius: 8px; background: #b7dd91; color: #151810; cursor: pointer; font-weight: 720; }
+    .preview-button:hover { background: #c8eda6; }
+    .preview-button:disabled { cursor: wait; opacity: .7; }
+    .preview-button:focus-visible, .ratio-button:focus-visible, .sample-button:focus-visible, .top-link:focus-visible, .download-button:focus-visible { outline: 2px solid #d5f4b4; outline-offset: 3px; }
+    .sample-button { display: block; margin: 14px auto 0; padding: 5px; border: 0; background: transparent; color: #b7dd91; cursor: pointer; font-size: 12px; }
+    .generation-status { min-height: 20px; margin: 12px 0 0; color: #bfc2b8; font-size: 12px; line-height: 1.5; }
+    .generation-status[data-state="error"] { color: #ffb6a8; }
+    .stage-panel { padding: 16px; }
+    .stage-head { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 2px 2px 13px; }
+    .stage-label { color: #bfc2b8; font-size: 9px; }
+    .stage-ratio { color: #858a7d; font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 10px; }
+    .stage { position: relative; display: grid; min-height: 250px; aspect-ratio: 4 / 3; overflow: hidden; place-items: center; border: 1px solid #3c4534; border-radius: 9px; background: radial-gradient(ellipse at 48% 42%, #35452d 0, #20271e 33%, #161a15 72%); transition: aspect-ratio .18s ease; }
+    .stage[data-ratio="square"] { aspect-ratio: 1 / 1; }
+    .stage[data-ratio="portrait"] { aspect-ratio: 3 / 4; }
+    .orbit-art { position: absolute; width: min(74%, 360px); opacity: .8; }
+    .stage-copy { position: relative; width: min(78%, 390px); padding: 14px; border: 1px solid rgba(220, 234, 205, .2); border-radius: 9px; background: rgba(13, 16, 12, .78); text-align: center; backdrop-filter: blur(8px); }
+    .stage-copy strong { display: block; color: #d7edc1; font-size: 11px; letter-spacing: .1em; }
+    .stage-copy p { margin: 9px 0 0; color: #c4c7bd; font-size: 13px; line-height: 1.5; overflow-wrap: anywhere; }
+    .stage-copy p:empty { display: none; }
+    .generated-image { display: none; width: 100%; height: 100%; object-fit: contain; }
+    .stage.has-image { background: #0c0e0b; }
+    .stage.has-image .generated-image { display: block; }
+    .stage.has-image .orbit-art, .stage.has-image .stage-copy { display: none; }
+    .download-button { display: inline-flex; min-height: 38px; align-items: center; justify-content: center; margin-top: 12px; padding: 0 13px; border: 1px solid #58634b; border-radius: 7px; background: #20271d; color: #d8f6bb; cursor: pointer; font-size: 12px; text-decoration: none; }
+    .download-button:hover { border-color: #b7dd91; background: #293323; }
+    .download-button[hidden] { display: none; }
+    .stage-note { margin: 12px 2px 0; color: #a7aa9f; font-size: 11px; line-height: 1.55; }
+    .notice { margin-top: 18px; padding: 14px 16px; border-left: 2px solid #b7dd91; border-radius: 0 8px 8px 0; background: #1b2118; color: #cbcfc3; font-size: 12px; line-height: 1.6; }
+    .notice strong { color: #d7edc1; }
+    .notice a { color: #d7edc1; }
+    footer { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 12px; margin-top: 28px; padding-top: 15px; border-top: 1px solid #33372f; color: #82877c; font-size: 11px; line-height: 1.5; }
+    footer a { color: #b7dd91; text-decoration: none; }
+
+    @media (max-width: 760px) {
+      .page { width: min(100% - 28px, 560px); padding-top: 18px; }
+      .intro { padding: 42px 0 24px; }
+      .workspace { grid-template-columns: 1fr; }
+      .controls { order: 1; }
+      .stage-panel { order: 2; }
+      .stage { min-height: 220px; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { scroll-behavior: auto !important; transition-duration: .01ms !important; }
+    }
+  </style>
+</head>
+<body>
+  <main class="page">
+    <header class="topbar">
+      <a class="brand" href="/" aria-label="RocketGPT home">
+        <span class="brand-mark" aria-hidden="true">✦</span>
+        <span class="brand-copy"><span class="brand-name">NALL-E</span><span class="brand-caption">A ROCKET-3 CONCEPT</span></span>
+      </a>
+      <a class="top-link" href="/">Rocket 2.0 home ↗</a>
+    </header>
+
+    <section class="intro" aria-labelledby="page-title">
+      <div class="eyebrow">Text-to-image model</div>
+      <h1 id="page-title">Imagine it.<br />Frame it.</h1>
+      <p>Describe a scene, mood, or idea and NALL-E will create an image from your words using Pollinations' public image service.</p>
+      <span class="service-tag">AI image generation · no key required</span>
+    </section>
+
+    <section class="workspace" aria-label="NALL-E image generator">
+      <form class="panel controls" id="promptForm">
+        <label class="field-label" for="prompt">Describe the image you imagine</label>
+        <textarea class="prompt" id="prompt" maxlength="500" required placeholder="A tiny observatory on a quiet moon, looking toward a blue sunrise..." aria-describedby="promptHelper"></textarea>
+        <p class="helper" id="promptHelper">For best results, describe the subject, setting, lighting, mood, and art style. Your prompt is sent to Pollinations to generate the image—don't include private or sensitive information.</p>
+
+        <span class="ratio-label">Image shape</span>
+        <div class="ratios" role="group" aria-label="Choose image shape">
+          <button class="ratio-button" type="button" data-ratio="square" aria-pressed="true">Square</button>
+          <button class="ratio-button" type="button" data-ratio="portrait" aria-pressed="false">Portrait</button>
+          <button class="ratio-button" type="button" data-ratio="landscape" aria-pressed="false">Landscape</button>
+        </div>
+        <button class="preview-button" id="generateButton" type="submit">Generate image</button>
+        <button class="sample-button" id="samplePrompt" type="button">Try a sample idea</button>
+        <p class="generation-status" id="generationStatus" role="status" aria-live="polite"></p>
+      </form>
+
+      <section class="panel stage-panel" aria-label="Generated image">
+        <div class="stage-head">
+          <span class="stage-label" id="stageLabel">Your image will appear here</span>
+          <span class="stage-ratio" id="stageRatio">1:1</span>
+        </div>
+        <div class="stage" id="stage" data-ratio="square">
+          <img class="generated-image" id="generatedImage" alt="AI-generated image from your prompt" />
+          <svg class="orbit-art" viewBox="0 0 400 300" fill="none" aria-hidden="true">
+            <circle cx="200" cy="147" r="90" stroke="#B7DD91" stroke-opacity=".62" />
+            <circle cx="200" cy="147" r="67" stroke="#D3E5BC" stroke-opacity=".35" stroke-dasharray="3 8" />
+            <path d="M75 199C115 166 154 163 200 191C245 218 284 214 328 179V263H75V199Z" fill="#778F61" fill-opacity=".72" />
+            <path d="M75 228C123 202 162 202 200 225C245 253 289 242 328 213V263H75V228Z" fill="#34472D" />
+            <circle cx="200" cy="147" r="27" fill="#E8C882" fill-opacity=".9" />
+            <path d="M102 91h11m181 13h8M151 54v9m112 200v8" stroke="#E4EACF" stroke-linecap="round" />
+            <circle cx="128" cy="137" r="2" fill="#F2EBD4" />
+            <circle cx="282" cy="124" r="2" fill="#F2EBD4" />
+            <circle cx="155" cy="224" r="2" fill="#F2EBD4" />
+          </svg>
+          <div class="stage-copy">
+            <strong id="stageTitle">YOUR IDEA, MADE VISIBLE</strong>
+            <p id="promptPreview">Write a prompt and generate your first image.</p>
+          </div>
+        </div>
+        <a class="download-button" id="downloadButton" href="#" download="nall-e-image.jpg" hidden>Download image</a>
+        <p class="stage-note" id="stageNote">Images are generated by Pollinations' public image service. NALL-E is Rocket-3's image-generation experience, not a model trained from scratch.</p>
+        <div class="notice"><strong>No-key public service:</strong> No OpenAI key or Render setup is required. Pollinations controls availability and may rate-limit or reject requests. Prompts are sent to Pollinations; don't include private or sensitive information.</div>
+      </section>
+    </section>
+
+    <footer>
+      <span>NALL-E is Rocket-3's image-generation experience, using Pollinations' public image service.</span>
+      <a href="/rocketgpt.html">Open Rocket 2.0 chat</a>
+    </footer>
+  </main>
+  <script>
+    (() => {
+      const form = document.getElementById('promptForm');
+      const promptInput = document.getElementById('prompt');
+      const preview = document.getElementById('promptPreview');
+      const stage = document.getElementById('stage');
+      const stageRatio = document.getElementById('stageRatio');
+      const stageTitle = document.getElementById('stageTitle');
+      const stageLabel = document.getElementById('stageLabel');
+      const stageNote = document.getElementById('stageNote');
+      const generateButton = document.getElementById('generateButton');
+      const generationStatus = document.getElementById('generationStatus');
+      const generatedImage = document.getElementById('generatedImage');
+      const downloadButton = document.getElementById('downloadButton');
+      const ratioButtons = Array.from(document.querySelectorAll('.ratio-button'));
+      const sampleButton = document.getElementById('samplePrompt');
+      const ratios = {
+        square: { label: '1:1', width: 1024, height: 1024 },
+        portrait: { label: '2:3', width: 1024, height: 1536 },
+        landscape: { label: '3:2', width: 1536, height: 1024 }
+      };
+      let generatedObjectUrl = '';
+
+      function setStatus(message, state = '') {
+        generationStatus.textContent = message;
+        generationStatus.dataset.state = state;
+      }
+
+      async function generateImage(prompt) {
+        const selectedRatio = ratioButtons.find((button) => button.getAttribute('aria-pressed') === 'true')?.dataset.ratio || 'square';
+        const dimensions = ratios[selectedRatio];
+
+        generateButton.disabled = true;
+        generateButton.textContent = 'Generating…';
+        setStatus('Generating your image. This can take a little while.');
+        preview.textContent = prompt;
+        stageTitle.textContent = 'CREATING YOUR IMAGE';
+        stageLabel.textContent = 'Generating image…';
+        stageNote.textContent = 'The image is generated by Pollinations from the prompt you provided.';
+
+        try {
+          const imageUrl = new URL(`https://image.pollinations.ai/prompt/${encodeURIComponent(prompt)}`);
+          imageUrl.searchParams.set('width', String(dimensions.width));
+          imageUrl.searchParams.set('height', String(dimensions.height));
+          imageUrl.searchParams.set('nologo', 'true');
+          const response = await fetch(imageUrl, {
+            signal: AbortSignal.timeout(180_000)
+          });
+          if (!response.ok) {
+            if (response.status === 402 || response.status === 429) {
+              throw new Error('The free image service is busy or has reached its limit. Please wait a while and try again.');
+            }
+            throw new Error(`Image generation failed (HTTP ${response.status}). Please try again later.`);
+          }
+
+          const imageBlob = await response.blob();
+          if (!imageBlob.type.startsWith('image/')) {
+            throw new Error('The image service returned an unexpected response. Please try again later.');
+          }
+
+          if (generatedObjectUrl) URL.revokeObjectURL(generatedObjectUrl);
+          generatedObjectUrl = URL.createObjectURL(imageBlob);
+          generatedImage.src = generatedObjectUrl;
+          generatedImage.alt = `AI-generated image: ${prompt}`;
+          downloadButton.href = generatedObjectUrl;
+          downloadButton.hidden = false;
+          stage.dataset.ratio = selectedRatio;
+          stageRatio.textContent = dimensions.label;
+          stage.classList.add('has-image');
+          stageTitle.textContent = 'YOUR IMAGE IS READY';
+          stageLabel.textContent = 'Generated image';
+          setStatus('Image generated with Pollinations. You can download it below.');
+        } catch (error) {
+          const message = error.name === 'TimeoutError'
+            ? 'Image generation took too long. Please try again.'
+            : error.name === 'TypeError'
+              ? 'Could not reach the image service. Check your connection and try again.'
+              : error.message;
+          setStatus(message, 'error');
+          stageTitle.textContent = 'IMAGE GENERATION DID NOT FINISH';
+          const hasPreviousImage = stage.classList.contains('has-image');
+          stageLabel.textContent = hasPreviousImage ? 'Previous image kept' : 'Generation failed';
+          stageNote.textContent = hasPreviousImage
+            ? 'Your last successful image is still shown. Check the message beside the prompt before trying again.'
+            : 'Check the message beside the prompt for details. The public image service may be busy, rate-limited, or unavailable.';
+        } finally {
+          generateButton.disabled = false;
+          generateButton.textContent = 'Generate image';
+        }
+      }
+
+      function showPrompt() {
+        const prompt = promptInput.value.trim();
+        if (!prompt) {
+          promptInput.focus();
+          return;
+        }
+        generateImage(prompt);
+      }
+
+      form.addEventListener('submit', (event) => {
+        event.preventDefault();
+        showPrompt();
+      });
+
+      ratioButtons.forEach((button) => {
+        button.addEventListener('click', () => {
+          ratioButtons.forEach((item) => item.setAttribute('aria-pressed', String(item === button)));
+          stage.dataset.ratio = button.dataset.ratio;
+          stageRatio.textContent = ratios[button.dataset.ratio].label;
+        });
+      });
+
+      sampleButton.addEventListener('click', () => {
+        promptInput.value = 'A tiny observatory on a quiet moon, looking toward a blue sunrise, cinematic illustration';
+        promptInput.focus();
+      });
+
+      window.addEventListener('pagehide', () => {
+        if (generatedObjectUrl) URL.revokeObjectURL(generatedObjectUrl);
+      });
+    })();
+  </script>
+</body>
+</html>
