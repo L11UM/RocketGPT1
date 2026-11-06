@@ -10,7 +10,7 @@
 .makinggpt-page .making-hero { max-width: 930px; padding: clamp(75px, 11vw, 150px) 0 90px; }
 .making-eyebrow { margin: 0 0 21px; color: var(--making-accent); font: 600 11px/1.5 ui-monospace, SFMono-Regular, Menlo, monospace; letter-spacing: .09em; text-transform: uppercase; }
 .making-eyebrow span { margin-right: 7px; }
-.makinggpt-page h1 { margin: 0; color: var(--making-ink); font-size: clamp(72px, 13vw, 154px); font-weight: 500; line-height: .87; letter-spacing: -.09em; }
+.makinggpt-page h1 { margin: 0; color: var(--making-ink); font-size: clamp(44px, 7vw, 76px); font-weight: 500; line-height: 1; letter-spacing: -.065em; }
 .making-lead { max-width: 760px; margin: 24px 0 0; color: #242824; font-size: clamp(24px, 4vw, 42px); line-height: 1.15; letter-spacing: -.055em; }
 .making-intro { max-width: 660px; margin: 20px 0 0; color: var(--making-muted); font-size: 16px; line-height: 1.75; }
 .making-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 12px; margin-top: 28px; }
@@ -74,7 +74,7 @@ html[data-theme="dark"] .makinggpt-page .site-footer { border-color: var(--makin
   .makinggpt-page .header-cta { margin-left: auto; }
   .makinggpt-page main { width: calc(100% - 36px); }
   .makinggpt-page .making-hero { padding: 70px 0 58px; }
-  .makinggpt-page h1 { font-size: clamp(66px, 20vw, 112px); }
+  .makinggpt-page h1 { font-size: clamp(42px, 12vw, 58px); }
   .making-lead { font-size: 27px; }
   .making-intro { font-size: 14px; }
   .making-actions { align-items: stretch; flex-direction: column; }
