@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="color-scheme" content="light" />
+  <meta name="theme-color" content="#ffffff" />
+  <meta name="description" content="A local preview of a RocketGPT-tuned language model running on your Mac." />
+  <title>MakingGPT | Local model preview</title>
+  <link rel="stylesheet" href="/styles.css" />
+  <script src="/app.js" defer></script>
+</head>
+<body>
+  <main class="app">
+    <header class="topbar">
+      <a class="brand" href="/" aria-label="MakingGPT local preview home">
+        <span class="brand-mark" aria-hidden="true">✦</span>
+        <span><strong>MakingGPT</strong><small>LOCAL MODEL PREVIEW</small></span>
+      </a>
+      <span class="model-badge"><span aria-hidden="true"></span> Qwen2.5 · 1.5B + RocketGPT adapter</span>
+    </header>
+
+    <section class="conversation" aria-labelledby="welcome-title">
+      <div class="welcome" id="welcome">
+        <div class="welcome-icon" aria-hidden="true">✦</div>
+        <p class="eyebrow">Running on this Mac</p>
+        <h1 id="welcome-title">Try our local model.</h1>
+        <p class="welcome-copy">This is an experimental RocketGPT fine-tune running locally—not GPT-3 and not the third-party AI service used by public Rocket 2.0.</p>
+        <div class="suggestions" aria-label="Sample prompts">
+          <button type="button" data-prompt="Give me three simple ways to organize a creative project.">Organize a creative project</button>
+          <button type="button" data-prompt="Explain how language models work in plain English.">Explain language models</button>
+          <button type="button" data-prompt="Help me write a short, friendly introduction for a new project.">Draft a project introduction</button>
+        </div>
+      </div>
+      <div class="messages" id="messages" aria-live="polite" aria-label="Conversation"></div>
+    </section>
+
+    <form class="composer-area" id="chatForm">
+      <label class="sr-only" for="prompt">Message MakingGPT</label>
+      <div class="composer">
+        <textarea id="prompt" name="prompt" rows="1" maxlength="4000" placeholder="Message the local model…" required></textarea>
+        <button id="sendButton" type="submit" aria-label="Send message">↑</button>
+      </div>
+      <div class="composer-footer">
+        <p id="status" role="status">Prompts stay on this Mac. The local model may make mistakes.</p>
+        <button id="clearButton" type="button">Clear chat</button>
+      </div>
+    </form>
+  </main>
+</body>
+</html>

@@ -1,0 +1,61 @@
+{"messages":[{"role":"system","content":"Follow the user's requested output format exactly."},{"role":"user","content":"Give exactly two fruit names, one per line."},{"role":"assistant","content":"Apple\nPear"}]}
+{"messages":[{"role":"user","content":"Explain photosynthesis in one sentence."},{"role":"assistant","content":"Photosynthesis is how plants use sunlight to turn water and carbon dioxide into sugars and oxygen."}]}
+{"messages":[{"role":"user","content":"Summarize this in exactly five words: The team postponed launch because testing uncovered a payment bug."},{"role":"assistant","content":"Testing found a payment bug."}]}
+{"messages":[{"role":"system","content":"If information is missing, say what is unknown rather than inventing it."},{"role":"user","content":"What time does my local library close today?"},{"role":"assistant","content":"I don't know your library or its hours. Share the library name and location, and I can help find them."}]}
+{"messages":[{"role":"user","content":"Return valid JSON with keys \"status\" and \"count\" for status ready and count 3. Do not add commentary."},{"role":"assistant","content":"{\"status\":\"ready\",\"count\":3}"}]}
+{"messages":[{"role":"user","content":"List three steps for making tea."},{"role":"assistant","content":"1. Boil fresh water.\n2. Steep tea for several minutes.\n3. Remove the tea bag and serve."},{"role":"user","content":"What happens after step 3?"},{"role":"assistant","content":"Enjoy your tea."},{"role":"user","content":"What should I do after enjoying the tea?"},{"role":"assistant","content":"Wash the teapot and cups, then put away the tea supplies."}]}
+{"messages":[{"role":"user","content":"Answer yes or no only: Is 14 an even number?"},{"role":"assistant","content":"Yes"}]}
+{"messages":[{"role":"user","content":"Give exactly three colors, separated by commas."},{"role":"assistant","content":"Red, blue, green"}]}
+{"messages":[{"role":"user","content":"Sort these words alphabetically and return only the words: pear, apple, plum."},{"role":"assistant","content":"apple, pear, plum"}]}
+{"messages":[{"role":"user","content":"What is 14 multiplied by 6? Give only the number."},{"role":"assistant","content":"84"}]}
+{"messages":[{"role":"user","content":"Translate \"good morning\" into Spanish. Return only the translation."},{"role":"assistant","content":"Buenos días."}]}
+{"messages":[{"role":"user","content":"Rewrite this to sound polite and keep the meaning: Send me the report now."},{"role":"assistant","content":"Could you please send me the report when you have a chance?"}]}
+{"messages":[{"role":"user","content":"Classify the sentiment as positive, negative, or mixed: \"The support agent was kind, but the refund took a month.\" Return one label."},{"role":"assistant","content":"Mixed"}]}
+{"messages":[{"role":"user","content":"Extract the city and date from this sentence as JSON only: \"The meeting in Toronto is on 2026-04-12.\""},{"role":"assistant","content":"{\"city\":\"Toronto\",\"date\":\"2026-04-12\"}"}]}
+{"messages":[{"role":"user","content":"Use only this information: Mira owns the blue bicycle. What color is Mira's bicycle?"},{"role":"assistant","content":"Blue."}]}
+{"messages":[{"role":"user","content":"Use only this information: The package arrived on Tuesday. Who delivered it?"},{"role":"assistant","content":"The information does not say who delivered it."}]}
+{"messages":[{"role":"user","content":"Explain a password manager in no more than 12 words."},{"role":"assistant","content":"A password manager securely stores and helps create your passwords."}]}
+{"messages":[{"role":"user","content":"Give two benefits and one drawback of biking to work. Use bullets."},{"role":"assistant","content":"- Benefit: It adds exercise to your day.\n- Benefit: It can reduce commuting costs.\n- Drawback: Weather can make the ride uncomfortable."}]}
+{"messages":[{"role":"user","content":"Turn this into a concise title of six words or fewer: A guide to keeping houseplants healthy through the winter."},{"role":"assistant","content":"Keeping Houseplants Healthy in Winter"}]}
+{"messages":[{"role":"user","content":"Complete this analogy with one word: Bird is to nest as bee is to ___."},{"role":"assistant","content":"Hive"}]}
+{"messages":[{"role":"user","content":"I have flour, eggs, and milk. Suggest one simple dish and one missing ingredient."},{"role":"assistant","content":"You could make pancakes; baking powder would help make them fluffier."}]}
+{"messages":[{"role":"user","content":"Give exactly two tips for organizing a desk. Number them."},{"role":"assistant","content":"1. Keep frequently used items within reach.\n2. Clear away items you no longer need."}]}
+{"messages":[{"role":"user","content":"Return the word \"ready\" in lowercase, with no punctuation."},{"role":"assistant","content":"ready"}]}
+{"messages":[{"role":"user","content":"Summarize in exactly six words: \"A power outage delayed the train, but service resumed after crews repaired a damaged signal.\""},{"role":"assistant","content":"Signal repairs restored delayed train service."}]}
+{"messages":[{"role":"user","content":"I will give you a list. First answer with its number of items, then its longest word: oak, sunflower, pine."},{"role":"assistant","content":"3\nsunflower"}]}
+{"messages":[{"role":"user","content":"What is 5 plus 8?"},{"role":"assistant","content":"13"},{"role":"user","content":"Now subtract 4 from that result. Give only the answer."},{"role":"assistant","content":"9"}]}
+{"messages":[{"role":"user","content":"Give one practical way to save water at home. Keep it under 10 words."},{"role":"assistant","content":"Turn off the tap while brushing your teeth."}]}
+{"messages":[{"role":"user","content":"Reply with exactly these three labels on separate lines: PLAN, BUILD, TEST."},{"role":"assistant","content":"PLAN\nBUILD\nTEST"}]}
+{"messages":[{"role":"user","content":"Return exactly four words and include the word calm: The room was quiet and the lights were low."},{"role":"assistant","content":"The room felt calm."}]}
+{"messages":[{"role":"user","content":"Make a Markdown table with columns Fruit and Color and these two rows: lemon/yellow, grape/purple."},{"role":"assistant","content":"| Fruit | Color |\n|---|---|\n| lemon | yellow |\n| grape | purple |"}]}
+{"messages":[{"role":"user","content":"Sort these numbers from largest to smallest. Return only the list: 2, 8, 5, 1."},{"role":"assistant","content":"8, 5, 2, 1"}]}
+{"messages":[{"role":"user","content":"Extract the email address only: For questions, contact Jo at jo@example.com."},{"role":"assistant","content":"jo@example.com"}]}
+{"messages":[{"role":"user","content":"Correct capitalization and punctuation without changing the meaning: we arrived late but the doors were open"},{"role":"assistant","content":"We arrived late, but the doors were open."}]}
+{"messages":[{"role":"user","content":"Explain gravity in exactly two sentences."},{"role":"assistant","content":"Gravity is an attraction between objects that have mass. On Earth, it pulls objects toward the planet's center."}]}
+{"messages":[{"role":"user","content":"Give a three-item picnic packing checklist with no introduction."},{"role":"assistant","content":"- Blanket\n- Water\n- Lunch"}]}
+{"messages":[{"role":"user","content":"Compare weather and climate in exactly two bullets."},{"role":"assistant","content":"- Weather describes short-term atmospheric conditions.\n- Climate describes typical patterns over a long period."}]}
+{"messages":[{"role":"user","content":"Rewrite this without using the word \"very\": I am very happy with the result."},{"role":"assistant","content":"I am delighted with the result."}]}
+{"messages":[{"role":"user","content":"Ask one clarifying question before recommending a laptop: Help me pick a laptop."},{"role":"assistant","content":"What will you mainly use it for, and what is your budget?"}]}
+{"messages":[{"role":"user","content":"The note says: \"Ari left the package by the front desk.\" Which delivery company brought it?"},{"role":"assistant","content":"The note does not name a delivery company."}]}
+{"messages":[{"role":"user","content":"Return true or false only: 10 is greater than 7."},{"role":"assistant","content":"true"}]}
+{"messages":[{"role":"user","content":"Translate \"thank you\" into French. Return only the translation."},{"role":"assistant","content":"Merci."}]}
+{"messages":[{"role":"user","content":"Explain recycling to an eight-year-old in exactly two sentences."},{"role":"assistant","content":"Recycling turns used materials into things that can be used again. It helps reduce how much trash we throw away."}]}
+{"messages":[{"role":"user","content":"Write a title of exactly three words for a story about a rainy afternoon."},{"role":"assistant","content":"A Rainy Afternoon"}]}
+{"messages":[{"role":"user","content":"Choose the option that stays within a $20 budget. Reply with its letter only: A costs $18; B costs $25."},{"role":"assistant","content":"A"}]}
+{"messages":[{"role":"user","content":"Return exactly three lines, each starting with a dash: Plan, Build, Review."},{"role":"assistant","content":"- Plan\n- Build\n- Review"}]}
+{"messages":[{"role":"user","content":"Return only this XML element with status set to ok."},{"role":"assistant","content":"<status>ok</status>"}]}
+{"messages":[{"role":"user","content":"Rewrite this in a neutral tone: This terrible plan failed miserably."},{"role":"assistant","content":"The plan did not succeed."}]}
+{"messages":[{"role":"user","content":"Ask one concise clarifying question about this instruction: Move it over there."},{"role":"assistant","content":"Which item should I move, and where should I put it?"}]}
+{"messages":[{"role":"user","content":"Sort these numbers from smallest to largest and keep duplicates: 5, 2, 5, 1."},{"role":"assistant","content":"1, 2, 5, 5"}]}
+{"messages":[{"role":"user","content":"Extract the task and owner as JSON only: \"Nia will update the guide. Omar will test the form.\" Use keys tasks and owners."},{"role":"assistant","content":"{\"tasks\":[\"update the guide\",\"test the form\"],\"owners\":[\"Nia\",\"Omar\"]}"}]}
+{"messages":[{"role":"user","content":"Suggest one indoor activity for a rainy day. Answer in one short sentence."},{"role":"assistant","content":"Try a puzzle or board game at home."}]}
+{"messages":[{"role":"user","content":"Use only this sentence: \"The workshop starts at 2 p.m.\" What time does it start?"},{"role":"assistant","content":"2 p.m."}]}
+{"messages":[{"role":"user","content":"What is 19 plus 24? Give only the number."},{"role":"assistant","content":"43"}]}
+{"messages":[{"role":"user","content":"Is 2 multiplied by 3 equal to 6? Answer yes or no only."},{"role":"assistant","content":"Yes"}]}
+{"messages":[{"role":"user","content":"Return the label \"approved\" in lowercase, with no extra text."},{"role":"assistant","content":"approved"}]}
+{"messages":[{"role":"user","content":"Give exactly two rhyming words."},{"role":"assistant","content":"cat, hat"}]}
+{"messages":[{"role":"user","content":"Name two drinks that usually contain no caffeine. Separate them with a comma."},{"role":"assistant","content":"Water, milk"}]}
+{"messages":[{"role":"user","content":"For the rest of this conversation, format each answer as one numbered list item."},{"role":"assistant","content":"Understood. I will use one numbered list item per reply."},{"role":"user","content":"Name a planet."},{"role":"assistant","content":"1. Mars"}]}
+{"messages":[{"role":"user","content":"Summarize in exactly six words: The team reviewed the draft and approved the launch."},{"role":"assistant","content":"Team reviewed draft and approved launch."}]}
+{"messages":[{"role":"user","content":"Write an email subject line of four words or fewer about a Monday schedule update. No punctuation."},{"role":"assistant","content":"Monday Schedule Update"}]}
+{"messages":[{"role":"user","content":"A basket held 12 apples. Five were used. How many remain? Give only the number."},{"role":"assistant","content":"7"}]}

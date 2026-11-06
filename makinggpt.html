@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="color-scheme" content="dark light" />
+  <meta name="theme-color" content="#080b12" />
+  <meta name="description" content="Explore MakingGPT, an experimental RocketGPT language-model adapter you can run locally on Apple Silicon." />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://rocketgpt.net/makinggpt.html" />
+  <link rel="manifest" href="/manifest.json" />
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+  <link rel="icon" type="image/svg+xml" href="/pwa-icon.svg" />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="RocketGPT" />
+  <meta property="og:title" content="MakingGPT | A local model experiment" />
+  <meta property="og:description" content="Explore an experimental RocketGPT adapter for Qwen2.5-1.5B-Instruct, designed to run locally on Apple Silicon." />
+  <meta property="og:url" content="https://rocketgpt.net/makinggpt.html" />
+  <meta property="og:image" content="https://rocketgpt.net/rocketgpt-share.png" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="MakingGPT | A local model experiment" />
+  <meta name="twitter:description" content="Explore an experimental RocketGPT adapter for Qwen2.5-1.5B-Instruct, designed to run locally on Apple Silicon." />
+  <meta name="twitter:image" content="https://rocketgpt.net/rocketgpt-share.png" />
+  <title>MakingGPT | A local model experiment</title>
+  <script src="/site.js"></script>
+  <link rel="stylesheet" href="/site.css" />
+  <link rel="stylesheet" href="/makinggpt.css?v=1" />
+</head>
+<body class="makinggpt-page">
+  <header class="site-header">
+    <a class="brand" href="/" aria-label="RocketGPT home">
+      <img src="/rocketgpt-logo.svg" alt="" />
+      <span>RocketGPT</span>
+    </a>
+    <nav class="site-nav" aria-label="Main navigation">
+      <a href="/">Home</a>
+      <a href="/rocketgpt.html">Rocket 2.0</a>
+      <a href="/makinggpt.html" aria-current="page">MakingGPT</a>
+      <a href="/nall-e.html">NALL-E</a>
+      <a href="/blog.html">Blog</a>
+      <a href="/store.html">Store</a>
+    </nav>
+    <a class="header-cta" href="#run-locally">Run locally <span aria-hidden="true">↓</span></a>
+  </header>
+
+  <main>
+    <section class="making-hero" aria-labelledby="page-title">
+      <p class="making-eyebrow"><span aria-hidden="true">✦</span> An open experiment from RocketGPT</p>
+      <h1 id="page-title">MakingGPT</h1>
+      <p class="making-lead">A small language-model experiment, running on your own Mac.</p>
+      <p class="making-intro">MakingGPT is an experimental RocketGPT adapter for Qwen2.5-1.5B-Instruct. Explore the code, prepare your own reviewed examples, and run a fine-tuning experiment locally.</p>
+      <div class="making-actions">
+        <a class="making-primary" href="#run-locally">Set up the local preview <span aria-hidden="true">↓</span></a>
+        <a class="making-secondary" href="https://github.com/L11UM/RocketGPT1/tree/main/MakingGPT">Explore the project source <span aria-hidden="true">↗</span></a>
+      </div>
+      <p class="making-note">Local experiment · Apple Silicon · No hosted MakingGPT chat</p>
+    </section>
+
+    <section class="making-facts" aria-label="About the MakingGPT experiment">
+      <article>
+        <span class="fact-index">01 / BASE MODEL</span>
+        <h2>Qwen2.5-1.5B-Instruct</h2>
+        <p>MakingGPT is designed to start from an open model with a RocketGPT LoRA adapter. It is not a foundation model trained from scratch.</p>
+      </article>
+      <article>
+        <span class="fact-index">02 / RUNS LOCALLY</span>
+        <h2>Your Mac does the work</h2>
+        <p>The preview uses Apple MLX-LM on Apple Silicon. Prompts go to the local model server on your device, not to RocketGPT's public chat provider.</p>
+      </article>
+      <article>
+        <span class="fact-index">03 / EARLY EXPERIMENT</span>
+        <h2>Small data, honest claims</h2>
+        <p>The included sample dataset and adapter are too small to establish model quality. Treat outputs as experimental and verify anything important.</p>
+      </article>
+    </section>
+
+    <section class="run-section" id="run-locally" aria-labelledby="run-title">
+      <div class="run-heading">
+        <p class="making-eyebrow">Take it for a local test drive</p>
+        <h2 id="run-title">Run MakingGPT on your Mac.</h2>
+        <p>The local chat preview is not hosted online, and adapter weights are not included in the repository. You’ll need an Apple Silicon Mac, macOS, Python 3.11 or newer, and several gigabytes of free disk space for the environment and model download.</p>
+      </div>
+      <ol class="setup-steps">
+        <li><span>01</span><div><h3>Set up the project</h3><p>Clone the repository, then create the Python environment.</p><pre><code>git clone https://github.com/L11UM/RocketGPT1.git
+cd RocketGPT1/MakingGPT
+python3.11 -m venv .venv
+source .venv/bin/activate
+python -m pip install -r requirements.txt</code></pre></div></li>
+        <li><span>02</span><div><h3>Prepare data and train an adapter</h3><p>The included examples are format samples only. Replace them with original, reviewed data—at least 200 training examples and 20 independent examples each for validation and testing—then validate and train.</p><pre><code>python scripts/validate_data.py
+TRAIN_ITERS=100 sh scripts/train_adapter.sh</code></pre></div></li>
+        <li><span>03</span><div><h3>Start your local preview</h3><p>After training creates an adapter, start the local model and browser preview. The first model load downloads the base model.</p><pre><code>sh scripts/start_local_demo.sh</code></pre></div></li>
+        <li><span>04</span><div><h3>Open the address printed in Terminal</h3><p>Prompts stay on your Mac. When you’re done, press Ctrl+C in that terminal to stop the local preview and model server.</p></div></li>
+      </ol>
+      <p class="local-warning"><strong>Keep expectations grounded.</strong> MakingGPT is not GPT-3, and it does not power Rocket 2.0. The public Rocket 2.0 chat remains a separate product using a third-party model through Pollinations.</p>
+      <a class="project-link" href="https://github.com/L11UM/RocketGPT1/tree/main/MakingGPT">Browse the source and full training guide <span aria-hidden="true">↗</span></a>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <a href="/">RocketGPT</a>
+    <span>Useful AI, built with care.</span>
+    <a href="/rocketgpt.html">Open Rocket 2.0</a>
+  </footer>
+</body>
+</html>

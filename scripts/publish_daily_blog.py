@@ -202,6 +202,7 @@ def generate_article_pages(posts_path: Path, articles_dir: Path) -> None:
     <nav class="site-nav" aria-label="Main navigation">
       <a href="/">Home</a>
       <a href="/rocketgpt.html">Rocket 2.0</a>
+      <a href="/makinggpt.html">MakingGPT</a>
       <a href="/nall-e.html">NALL-E</a>
       <a href="/blog.html" aria-current="page">Blog</a>
       <a href="/store.html">Store</a>

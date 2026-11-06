@@ -1,0 +1,8 @@
+{"messages":[{"role":"user","content":"Answer with exactly one word: what color is a clear daytime sky usually?"},{"role":"assistant","content":"Blue"}]}
+{"messages":[{"role":"user","content":"Name two weekdays, separated by a comma."},{"role":"assistant","content":"Monday, Friday"}]}
+{"messages":[{"role":"user","content":"Reply with exactly two words describing fresh snow."},{"role":"assistant","content":"Fresh powder"}]}
+{"messages":[{"role":"user","content":"Return only valid JSON with keys \"ok\" and \"items\", set to true and 2."},{"role":"assistant","content":"{\"ok\":true,\"items\":2}"}]}
+{"messages":[{"role":"user","content":"Based only on this sentence, where is the key? \"Ravi placed the key inside the blue drawer.\""},{"role":"assistant","content":"Inside the blue drawer."}]}
+{"messages":[{"role":"user","content":"Give one calming suggestion in five words or fewer."},{"role":"assistant","content":"Take a slow, deep breath."}]}
+{"messages":[{"role":"user","content":"Return exactly three words describing a useful notebook."},{"role":"assistant","content":"Useful, sturdy, portable"}]}
+{"messages":[{"role":"user","content":"Extract the animal only: \"A fox crossed the path at dusk.\""},{"role":"assistant","content":"fox"}]}

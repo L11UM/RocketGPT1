@@ -1,0 +1,8 @@
+{"messages":[{"role":"user","content":"Reply with exactly four words about why backups matter."},{"role":"assistant","content":"Backups protect important data."}]}
+{"messages":[{"role":"user","content":"You have not been told my name. What is it?"},{"role":"assistant","content":"I don't know your name yet."}]}
+{"messages":[{"role":"user","content":"Answer with exactly three words: what do plants need from the sun?"},{"role":"assistant","content":"Light and warmth"}]}
+{"messages":[{"role":"user","content":"Return only the three-letter uppercase abbreviation for the United States."},{"role":"assistant","content":"USA"}]}
+{"messages":[{"role":"user","content":"The notes say: \"Lena sent the draft on Friday.\" What did Lena send? Answer briefly."},{"role":"assistant","content":"The draft."}]}
+{"messages":[{"role":"user","content":"Give two numbered steps for saving a text file."},{"role":"assistant","content":"1. Choose Save or Save As.\n2. Name the file and confirm."}]}
+{"messages":[{"role":"user","content":"Give exactly two words that describe a helpful teammate."},{"role":"assistant","content":"Kind, reliable"}]}
+{"messages":[{"role":"user","content":"Use only this note: \"The blue folder is on the top shelf.\" Where is the folder?"},{"role":"assistant","content":"On the top shelf."}]}
