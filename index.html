@@ -55,25 +55,28 @@
     :root { color-scheme: dark; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; background: #171717; color: #ededed; }
     * { box-sizing: border-box; }
     body { min-height: 100vh; margin: 0; background: radial-gradient(ellipse at 65% 0, #20271f 0, #171717 45rem); }
-    main { width: min(1120px, calc(100% - 48px)); margin: 0 auto; padding: 24px 0 56px; }
-    header { display: flex; align-items: center; justify-content: space-between; min-height: 68px; padding-bottom: 18px; border-bottom: 1px solid #383838; }
-    .brand { display: flex; align-items: center; gap: 11px; }
+    main { width: min(1120px, calc(100% - 48px)); margin: 0 auto; padding: 0 0 56px; }
+    header { display: flex; align-items: center; justify-content: space-between; width: 100vw; min-height: 72px; margin-left: calc(50% - 50vw); padding: 12px max(24px, calc((100vw - 1120px) / 2)); border-bottom: 1px solid #e7e7e7; background: #fff; color: #171717; }
+    .brand { display: flex; align-items: center; gap: 11px; color: inherit; text-decoration: none; }
     .brand img { width: 34px; height: 43px; object-fit: contain; }
     .brand-copy { display: grid; gap: 2px; }
     .brand-copy strong { font-size: 19px; letter-spacing: -.04em; }
     .brand-copy span, .model { color: #929292; font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 10px; letter-spacing: .08em; }
-    .header-actions { display: flex; align-items: center; gap: 18px; }
-    .model { display: flex; align-items: center; gap: 9px; }
-    .model::before { width: 7px; height: 7px; border-radius: 50%; background: #a9cf8d; content: ""; }
-    .site-directory { position: relative; }
-    .site-directory summary { padding: 9px 12px; border: 1px solid #444; border-radius: 7px; color: #ededed; cursor: pointer; font-size: 13px; list-style: none; }
+    .header-actions { display: flex; align-items: center; gap: 24px; }
+    .site-nav { display: flex; align-items: center; gap: 24px; }
+    .site-nav a { color: #444; font-size: 13px; text-decoration: none; transition: color .18s; }
+    .site-nav a:hover, .site-nav a[aria-current="page"] { color: #53763a; }
+    .nav-cta { display: inline-flex; min-height: 40px; align-items: center; padding: 0 15px; border: 1px solid #171717; border-radius: 7px; background: #171717; color: #fff; font-size: 13px; font-weight: 700; text-decoration: none; transition: background .18s; }
+    .nav-cta:hover { background: #343434; }
+    .site-nav a:focus-visible, .nav-cta:focus-visible, .site-directory summary:focus-visible, .site-directory a:focus-visible { outline: 2px solid #53763a; outline-offset: 3px; }
+    .site-directory { position: relative; display: none; }
+    .site-directory summary { padding: 9px 12px; border: 1px solid #ddd; border-radius: 7px; color: #222; cursor: pointer; font-size: 13px; list-style: none; }
     .site-directory summary::-webkit-details-marker { display: none; }
-    .site-directory summary::after { margin-left: 8px; color: #a9cf8d; content: "▾"; }
-    .site-directory summary:hover, .site-directory[open] summary { border-color: #a9cf8d; }
-    .site-directory summary:focus-visible, .site-directory a:focus-visible { outline: 2px solid #a9cf8d; outline-offset: 3px; }
-    .site-directory-links { position: absolute; top: calc(100% + 8px); right: 0; z-index: 5; min-width: 170px; padding: 6px; border: 1px solid #444; border-radius: 8px; background: #202020; box-shadow: 0 12px 30px rgba(0, 0, 0, .35); }
-    .site-directory-links a { display: block; padding: 9px 10px; border-radius: 5px; color: #ededed; font-size: 13px; text-decoration: none; }
-    .site-directory-links a:hover, .site-directory-links a[aria-current="page"] { background: #30362c; color: #c1e3a8; }
+    .site-directory summary::after { margin-left: 8px; color: #53763a; content: "▾"; }
+    .site-directory summary:hover, .site-directory[open] summary { border-color: #888; }
+    .site-directory-links { position: absolute; top: calc(100% + 8px); right: 0; z-index: 5; min-width: 170px; padding: 6px; border: 1px solid #e2e2e2; border-radius: 8px; background: #fff; box-shadow: 0 12px 30px rgba(0, 0, 0, .14); }
+    .site-directory-links a { display: block; padding: 9px 10px; border-radius: 5px; color: #222; font-size: 13px; text-decoration: none; }
+    .site-directory-links a:hover, .site-directory-links a[aria-current="page"] { background: #f0f4ed; color: #405c2e; }
     .hero { max-width: 850px; padding: 84px 0 66px; }
     .eyebrow { margin: 0 0 18px; color: #a9cf8d; font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 12px; font-weight: 600; letter-spacing: .12em; text-transform: uppercase; }
     h1 { max-width: 780px; margin: 0 0 20px; font-size: clamp(42px, 7vw, 68px); line-height: 1.04; letter-spacing: -.055em; }
@@ -92,17 +95,23 @@
     a { color: #a9cf8d; }
     .cta, .cta:hover { color: #171717; }
     footer { margin-top: 54px; padding-top: 18px; border-top: 1px solid #383838; color: #898989; font-size: 12px; line-height: 1.6; }
-    @media (max-width: 600px) { main { width: calc(100% - 36px); padding-top: 18px; } .hero { padding: 64px 0 46px; } .brand img { width: 30px; height: 38px; } .brand-copy strong { font-size: 17px; } .header-actions { gap: 8px; } .model { display: none; } .share-cta { margin: 10px 0 0; } }
+    @media (max-width: 760px) { main { width: calc(100% - 36px); padding-top: 0; } header { gap: 10px; padding: 12px 18px; } .hero { padding: 64px 0 46px; } .brand img { width: 30px; height: 38px; } .brand-copy strong { font-size: 17px; } .header-actions { gap: 8px; } .site-nav { display: none; } .site-directory { display: block; } .nav-cta { min-height: 38px; padding: 0 10px; font-size: 12px; } .share-cta { margin: 10px 0 0; } }
+    @media (max-width: 420px) { .nav-cta { display: none; } }
   </style>
 </head>
 <body>
   <main>
     <header>
-      <div class="brand">
+      <a class="brand" href="/" aria-label="RocketGPT home">
         <img src="rocketgpt-logo.svg" alt="" />
         <div class="brand-copy"><strong>RocketGPT</strong><span>AI RESEARCH &amp; DEPLOYMENT</span></div>
-      </div>
+      </a>
       <div class="header-actions">
+        <nav class="site-nav" aria-label="Main navigation">
+          <a href="/" aria-current="page">Home</a>
+          <a href="/rocketgpt.html">Rocket 2.0</a>
+          <a href="/nall-e.html">NALL-E</a>
+        </nav>
         <details class="site-directory">
           <summary aria-label="Open page directory">Pages</summary>
           <nav class="site-directory-links" aria-label="Page directory">
@@ -111,7 +120,7 @@
             <a href="/nall-e.html">NALL-E</a>
           </nav>
         </details>
-        <div class="model">GPT-OSS</div>
+        <a class="nav-cta" href="/rocketgpt.html">Try Rocket 2.0</a>
       </div>
     </header>
 

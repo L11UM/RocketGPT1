@@ -25,23 +25,28 @@
     button, textarea { font: inherit; }
     button { color: inherit; }
     a { color: inherit; }
-    .page { width: min(1120px, calc(100% - 40px)); margin: 0 auto; padding: 28px 0 48px; }
-    .topbar { display: flex; align-items: center; justify-content: space-between; padding-bottom: 20px; border-bottom: 1px solid #33372f; }
+    .page { width: min(1120px, calc(100% - 40px)); margin: 0 auto; padding: 0 0 48px; }
+    .topbar { display: flex; align-items: center; justify-content: space-between; width: 100vw; min-height: 72px; margin-left: calc(50% - 50vw); padding: 12px max(24px, calc((100vw - 1120px) / 2)); border-bottom: 1px solid #e7e7e7; background: #fff; color: #171717; }
     .brand { display: flex; align-items: center; gap: 12px; text-decoration: none; }
     .brand-mark { display: grid; width: 38px; height: 38px; place-items: center; border: 1px solid #63724f; border-radius: 12px; background: #1b2118; color: #c4ee9c; font-size: 19px; }
     .brand-copy { display: grid; gap: 3px; }
     .brand-name { font-size: 16px; font-weight: 720; letter-spacing: -.04em; }
     .brand-caption, .eyebrow, .stage-label, .ratio-label { color: #9c9f93; font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 10px; letter-spacing: .12em; text-transform: uppercase; }
     .brand-caption { margin-top: 3px; font-size: 9px; }
-    .site-directory { position: relative; }
-    .site-directory summary { padding: 9px 12px; border: 1px solid #44493f; border-radius: 7px; color: #e6e8df; cursor: pointer; font-size: 13px; list-style: none; }
+    .site-nav { display: flex; align-items: center; gap: 22px; }
+    .site-nav a { color: #444; font-size: 13px; text-decoration: none; }
+    .site-nav a:hover, .site-nav a[aria-current="page"] { color: #53763a; }
+    .nav-cta { display: inline-flex; min-height: 38px; align-items: center; padding: 0 13px; border: 1px solid #171717; border-radius: 7px; background: #171717; color: #fff; font-size: 12px; font-weight: 700; text-decoration: none; }
+    .nav-cta:hover { background: #343434; }
+    .site-nav a:focus-visible, .nav-cta:focus-visible, .site-directory summary:focus-visible, .site-directory a:focus-visible { outline: 2px solid #53763a; outline-offset: 3px; }
+    .site-directory { position: relative; display: none; }
+    .site-directory summary { padding: 9px 12px; border: 1px solid #ddd; border-radius: 7px; color: #222; cursor: pointer; font-size: 13px; list-style: none; }
     .site-directory summary::-webkit-details-marker { display: none; }
-    .site-directory summary::after { margin-left: 8px; color: #b7dd91; content: "▾"; }
-    .site-directory summary:hover, .site-directory[open] summary { border-color: #b7dd91; }
-    .site-directory summary:focus-visible, .site-directory a:focus-visible { outline: 2px solid #d5f4b4; outline-offset: 3px; }
-    .site-directory-links { position: absolute; top: calc(100% + 8px); right: 0; z-index: 5; min-width: 170px; padding: 6px; border: 1px solid #44493f; border-radius: 8px; background: #191c18; box-shadow: 0 12px 30px rgba(0, 0, 0, .4); }
-    .site-directory-links a { display: block; padding: 9px 10px; border-radius: 5px; color: #e6e8df; font-size: 13px; text-decoration: none; }
-    .site-directory-links a:hover, .site-directory-links a[aria-current="page"] { background: #252e20; color: #d8f6bb; }
+    .site-directory summary::after { margin-left: 8px; color: #53763a; content: "▾"; }
+    .site-directory summary:hover, .site-directory[open] summary { border-color: #888; }
+    .site-directory-links { position: absolute; top: calc(100% + 8px); right: 0; z-index: 5; min-width: 170px; padding: 6px; border: 1px solid #e2e2e2; border-radius: 8px; background: #fff; box-shadow: 0 12px 30px rgba(0, 0, 0, .14); }
+    .site-directory-links a { display: block; padding: 9px 10px; border-radius: 5px; color: #222; font-size: 13px; text-decoration: none; }
+    .site-directory-links a:hover, .site-directory-links a[aria-current="page"] { background: #f0f4ed; color: #405c2e; }
     .intro { max-width: 680px; padding: 58px 0 34px; }
     .eyebrow { color: #b7dd91; }
     h1 { margin: 12px 0; font-size: clamp(38px, 6vw, 58px); letter-spacing: -.06em; line-height: 1; }
@@ -95,13 +100,20 @@
     footer a { color: #b7dd91; text-decoration: none; }
 
     @media (max-width: 760px) {
-      .page { width: min(100% - 28px, 560px); padding-top: 18px; }
+      .page { width: min(100% - 28px, 560px); padding-top: 0; }
+      .topbar { padding: 12px 14px; }
       .brand-caption { font-size: 8px; }
+      .site-nav { display: none; }
+      .site-directory { display: block; }
+      .nav-cta { min-height: 36px; padding: 0 9px; font-size: 11px; }
       .intro { padding: 42px 0 24px; }
       .workspace { grid-template-columns: 1fr; }
       .controls { order: 1; }
       .stage-panel { order: 2; }
       .stage { min-height: 220px; }
+    }
+    @media (max-width: 420px) {
+      .nav-cta { display: none; }
     }
 
     @media (prefers-reduced-motion: reduce) {
@@ -116,6 +128,11 @@
         <span class="brand-mark" aria-hidden="true">✦</span>
         <span class="brand-copy"><span class="brand-name">NALL-E</span><span class="brand-caption">A ROCKETGPT PRODUCT</span></span>
       </a>
+      <nav class="site-nav" aria-label="Main navigation">
+        <a href="/">Home</a>
+        <a href="/rocketgpt.html">Rocket 2.0</a>
+        <a href="/nall-e.html" aria-current="page">NALL-E</a>
+      </nav>
       <details class="site-directory">
         <summary aria-label="Open page directory">Pages</summary>
         <nav class="site-directory-links" aria-label="Page directory">
@@ -124,6 +141,7 @@
           <a href="/nall-e.html" aria-current="page">NALL-E</a>
         </nav>
       </details>
+      <a class="nav-cta" href="/rocketgpt.html">Try Rocket 2.0</a>
     </header>
 
     <section class="intro" aria-labelledby="page-title">
