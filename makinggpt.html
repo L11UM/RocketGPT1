@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="color-scheme" content="dark light" />
   <meta name="theme-color" content="#080b12" />
-  <meta name="description" content="Explore the MakingGPT project online from any computer with a web browser and internet connection. The experimental model runs locally." />
+  <meta name="description" content="MakingGPT is an experimental instruction-tuning project aiming to help an AI model follow human instructions more reliably. Compare results with Rocket 2.0 only after evaluation." />
   <meta name="robots" content="index, follow" />
   <link rel="canonical" href="https://rocketgpt.net/makinggpt.html" />
   <link rel="manifest" href="/manifest.json" />
@@ -14,12 +14,12 @@
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="RocketGPT" />
   <meta property="og:title" content="MakingGPT | A local model experiment" />
-  <meta property="og:description" content="Explore the MakingGPT project online from any computer with a web browser and internet connection. The experimental model runs locally." />
+  <meta property="og:description" content="MakingGPT is an experimental instruction-tuning project aiming to help an AI model follow human instructions more reliably. Compare results with Rocket 2.0 only after evaluation." />
   <meta property="og:url" content="https://rocketgpt.net/makinggpt.html" />
   <meta property="og:image" content="https://rocketgpt.net/rocketgpt-share.png" />
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="MakingGPT | A local model experiment" />
-  <meta name="twitter:description" content="Explore the MakingGPT project online from any computer with a web browser and internet connection. The experimental model runs locally." />
+  <meta name="twitter:description" content="MakingGPT is an experimental instruction-tuning project aiming to help an AI model follow human instructions more reliably. Compare results with Rocket 2.0 only after evaluation." />
   <meta name="twitter:image" content="https://rocketgpt.net/rocketgpt-share.png" />
   <title>MakingGPT | A local model experiment</title>
   <script src="/site.js"></script>
@@ -48,7 +48,7 @@
       <p class="making-eyebrow"><span aria-hidden="true">✦</span> An open experiment from RocketGPT</p>
       <h1 id="page-title">MakingGPT</h1>
       <p class="making-lead">Explore the MakingGPT project online from any computer with a web browser and internet connection.</p>
-      <p class="making-intro">MakingGPT is an experimental RocketGPT adapter for Qwen2.5-1.5B-Instruct. The project page and guide are online; the experimental model preview is not hosted and requires a compatible local setup.</p>
+      <p class="making-intro">MakingGPT is an experimental instruction-tuning project for Qwen2.5-1.5B-Instruct, designed to train an AI model to follow human instructions more reliably. The project page and guide are online; the experimental model preview is not hosted and requires a compatible local setup.</p>
       <div class="making-actions">
         <a class="making-primary" href="#run-locally">Set up the local preview <span aria-hidden="true">↓</span></a>
         <a class="making-secondary" href="https://github.com/L11UM/RocketGPT1/tree/main/MakingGPT">Explore the project source <span aria-hidden="true">↗</span></a>
@@ -60,7 +60,7 @@
       <article>
         <span class="fact-index">01 / BASE MODEL</span>
         <h2>Qwen2.5-1.5B-Instruct</h2>
-        <p>MakingGPT is designed to start from an open model with a RocketGPT LoRA adapter. It is not a foundation model trained from scratch.</p>
+        <p>MakingGPT starts from an instruction-tuned open model and uses a RocketGPT LoRA adapter for further instruction tuning. It is not a foundation model trained from scratch.</p>
       </article>
       <article>
         <span class="fact-index">02 / RUNS LOCALLY</span>
@@ -69,8 +69,8 @@
       </article>
       <article>
         <span class="fact-index">03 / EARLY EXPERIMENT</span>
-        <h2>Small data, honest claims</h2>
-        <p>The included sample dataset and adapter are too small to establish model quality. Treat outputs as experimental and verify anything important.</p>
+        <h2>Designed for instruction following</h2>
+        <p>The goal is to help the model follow human instructions more reliably. The included sample data is not enough to establish that it performs better than Rocket 2.0; that requires a fair evaluation.</p>
       </article>
     </section>
 
@@ -91,7 +91,7 @@ TRAIN_ITERS=100 sh scripts/train_adapter.sh</code></pre></div></li>
         <li><span>03</span><div><h3>Start your local preview</h3><p>After training creates an adapter, start the local model and browser preview. The first model load downloads the base model.</p><pre><code>sh scripts/start_local_demo.sh</code></pre></div></li>
         <li><span>04</span><div><h3>Open the address printed in your terminal</h3><p>Prompts stay on your device. When you’re done, press Ctrl+C in that terminal to stop the local preview and model server.</p></div></li>
       </ol>
-      <p class="local-warning"><strong>Keep expectations grounded.</strong> MakingGPT is not GPT-3, and it does not power Rocket 2.0. The public Rocket 2.0 chat remains a separate product using a third-party model through Pollinations.</p>
+      <p class="local-warning"><strong>Keep expectations grounded.</strong> MakingGPT is an experimental instruction-tuning project, not GPT-3, and it does not power Rocket 2.0. It has not been shown to follow instructions better than Rocket 2.0. A fair comparison requires a trained adapter and evaluation on the same held-out prompts. Rocket 2.0 remains a separate product using a third-party model through Pollinations.</p>
       <a class="project-link" href="https://github.com/L11UM/RocketGPT1/tree/main/MakingGPT">Browse the source and full training guide <span aria-hidden="true">↗</span></a>
     </section>
   </main>
