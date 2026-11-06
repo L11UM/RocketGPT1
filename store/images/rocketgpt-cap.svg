@@ -1,17 +1,40 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 500" role="img">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 720" fill="none" role="img" aria-labelledby="title">
+  <title id="title">Rendered RocketGPT cap concept</title>
   <defs>
-    <linearGradient id="cap" x1="0" y1="0" x2="0.85" y2="1">
-      <stop offset="0" stop-color="#fff"/>
-      <stop offset="1" stop-color="#dfe4da"/>
+    <linearGradient id="crown" x1="227" y1="168" x2="568" y2="466" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#fffef9"/>
+      <stop offset=".48" stop-color="#f0eee5"/>
+      <stop offset="1" stop-color="#d5d4ca"/>
     </linearGradient>
-    <filter id="shadow" x="-30%" y="-30%" width="160%" height="180%">
-      <feGaussianBlur stdDeviation="13"/>
+    <linearGradient id="bill" x1="223" y1="405" x2="583" y2="515" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#e7e5dc"/>
+      <stop offset=".55" stop-color="#fbfaf4"/>
+      <stop offset="1" stop-color="#d2d1c7"/>
+    </linearGradient>
+    <linearGradient id="side" x1="526" y1="254" x2="656" y2="421" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#e7e5da"/>
+      <stop offset="1" stop-color="#c9c8bd"/>
+    </linearGradient>
+    <filter id="shadow" x="96" y="498" width="620" height="130" color-interpolation-filters="sRGB" filterUnits="userSpaceOnUse">
+      <feGaussianBlur stdDeviation="18"/>
     </filter>
+    <pattern id="weave" width="8" height="8" patternTransform="rotate(35)" patternUnits="userSpaceOnUse">
+      <path d="M0 0v8M4 0v8" stroke="#8f9188" stroke-opacity=".09"/>
+    </pattern>
+    <clipPath id="crownClip">
+      <path d="M202 423c-9-112 32-209 119-258 71-40 164-37 226 13 61 49 90 130 82 245-103 44-289 59-427 0Z"/>
+    </clipPath>
   </defs>
-  <ellipse cx="306" cy="409" rx="188" ry="25" fill="#72816b" opacity=".16" filter="url(#shadow)"/>
-  <path d="M124 305c8-111 82-184 186-190 100-6 164 58 170 166l-126 76-230 5Z" fill="url(#cap)" stroke="#b7c0b1" stroke-width="5"/>
-  <path d="M126 304c-31 6-56 24-66 48-8 20 5 38 29 42 79 14 178-4 285-44-44-34-157-59-248-46Z" fill="#e8ece4" stroke="#b7c0b1" stroke-width="5"/>
-  <path d="M309 116c11 70 15 150 8 237" fill="none" stroke="#d0d7ca" stroke-width="5"/>
-  <path d="m295 203 13-27 13 27 30 2-23 19 8 29-28-16-26 16 8-29-23-19 29-2Z" fill="#6c8b5c"/>
-  <circle cx="310" cy="118" r="6" fill="#c4ccbd"/>
+  <ellipse cx="407" cy="565" fill="#343a32" opacity=".16" filter="url(#shadow)" rx="233" ry="35"/>
+  <path d="M202 423c-9-112 32-209 119-258 71-40 164-37 226 13 61 49 90 130 82 245-103 44-289 59-427 0Z" fill="url(#crown)"/>
+  <path d="M202 423c-9-112 32-209 119-258 71-40 164-37 226 13 61 49 90 130 82 245-103 44-289 59-427 0Z" fill="url(#weave)" clip-path="url(#crownClip)"/>
+  <path d="M527 181c57 53 89 139 83 242 19-4 35-10 50-16 7-116-24-208-88-260-15 6-30 17-45 34Z" fill="url(#side)" opacity=".72"/>
+  <path d="M201 420c94-38 325-44 438 4-28 67-121 112-247 113-104 1-190-36-224-91-8-12 5-21 33-26Z" fill="url(#bill)"/>
+  <path d="M205 425c104-38 319-43 425 1M188 448c43 51 126 80 218 79 105-1 193-34 229-87" stroke="#b9b8ad" stroke-linecap="round" stroke-width="3" opacity=".68"/>
+  <path d="M405 166c-2 86-3 171 3 257M320 184c-27 79-39 159-37 238M499 177c26 81 39 166 32 247" stroke="#c7c6bb" stroke-linecap="round" stroke-width="3" opacity=".65"/>
+  <path d="M404 166c-2 86-3 171 3 257M320 184c-27 79-39 159-37 238M499 177c26 81 39 166 32 247" stroke="#fff" stroke-dasharray="2 8" stroke-linecap="round" stroke-width="2" opacity=".78"/>
+  <path d="m407 284 11 22 25 4-18 17 4 25-22-12-22 12 4-25-18-17 25-4 11-22Z" fill="#718b61"/>
+  <path d="M407 278c-15 19-22 36-22 52m44-52c15 19 22 36 22 52" stroke="#718b61" stroke-linecap="round" stroke-width="3" opacity=".56"/>
+  <circle cx="407" cy="163" r="8" fill="#d5d3c8" stroke="#bab9ad" stroke-width="2"/>
+  <path d="M392 160c4-7 10-10 15-10s11 3 15 10" stroke="#b9b8ad" stroke-linecap="round" stroke-width="2"/>
 </svg>

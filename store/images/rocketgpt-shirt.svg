@@ -1,16 +1,36 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 600" role="img">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 720" fill="none" role="img" aria-labelledby="title">
+  <title id="title">Rendered RocketGPT heavyweight tee concept</title>
   <defs>
-    <linearGradient id="shirt" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0" stop-color="#fff"/>
-      <stop offset="1" stop-color="#e7eae6"/>
+    <linearGradient id="shirt" x1="221" y1="126" x2="568" y2="572" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#fff"/>
+      <stop offset=".48" stop-color="#f4f3ef"/>
+      <stop offset="1" stop-color="#d9d9d3"/>
     </linearGradient>
-    <filter id="shadow" x="-30%" y="-30%" width="160%" height="180%">
-      <feGaussianBlur stdDeviation="14"/>
+    <linearGradient id="sleeve" x1="151" y1="163" x2="247" y2="350" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#fdfcf8"/>
+      <stop offset="1" stop-color="#deded7"/>
+    </linearGradient>
+    <filter id="shadow" x="85" y="506" width="630" height="120" color-interpolation-filters="sRGB" filterUnits="userSpaceOnUse">
+      <feGaussianBlur stdDeviation="17"/>
     </filter>
+    <pattern id="weave" width="9" height="9" patternTransform="rotate(35)" patternUnits="userSpaceOnUse">
+      <path d="M0 0v9M4.5 0v9" stroke="#969890" stroke-opacity=".065"/>
+    </pattern>
+    <clipPath id="body">
+      <path d="m275 138 61-30c13 24 34 36 64 36s51-12 64-36l61 30 100 79-57 96-58-40v214H290V273l-58 40-57-96 100-79Z"/>
+    </clipPath>
   </defs>
-  <ellipse cx="302" cy="532" rx="166" ry="24" fill="#748078" opacity=".14" filter="url(#shadow)"/>
-  <path d="m219 91 57-31c15 22 33 33 54 33s39-11 54-33l57 31 98 82-58 75-58-45v293H190V203l-58 45-58-75Z" fill="url(#shirt)" stroke="#c9ceca" stroke-width="5" stroke-linejoin="round"/>
-  <path d="M276 60c8 34 27 50 54 50s46-16 54-50" fill="none" stroke="#c0c6c1" stroke-width="6"/>
-  <path d="M190 204v290m224-290v290" fill="none" stroke="#d9ddd9" stroke-width="4"/>
-  <path d="m300 203 10-21 10 21 24 2-18 15 6 23-22-13-21 13 6-23-18-15 23-2Z" fill="#6c8b5c"/>
+  <ellipse cx="403" cy="568" fill="#394038" opacity=".14" filter="url(#shadow)" rx="233" ry="28"/>
+  <path d="m275 138 61-30c13 24 34 36 64 36s51-12 64-36l61 30 100 79-57 96-58-40v214H290V273l-58 40-57-96 100-79Z" fill="url(#shirt)" stroke="#d0d0c8" stroke-linejoin="round" stroke-width="3"/>
+  <path d="m275 138 61-30c13 24 34 36 64 36s51-12 64-36l61 30 100 79-57 96-58-40v214H290V273l-58 40-57-96 100-79Z" fill="url(#weave)" clip-path="url(#body)"/>
+  <path d="m275 138-72 56-46 30 60 86 73-43v218m174-347 72 56 46 30-60 86-73-43v218" stroke="#c3c4bc" stroke-linecap="round" stroke-linejoin="round" stroke-width="3" opacity=".72"/>
+  <path d="m181 225-24 34m462-34 24 34M290 278v204m212-204v204" stroke="#fff" stroke-dasharray="2 8" stroke-linecap="round" stroke-width="2" opacity=".78"/>
+  <path d="M336 108c11 36 33 53 64 53s53-17 64-53" stroke="#c6c7bf" stroke-width="5"/>
+  <path d="M341 111c12 29 31 43 59 43s47-14 59-43" stroke="#fff" stroke-width="2"/>
+  <path d="M369 111c5 17 15 26 31 26s26-9 31-26" stroke="#d4d5ce" stroke-width="3"/>
+  <path d="M322 354c-7 58-10 91-8 126m166-142c11 40 14 71 12 104m-196-229c-20 27-35 47-49 61m309-61c20 27 35 47 49 61" stroke="#c9cac2" stroke-linecap="round" stroke-width="6" opacity=".38"/>
+  <path d="M390 256c10-4 18-9 27-15m-38 103 11 31m-2 89-11 20m108-120 12 20m-264-179 16 17m372-17-16 17" stroke="#fff" stroke-linecap="round" stroke-width="5" opacity=".75"/>
+  <path d="m406 220 9 18 20 3-14 14 3 20-18-9-18 9 3-20-14-14 20-3 9-18Z" fill="#718b61"/>
+  <path d="M391 216c-12 14-18 27-18 41m66-41c12 14 18 27 18 41" stroke="#718b61" stroke-linecap="round" stroke-width="2.5" opacity=".5"/>
+  <path d="M290 488h212" stroke="#c1c2ba" stroke-width="3"/>
 </svg>
