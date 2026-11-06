@@ -2,13 +2,25 @@
   {
     "date": "2026-11-05",
     "category": "Product update",
-    "title": "Rocket 3.0: a new name for RocketGPT chat",
+    "title": "Rocket 2.0 keeps its familiar name",
     "image": "/blog/images/rocketgpt-update.svg",
     "imageAlt": "A small rocket following a green orbital path against a soft background.",
-    "summary": "RocketGPT chat is now called Rocket 3.0. The product name is new; the public chat still uses a third-party AI service.",
+    "summary": "We are returning the public chat to its Rocket 2.0 name for now. Its features and third-party AI service remain unchanged.",
     "body": [
-      "We have renamed the public RocketGPT chat experience to Rocket 3.0. The new name updates the product identity across the website, navigation, and sharing previews.",
-      "This is a product rename, not a claim that RocketGPT has trained or deployed its own language model for the public chat. Rocket 3.0 continues to send requests to Pollinations' third-party AI service. A separate experimental RocketGPT fine-tune can be run locally on a Mac."
+      "The public chat is back to being called Rocket 2.0. We are keeping the familiar name for now; this update changes the branding, not how the chat works.",
+      "Rocket 2.0 continues to use Pollinations' third-party AI service. It is not powered by a language model trained or hosted by RocketGPT."
+    ]
+  },
+  {
+    "date": "2026-11-05",
+    "category": "Product update",
+    "title": "A brief Rocket 3.0 rebrand",
+    "image": "/blog/images/rocketgpt-update.svg",
+    "imageAlt": "A small rocket following a green orbital path against a soft background.",
+    "summary": "The public chat briefly used the Rocket 3.0 name before returning to Rocket 2.0. The underlying service did not change.",
+    "body": [
+      "The RocketGPT chat briefly used the Rocket 3.0 name. It has since returned to Rocket 2.0, the familiar name for the public chat.",
+      "The chat continues to send requests to Pollinations' third-party AI service. The brief rename did not introduce a model trained or hosted by RocketGPT."
     ]
   },
   {

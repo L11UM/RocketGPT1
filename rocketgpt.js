@@ -56,8 +56,8 @@ ${viralInstructions}`;
 
   async function shareApp() {
     const shareData = {
-      title: 'Rocket 3.0 — Turn ideas into attention',
-      text: 'Try Rocket 3.0, a free AI chat workspace for sharper ideas and shareable content.',
+      title: 'Rocket 2.0 — Turn ideas into attention',
+      text: 'Try Rocket 2.0, a free AI chat workspace for sharper ideas and shareable content.',
       url: 'https://rocketgpt.net/rocketgpt.html?utm_source=share&utm_medium=link'
     };
     try {
@@ -67,15 +67,15 @@ ${viralInstructions}`;
       }
       await navigator.clipboard.writeText(shareData.url);
       elements.shareApp.classList.add('is-copied');
-      elements.shareApp.setAttribute('aria-label', 'Rocket 3.0 link copied');
+      elements.shareApp.setAttribute('aria-label', 'Rocket 2.0 link copied');
     } catch (error) {
       if (error.name === 'AbortError') return;
       elements.shareApp.classList.add('is-unavailable');
-      elements.shareApp.setAttribute('aria-label', 'Rocket 3.0 sharing unavailable');
+      elements.shareApp.setAttribute('aria-label', 'Rocket 2.0 sharing unavailable');
     }
     window.setTimeout(() => {
       elements.shareApp.classList.remove('is-copied', 'is-unavailable');
-      elements.shareApp.setAttribute('aria-label', 'Share Rocket 3.0');
+      elements.shareApp.setAttribute('aria-label', 'Share Rocket 2.0');
     }, 2200);
   }
 
@@ -272,10 +272,10 @@ ${viralInstructions}`;
     const shareUrl = new URL(document.querySelector('meta[property="og:url"]')?.content || window.location.href);
     shareUrl.searchParams.set('utm_source', 'share');
     shareUrl.searchParams.set('utm_medium', 'answer');
-    const shareText = `${text}\n\n— Rocket 3.0`;
+    const shareText = `${text}\n\n— Rocket 2.0`;
     try {
       if (navigator.share) {
-        await navigator.share({ title: 'Rocket 3.0', text: shareText, url: shareUrl.toString() });
+        await navigator.share({ title: 'Rocket 2.0', text: shareText, url: shareUrl.toString() });
         return;
       }
       await navigator.clipboard.writeText(`${shareText}\n${shareUrl.toString()}`);
@@ -335,7 +335,7 @@ ${viralInstructions}`;
     shareButton.className = 'share-answer';
     shareButton.type = 'button';
     shareButton.textContent = 'Share answer ↗';
-    shareButton.setAttribute('aria-label', 'Share this Rocket 3.0 answer');
+    shareButton.setAttribute('aria-label', 'Share this Rocket 2.0 answer');
     shareButton.addEventListener('click', () => shareAnswer(message.content, shareButton));
     helpfulButton.className = 'feedback-vote';
     helpfulButton.type = 'button';
