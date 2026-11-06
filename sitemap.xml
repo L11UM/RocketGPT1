@@ -11,11 +11,6 @@
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://rocketgpt.net/makinggpt.html</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
     <loc>https://rocketgpt.net/nall-e.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>

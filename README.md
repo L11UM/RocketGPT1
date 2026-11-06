@@ -18,7 +18,7 @@ Open [http://localhost:8000/](http://localhost:8000/) for the homepage. Direct A
 
 - `index.html`, `home.css`, and `home.js` — homepage, prompt examples, and sharing.
 - `rocketgpt.html`, `rocketgpt.css`, and `rocketgpt.js` — Rocket 2.0 chat.
-- `makinggpt.html` and `makinggpt.css` — overview and local setup instructions for the experimental MakingGPT project in `MakingGPT/`, including its SFT, reward-model, and PPO training workflow.
+- `MakingGPT/` — experimental model training code and instructions; not currently linked from the public site while model training is in progress.
 - `nall-e.html`, `nall-e.css`, and `nall-e.js` — NALL-E image generation and its temporary gallery.
 - `blog.html`, `blog.css`, `blog.js`, and `blog/posts.json` — blog archive and story pages.
 - `blog/articles/` and `blog-article.js` — static story pages with per-story social metadata and sharing controls.
