@@ -27,12 +27,12 @@ jobs:
       - name: Add today's editorial note
         run: |
           python3 scripts/publish_daily_blog.py
-          if git diff --quiet -- blog/posts.json; then
+          git add blog/posts.json blog/feed.xml blog/articles/ sitemap.xml
+          if git diff --cached --quiet; then
             echo "No new daily note was needed."
           else
             git config user.name "github-actions[bot]"
             git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-            git add blog/posts.json
             git commit -m "Publish RocketGPT daily blog note"
             git push origin "HEAD:${GITHUB_REF_NAME}"
           fi

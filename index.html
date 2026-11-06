@@ -3,16 +3,19 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>RocketGPT | American AI Research &amp; Deployment</title>
-  <meta name="description" content="RocketGPT builds AI products including Rocket 2.0, a free chat experience powered by a third-party large language model, and NALL-E." />
+  <meta name="color-scheme" content="dark light" />
+  <title>RocketGPT | AI chat and image tools</title>
+  <meta name="description" content="Explore ideas with Rocket 2.0, a free chat powered by a third-party large language model, or create images with NALL-E." />
   <meta name="robots" content="index, follow, max-image-preview:large" />
-  <meta name="theme-color" content="#ffffff" />
+  <meta name="theme-color" content="#080b12" />
   <link rel="canonical" href="https://rocketgpt.net/" />
-  <link rel="icon" type="image/svg+xml" href="/rocketgpt-logo.svg" />
+  <link rel="icon" type="image/svg+xml" href="/pwa-icon.svg" />
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+  <link rel="manifest" href="/manifest.json" />
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="RocketGPT" />
-  <meta property="og:title" content="RocketGPT | American AI Research &amp; Deployment" />
-  <meta property="og:description" content="RocketGPT builds AI products including Rocket 2.0, a free chat experience powered by a third-party large language model, and NALL-E." />
+  <meta property="og:title" content="RocketGPT | AI chat and image tools" />
+  <meta property="og:description" content="Explore ideas with Rocket 2.0, a free chat powered by a third-party large language model, or create images with NALL-E." />
   <meta property="og:url" content="https://rocketgpt.net/" />
   <meta property="og:image" content="https://rocketgpt.net/rocketgpt-share.png?v=rocketgpt-2-name-745bcbf" />
   <meta property="og:image:type" content="image/png" />
@@ -20,9 +23,10 @@
   <meta property="og:image:height" content="630" />
   <meta property="og:image:alt" content="Rocket 2.0 — a free AI chat workspace for sharper ideas and shareable content." />
   <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="RocketGPT | American AI Research &amp; Deployment" />
-  <meta name="twitter:description" content="RocketGPT builds AI products including Rocket 2.0, a free chat experience powered by a third-party large language model, and NALL-E." />
+  <meta name="twitter:title" content="RocketGPT | AI chat and image tools" />
+  <meta name="twitter:description" content="Explore ideas with Rocket 2.0, a free chat powered by a third-party large language model, or create images with NALL-E." />
   <meta name="twitter:image" content="https://rocketgpt.net/rocketgpt-share.png?v=rocketgpt-2-name-745bcbf" />
+  <script src="/site.js"></script>
   <script type="application/ld+json">
     {
       "@context": "https://schema.org",
@@ -32,7 +36,51 @@
           "@id": "https://rocketgpt.net/#organization",
           "name": "RocketGPT",
           "url": "https://rocketgpt.net/",
-          "description": "An American artificial intelligence research and deployment company."
+          "description": "AI products for exploring ideas, drafting, and image creation."
+        },
+        {
+          "@type": "WebSite",
+          "@id": "https://rocketgpt.net/#website",
+          "name": "RocketGPT",
+          "url": "https://rocketgpt.net/",
+          "publisher": { "@id": "https://rocketgpt.net/#organization" }
+        },
+        {
+          "@type": "FAQPage",
+          "mainEntity": [
+            {
+              "@type": "Question",
+              "name": "Is Rocket 2.0 free to use?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Rocket 2.0 uses the provider's anonymous free AI service. It requires no account or API key, but has a shared per-IP rate limit and may occasionally be unavailable."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "Is Rocket 2.0 a large language model?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Rocket 2.0 is an LLM-powered chat product. Its responses come from a large language model provided through Pollinations; RocketGPT does not train or host that model."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "Do I need an OpenAI key?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "No. Rocket 2.0 uses Pollinations' third-party AI service, not the OpenAI API."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "Can Rocket 2.0 browse the web?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "No. The current free chat does not have web search, so it cannot verify live news or current webpages."
+              }
+            }
+          ]
         },
         {
           "@type": "WebApplication",
@@ -51,60 +99,15 @@
       ]
     }
   </script>
-  <style>
-    :root { color-scheme: light; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; background: #fff; color: #171717; }
-    * { box-sizing: border-box; }
-    body { min-height: 100vh; margin: 0; background: #fff; }
-    main { width: min(1120px, calc(100% - 48px)); margin: 0 auto; padding: 0 0 56px; }
-    header { display: flex; align-items: center; justify-content: space-between; width: 100vw; min-height: 72px; margin-left: calc(50% - 50vw); padding: 12px max(24px, calc((100vw - 1120px) / 2)); border-bottom: 1px solid #e7e7e7; background: #fff; color: #171717; }
-    .brand { display: flex; align-items: center; gap: 11px; color: inherit; text-decoration: none; }
-    .brand img { width: 34px; height: 43px; object-fit: contain; }
-    .brand-copy { display: grid; gap: 2px; }
-    .brand-copy strong { font-size: 19px; letter-spacing: -.04em; }
-    .brand-copy span, .model { color: #666; font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 10px; letter-spacing: .08em; }
-    .header-actions { display: flex; align-items: center; gap: 24px; }
-    .site-nav { display: flex; align-items: center; gap: 24px; }
-    .site-nav a { color: #444; font-size: 13px; text-decoration: none; transition: color .18s; }
-    .site-nav a:hover, .site-nav a[aria-current="page"] { color: #53763a; }
-    .nav-cta { display: inline-flex; min-height: 40px; align-items: center; padding: 0 15px; border: 1px solid #171717; border-radius: 7px; background: #171717; color: #fff; font-size: 13px; font-weight: 700; text-decoration: none; transition: background .18s; }
-    .nav-cta:hover { background: #343434; }
-    .site-nav a:focus-visible, .nav-cta:focus-visible, .site-directory summary:focus-visible, .site-directory a:focus-visible { outline: 2px solid #53763a; outline-offset: 3px; }
-    .site-directory { position: relative; display: none; }
-    .site-directory summary { padding: 9px 12px; border: 1px solid #ddd; border-radius: 7px; color: #222; cursor: pointer; font-size: 13px; list-style: none; }
-    .site-directory summary::-webkit-details-marker { display: none; }
-    .site-directory summary::after { margin-left: 8px; color: #53763a; content: "▾"; }
-    .site-directory summary:hover, .site-directory[open] summary { border-color: #888; }
-    .site-directory-links { position: absolute; top: calc(100% + 8px); right: 0; z-index: 5; min-width: 170px; padding: 6px; border: 1px solid #e2e2e2; border-radius: 8px; background: #fff; box-shadow: 0 12px 30px rgba(0, 0, 0, .14); }
-    .site-directory-links a { display: block; padding: 9px 10px; border-radius: 5px; color: #222; font-size: 13px; text-decoration: none; }
-    .site-directory-links a:hover, .site-directory-links a[aria-current="page"] { background: #f0f4ed; color: #405c2e; }
-    .hero { max-width: 850px; padding: 84px 0 66px; }
-    .eyebrow { margin: 0 0 18px; color: #53763a; font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 12px; font-weight: 600; letter-spacing: .12em; text-transform: uppercase; }
-    h1 { max-width: 780px; margin: 0 0 20px; font-size: clamp(42px, 7vw, 68px); line-height: 1.04; letter-spacing: -.055em; }
-    .lead { max-width: 690px; margin: 0; color: #4b4b4b; font-size: clamp(17px, 2.5vw, 20px); line-height: 1.65; }
-    .cta { display: inline-flex; min-height: 48px; align-items: center; justify-content: center; gap: 10px; margin-top: 26px; padding: 0 20px; border: 1px solid #a9cf8d; border-radius: 7px; background: #a9cf8d; color: #171717; font-weight: 700; text-decoration: none; transition: background .18s, transform .18s; }
-    .cta:hover { transform: translateY(-1px); background: #c1e3a8; }
-    .share-cta { min-height: 44px; margin: 0 0 0 12px; padding: 0 16px; border: 1px solid #d5d5d5; background: #fff; color: #222; }
-    .share-cta:hover { border-color: #888; background: #f7f7f7; color: #171717; }
-    .share-status { min-height: 20px; margin: 10px 0 0; color: #53763a; font-size: 13px; }
-    h2 { margin: 34px 0 10px; font-size: 22px; letter-spacing: -.02em; }
-    p, li { color: #4b4b4b; font-size: 15px; line-height: 1.75; }
-    .features { display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 12px; margin: 0 0 40px; }
-    .feature { padding: 19px; border: 1px solid #e5e5e5; border-radius: 9px; background: #fafafa; }
-    .feature h2 { margin: 0 0 8px; font-size: 16px; color: #171717; }
-    .feature p { margin: 0; font-size: 13px; }
-    a { color: #496a34; }
-    .cta, .cta:hover { color: #171717; }
-    footer { margin-top: 54px; padding-top: 18px; border-top: 1px solid #e5e5e5; color: #666; font-size: 12px; line-height: 1.6; }
-    @media (max-width: 760px) { main { width: calc(100% - 36px); padding-top: 0; } header { gap: 10px; padding: 12px 18px; } .hero { padding: 64px 0 46px; } .brand img { width: 30px; height: 38px; } .brand-copy strong { font-size: 17px; } .header-actions { gap: 8px; } .site-nav { display: none; } .site-directory { display: block; } .nav-cta { min-height: 38px; padding: 0 10px; font-size: 12px; } .share-cta { margin: 10px 0 0; } }
-    @media (max-width: 420px) { .nav-cta { display: none; } }
-  </style>
+  <link rel="stylesheet" href="/home.css" />
+  <link rel="stylesheet" href="/site.css" />
 </head>
-<body>
+<body class="home-page">
   <main>
     <header>
       <a class="brand" href="/" aria-label="RocketGPT home">
         <img src="rocketgpt-logo.svg" alt="" />
-        <div class="brand-copy"><strong>RocketGPT</strong><span>AI RESEARCH &amp; DEPLOYMENT</span></div>
+        <div class="brand-copy"><strong>RocketGPT</strong><span>AI CHAT &amp; CREATIVE TOOLS</span></div>
       </a>
       <div class="header-actions">
         <nav class="site-nav" aria-label="Main navigation">
@@ -129,12 +132,64 @@
     </header>
 
     <section class="hero" aria-labelledby="hero-title">
-      <p class="eyebrow">American AI research &amp; deployment</p>
-      <h1 id="hero-title">A useful AI chat, ready when you are.</h1>
-      <p class="lead">RocketGPT is an American artificial intelligence research and deployment company. We build AI products to help people explore ideas and get useful work done. Try Rocket 2.0, our free browser-based chat powered by a large language model (LLM)—no account or API key needed.</p>
-      <a class="cta" href="/rocketgpt.html">Start chatting with Rocket 2.0 <span aria-hidden="true">&nbsp;→</span></a>
+      <p class="eyebrow">ROCKETGPT · YOUR IDEAS, CLEARED FOR LAUNCH</p>
+      <h1 id="hero-title">Your next big idea has a launch button.</h1>
+      <p class="lead">Explore ideas, shape a plan, or write something worth sharing with Rocket 2.0, a free chat powered by a third-party large language model.</p>
+      <form class="hero-composer" action="/rocketgpt.html" method="get">
+        <label class="sr-only" for="heroPrompt">What do you want to make?</label>
+        <input id="heroPrompt" name="prompt" maxlength="4000" required placeholder="What do you want to make?" autocomplete="off" />
+        <input type="hidden" name="launch" value="1" />
+        <button type="submit">Launch Rocket <span aria-hidden="true">↗</span></button>
+      </form>
+      <p class="hero-footnote">No account or API key. Don't enter sensitive information.</p>
+      <img class="hero-rocket" src="/rocketgpt-logo.svg" alt="" aria-hidden="true" />
       <button class="cta share-cta" id="shareRocket" type="button">Share Rocket 2.0 <span aria-hidden="true">↗</span></button>
       <p class="share-status" id="shareStatus" role="status" aria-live="polite"></p>
+    </section>
+
+    <section class="prompt-feature" aria-labelledby="daily-prompt-title">
+      <div class="prompt-feature-heading">
+        <p class="eyebrow">A small spark for today</p>
+        <h2 id="daily-prompt-title">Prompt of the day</h2>
+        <p id="dailyPrompt" class="daily-prompt-text"></p>
+        <button class="daily-prompt-launch" id="dailyPromptLaunch" type="button" data-prompt-of-day>Try this prompt <span aria-hidden="true">↗</span></button>
+      </div>
+      <div class="daily-example">
+        <span class="example-label">Illustrative example output · not a live response</span>
+        <p id="dailyOutput"></p>
+      </div>
+      <div class="prompt-gallery" aria-labelledby="example-prompts-title">
+        <div class="prompt-gallery-heading">
+          <div>
+            <p class="eyebrow">A few starting points</p>
+            <h2 id="example-prompts-title">Steal a prompt. Make it yours.</h2>
+          </div>
+          <span>Examples, not testimonials</span>
+        </div>
+        <div class="prompt-gallery-grid">
+          <article class="prompt-example">
+            <span class="example-label">Example prompt</span>
+            <h3>Make the blank page less blank</h3>
+            <p>Give me three surprising opening lines for a short post about learning a new skill as an adult.</p>
+            <p class="example-output"><strong>Illustrative output:</strong> “I thought learning guitar would make me feel talented. Mostly, it made me appreciate patient neighbors.”</p>
+            <button type="button" data-fill-prompt="Give me three surprising opening lines for a short post about learning a new skill as an adult.">Use this prompt</button>
+          </article>
+          <article class="prompt-example">
+            <span class="example-label">Example prompt</span>
+            <h3>Turn a goal into a plan</h3>
+            <p>Help me plan a low-pressure weekend reset with one useful task, one outdoor break, and real downtime.</p>
+            <p class="example-output"><strong>Illustrative output:</strong> Pick one 30-minute task, take a walk before lunch, then leave the evening unplanned.</p>
+            <button type="button" data-fill-prompt="Help me plan a low-pressure weekend reset with one useful task, one outdoor break, and real downtime.">Use this prompt</button>
+          </article>
+          <article class="prompt-example">
+            <span class="example-label">Example prompt</span>
+            <h3>Find another angle</h3>
+            <p>Brainstorm five small, useful ways a neighborhood bookstore could welcome first-time visitors.</p>
+            <p class="example-output"><strong>Illustrative output:</strong> Try a staff-pick map, a quiet browsing hour, or a handwritten “start here” shelf.</p>
+            <button type="button" data-fill-prompt="Brainstorm five small, useful ways a neighborhood bookstore could welcome first-time visitors.">Use this prompt</button>
+          </article>
+        </div>
+      </div>
     </section>
 
     <section aria-labelledby="company-title">
@@ -200,27 +255,6 @@
       <a href="/rocketgpt.html">Open Rocket 2.0 chat</a>
     </footer>
   </main>
-  <script>
-    const shareButton = document.getElementById('shareRocket');
-    const shareStatus = document.getElementById('shareStatus');
-    shareButton.addEventListener('click', async () => {
-      const shareData = {
-        title: 'Rocket 2.0 — Turn ideas into attention',
-        text: 'Try Rocket 2.0, a free AI chat workspace for sharper ideas and shareable content.',
-        url: 'https://rocketgpt.net/?utm_source=share&utm_medium=link'
-      };
-      try {
-        if (navigator.share) {
-          await navigator.share(shareData);
-          shareStatus.textContent = 'Ready to share Rocket 2.0.';
-          return;
-        }
-        await navigator.clipboard.writeText(shareData.url);
-        shareStatus.textContent = 'Rocket 2.0 link copied. Send it to a friend.';
-      } catch (error) {
-        if (error.name !== 'AbortError') shareStatus.textContent = 'Sharing is unavailable in this browser.';
-      }
-    });
-  </script>
+  <script src="/home.js" defer></script>
 </body>
 </html>

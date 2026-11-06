@@ -6,7 +6,11 @@
   <title>RocketGPT | Rocket 2.0 AI Chat</title>
   <meta name="description" content="Chat with Rocket 2.0, a free AI chat powered by a third-party large language model. Ask questions, improve writing, plan projects, and create shareable content—no account or API key required." />
   <meta name="robots" content="index, follow, max-image-preview:large" />
+  <meta name="color-scheme" content="dark light" />
+  <meta name="theme-color" content="#080b12" />
   <link rel="canonical" href="https://rocketgpt.net/rocketgpt.html" />
+  <link rel="manifest" href="/manifest.json" />
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="RocketGPT" />
   <meta property="og:title" content="RocketGPT — Turn ideas into attention with Rocket 2.0" />
@@ -21,9 +25,11 @@
   <meta name="twitter:title" content="RocketGPT — Turn ideas into attention with Rocket 2.0" />
   <meta name="twitter:description" content="Rocket 2.0 is a free AI chat powered by a third-party large language model. No account or API key required." />
   <meta name="twitter:image" content="https://rocketgpt.net/rocketgpt-share.png?v=rocketgpt-2-name-745bcbf" />
-  <link rel="icon" type="image/svg+xml" href="rocketgpt-logo.svg" />
+  <link rel="icon" type="image/svg+xml" href="/pwa-icon.svg" />
   <meta name="api-base-url" content="https://rocketgpt1.onrender.com" />
+  <script src="/site.js"></script>
   <link rel="stylesheet" href="rocketgpt.css?v=rocketgpt-2-name-745bcbf" />
+  <link rel="stylesheet" href="/site.css" />
 </head>
 <body>
   <div class="app-shell">
@@ -34,7 +40,11 @@
         <label class="history-search"><span aria-hidden="true">⌕</span><input id="historySearch" type="search" placeholder="Search chats" aria-label="Search chats" /></label>
         <div class="history-heading">RECENT</div>
         <div class="thread-list" id="threadList" role="list"></div>
-        <p class="history-privacy">Saved only in this browser</p>
+        <div class="history-tools" aria-label="Export active chat">
+          <button type="button" id="exportMarkdown" disabled>Export .md</button>
+          <button type="button" id="exportText" disabled>Export .txt</button>
+        </div>
+        <p class="history-privacy" id="historyStatus" role="status" aria-live="polite">Saved only in this browser</p>
       </section>
       <div class="side-bottom">
         <div class="local-status"><span class="status-dot"></span><div><strong>Third-party LLM</strong><small>FREE LLM CHAT</small></div></div>
@@ -80,7 +90,36 @@
           </div>
         </section>
         <section class="messages" id="messages" aria-live="polite"></section>
-        <div class="composer-area"><form class="composer" id="composer"><textarea id="prompt" rows="1" placeholder="Message Rocket 2.0" aria-label="Message Rocket 2.0"></textarea><button class="send" aria-label="Send message">↑</button></form><div class="composer-options"><button class="viral-toggle" id="viralMode" type="button" aria-pressed="false">Viral mode: Off</button><span>Free AI · one reply per IP every 30 seconds · don't send sensitive info</span></div><div class="composer-meta"><span>AI can make mistakes. Check important info.</span><span>⌘ ↵ to send</span></div></div>
+        <div class="composer-area">
+          <div class="fuel-status" id="fuelStatus" role="status" aria-live="polite" hidden>
+            <span class="fuel-label">Rocket fuel refilling</span>
+            <progress id="fuelProgress" max="30" value="0" aria-label="Rocket fuel cooldown progress"></progress>
+            <span class="fuel-countdown" id="fuelCountdown">30s</span>
+          </div>
+          <form class="composer" id="composer">
+            <textarea id="prompt" rows="1" placeholder="Message Rocket 2.0" aria-label="Message Rocket 2.0"></textarea>
+            <button class="send" aria-label="Send message">↑</button>
+          </form>
+          <div class="composer-options">
+            <label class="mode-control" id="modeControl" data-mode="creator" for="launchMode">
+              <span class="mode-icon" aria-hidden="true">✦</span>
+              <span class="mode-label">Launch mode</span>
+              <select id="launchMode" aria-label="Choose a launch mode">
+                <option value="creator">✍️ Creator</option>
+                <option value="coach">🧭 Coach</option>
+                <option value="explainer">💡 Explainer</option>
+                <option value="hype-writer">🚀 Hype Writer</option>
+                <option value="brainstormer">🧠 Brainstormer</option>
+              </select>
+            </label>
+            <button class="viral-toggle" id="viralMode" type="button" aria-pressed="false">Viral mode: Off</button>
+            <span class="service-note">Free AI · one reply per IP every 30 seconds · don't send sensitive info</span>
+          </div>
+          <div class="composer-meta">
+            <span>AI can make mistakes. Check important info.</span>
+            <span><kbd>Enter</kbd> send · <kbd>Shift+Enter</kbd> new line · <kbd>/</kbd> focus</span>
+          </div>
+        </div>
       </div>
     </main>
   </div>

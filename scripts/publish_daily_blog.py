@@ -1,11 +1,20 @@
 #!/usr/bin/env python3
-"""Append one dated editorial note to the static RocketGPT blog archive."""
+"""Publish a dated note, RSS feed, and static story pages for the RocketGPT blog."""
 
 import argparse
+from email.utils import format_datetime
+from html import escape
 import json
-from datetime import date, datetime
+from datetime import date, datetime, time, timezone
 from pathlib import Path
+import re
+import xml.etree.ElementTree as ET
 from zoneinfo import ZoneInfo
+
+
+SITE_URL = "https://rocketgpt.net"
+ATOM_NAMESPACE = "http://www.w3.org/2005/Atom"
+SITEMAP_NAMESPACE = "http://www.sitemaps.org/schemas/sitemap/0.9"
 
 
 DAILY_NOTES = (
@@ -124,6 +133,141 @@ DAILY_NOTES = (
 )
 
 
+def post_slug(post: dict) -> str:
+    title_slug = re.sub(r"[^a-z0-9]+", "-", post["title"].lower()).strip("-")
+    return f'{post["date"]}-{title_slug}'
+
+
+def article_url(post: dict) -> str:
+    return f"{SITE_URL}/blog/articles/{post_slug(post)}.html"
+
+
+def generate_article_pages(posts_path: Path, articles_dir: Path) -> None:
+    posts = json.loads(posts_path.read_text(encoding="utf-8"))
+    if not isinstance(posts, list):
+        raise ValueError(f"{posts_path} must contain a JSON array")
+
+    articles_dir.mkdir(parents=True, exist_ok=True)
+    for post in posts:
+        title = escape(post["title"])
+        summary = escape(post["summary"])
+        category = escape(post["category"])
+        published = date.fromisoformat(post["date"])
+        published_label = published.strftime("%B %d, %Y").replace(" 0", " ")
+        image = escape(post["image"], quote=True)
+        image_alt = escape(post["imageAlt"], quote=True)
+        url = article_url(post)
+        body = "\n".join(
+            f"          <p>{escape(paragraph)}</p>" for paragraph in post["body"]
+        )
+        page = f"""<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="color-scheme" content="dark light" />
+  <meta name="theme-color" content="#080b12" />
+  <meta name="description" content="{summary}" />
+  <link rel="canonical" href="{url}" />
+  <link rel="manifest" href="/manifest.json" />
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+  <link rel="icon" type="image/svg+xml" href="/pwa-icon.svg" />
+  <meta property="og:type" content="article" />
+  <meta property="og:site_name" content="RocketGPT" />
+  <meta property="og:title" content="{title} | RocketGPT Blog" />
+  <meta property="og:description" content="{summary}" />
+  <meta property="og:url" content="{url}" />
+  <meta property="og:image" content="{SITE_URL}/rocketgpt-share.png" />
+  <meta property="og:image:type" content="image/png" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:image:alt" content="Rocket 2.0 — a free AI chat workspace for sharper ideas and shareable content." />
+  <meta property="article:published_time" content="{published.isoformat()}T00:00:00Z" />
+  <meta property="article:section" content="{category}" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="{title} | RocketGPT Blog" />
+  <meta name="twitter:description" content="{summary}" />
+  <meta name="twitter:image" content="{SITE_URL}/rocketgpt-share.png" />
+  <link rel="stylesheet" href="/blog.css?v=2-rss-share" />
+  <link rel="stylesheet" href="/site.css" />
+  <title>{title} | RocketGPT Blog</title>
+</head>
+<body>
+  <header class="site-header">
+    <a class="brand" href="/" aria-label="RocketGPT home">
+      <img src="/rocketgpt-logo.svg" alt="" />
+      <span>RocketGPT</span>
+    </a>
+    <nav class="site-nav" aria-label="Main navigation">
+      <a href="/">Home</a>
+      <a href="/rocketgpt.html">Rocket 2.0</a>
+      <a href="/nall-e.html">NALL-E</a>
+      <a href="/blog.html" aria-current="page">Blog</a>
+      <a href="/store.html">Store</a>
+    </nav>
+    <a class="header-cta" href="/rocketgpt.html">Try Rocket 2.0 <span aria-hidden="true">→</span></a>
+  </header>
+  <main>
+    <section class="posts-section" aria-label="Blog story">
+      <div class="posts is-detail">
+        <a class="back-link" href="/blog.html">← All stories</a>
+        <article class="post post-detail">
+          <img class="post-detail-image" src="{image}" alt="{image_alt}" />
+          <div class="post-content">
+            <div class="post-meta"><span class="post-category">{category}</span><time datetime="{published.isoformat()}">{published_label}</time></div>
+            <h1>{title}</h1>
+            <p class="post-summary">{summary}</p>
+            <div class="post-body">
+{body}
+            </div>
+            <div class="post-share-actions">
+              <button class="share-story" type="button" data-share-url="{url}" data-share-title="{title}" data-share-text="{summary}">Share this story</button>
+              <span class="share-status" role="status" aria-live="polite"></span>
+            </div>
+          </div>
+        </article>
+      </div>
+    </section>
+  </main>
+  <footer class="site-footer">
+    <a href="/">RocketGPT</a>
+    <span>Useful AI, built with care.</span>
+    <a href="/rocketgpt.html">Open Rocket 2.0</a>
+  </footer>
+  <script src="/site.js"></script>
+  <script src="/blog-article.js" defer></script>
+</body>
+</html>
+"""
+        (articles_dir / f"{post_slug(post)}.html").write_text(page, encoding="utf-8")
+
+
+def update_sitemap(posts_path: Path, sitemap_path: Path) -> None:
+    posts = json.loads(posts_path.read_text(encoding="utf-8"))
+    if not isinstance(posts, list):
+        raise ValueError(f"{posts_path} must contain a JSON array")
+
+    ET.register_namespace("", SITEMAP_NAMESPACE)
+    sitemap = ET.parse(sitemap_path).getroot()
+    existing_urls = {
+        element.text
+        for element in sitemap.findall(f"{{{SITEMAP_NAMESPACE}}}url/{{{SITEMAP_NAMESPACE}}}loc")
+    }
+    for post in posts:
+        url = article_url(post)
+        if url in existing_urls:
+            continue
+        entry = ET.SubElement(sitemap, f"{{{SITEMAP_NAMESPACE}}}url")
+        ET.SubElement(entry, f"{{{SITEMAP_NAMESPACE}}}loc").text = url
+        ET.SubElement(entry, f"{{{SITEMAP_NAMESPACE}}}changefreq").text = "yearly"
+        ET.SubElement(entry, f"{{{SITEMAP_NAMESPACE}}}priority").text = "0.5"
+
+    ET.indent(sitemap, space="  ")
+    sitemap_path.write_bytes(
+        ET.tostring(sitemap, encoding="utf-8", xml_declaration=True) + b"\n"
+    )
+
+
 def append_daily_post(posts_path: Path, posted_date: date) -> bool:
     posts = json.loads(posts_path.read_text(encoding="utf-8"))
     if not isinstance(posts, list):
@@ -152,6 +296,50 @@ def append_daily_post(posts_path: Path, posted_date: date) -> bool:
     return True
 
 
+def write_rss_feed(posts_path: Path, feed_path: Path) -> None:
+    posts = json.loads(posts_path.read_text(encoding="utf-8"))
+    if not isinstance(posts, list):
+        raise ValueError(f"{posts_path} must contain a JSON array")
+
+    ET.register_namespace("atom", ATOM_NAMESPACE)
+    rss = ET.Element("rss", {"version": "2.0"})
+    channel = ET.SubElement(rss, "channel")
+    ET.SubElement(channel, "title").text = "RocketGPT Blog"
+    ET.SubElement(channel, "link").text = f"{SITE_URL}/blog.html"
+    ET.SubElement(
+        channel,
+        f"{{{ATOM_NAMESPACE}}}link",
+        {
+            "href": f"{SITE_URL}/blog/feed.xml",
+            "rel": "self",
+            "type": "application/rss+xml"
+        }
+    )
+    ET.SubElement(channel, "description").text = (
+        "Product updates and daily notes from RocketGPT."
+    )
+    ET.SubElement(channel, "language").text = "en-us"
+
+    for post in posts:
+        post_url = article_url(post)
+        item = ET.SubElement(channel, "item")
+        ET.SubElement(item, "title").text = post["title"]
+        ET.SubElement(item, "link").text = post_url
+        ET.SubElement(item, "guid", {"isPermaLink": "true"}).text = post_url
+        ET.SubElement(item, "description").text = post["summary"]
+        ET.SubElement(item, "category").text = post["category"]
+        published = datetime.combine(
+            date.fromisoformat(post["date"]), time.min, tzinfo=timezone.utc
+        )
+        ET.SubElement(item, "pubDate").text = format_datetime(published, usegmt=True)
+
+    ET.indent(rss, space="  ")
+    feed_path.parent.mkdir(parents=True, exist_ok=True)
+    feed_path.write_bytes(
+        ET.tostring(rss, encoding="utf-8", xml_declaration=True) + b"\n"
+    )
+
+
 def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument(
@@ -165,10 +353,19 @@ def main() -> None:
         else datetime.now(ZoneInfo("America/Los_Angeles")).date()
     )
     posts_path = Path(__file__).resolve().parents[1] / "blog" / "posts.json"
+    feed_path = posts_path.parent / "feed.xml"
+    articles_dir = posts_path.parent / "articles"
+    sitemap_path = posts_path.parent.parent / "sitemap.xml"
     if append_daily_post(posts_path, posted_date):
         print(f"Added RocketGPT daily blog post for {posted_date.isoformat()}.")
     else:
         print(f"A daily blog post for {posted_date.isoformat()} already exists.")
+    write_rss_feed(posts_path, feed_path)
+    generate_article_pages(posts_path, articles_dir)
+    update_sitemap(posts_path, sitemap_path)
+    print(f"Updated RSS feed at {feed_path}.")
+    print(f"Generated static article pages in {articles_dir}.")
+    print(f"Updated sitemap at {sitemap_path}.")
 
 
 if __name__ == "__main__":

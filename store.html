@@ -3,12 +3,26 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="color-scheme" content="light" />
-  <meta name="theme-color" content="#ffffff" />
+  <meta name="color-scheme" content="dark light" />
+  <meta name="theme-color" content="#080b12" />
   <meta name="description" content="Explore generated RocketGPT merchandise mockups, including a cap, heavyweight tee, and pullover hoodie." />
   <link rel="canonical" href="https://rocketgpt.net/store.html" />
-  <link rel="icon" type="image/svg+xml" href="/rocketgpt-logo.svg" />
+  <link rel="manifest" href="/manifest.json" />
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+  <link rel="icon" type="image/svg+xml" href="/pwa-icon.svg" />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="RocketGPT" />
+  <meta property="og:title" content="RocketGPT Store | Gear concepts" />
+  <meta property="og:description" content="Preview concept renders for a RocketGPT cap, shirt, and hoodie. These are mockups, not products for sale." />
+  <meta property="og:url" content="https://rocketgpt.net/store.html" />
+  <meta property="og:image" content="https://rocketgpt.net/rocketgpt-share.png" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="RocketGPT Store | Gear concepts" />
+  <meta name="twitter:description" content="Preview concept renders for a RocketGPT cap, shirt, and hoodie. These are mockups, not products for sale." />
+  <meta name="twitter:image" content="https://rocketgpt.net/rocketgpt-share.png" />
+  <script src="/site.js"></script>
   <link rel="stylesheet" href="/store.css?v=2-product-renders" />
+  <link rel="stylesheet" href="/site.css" />
   <title>RocketGPT Store | Gear for curious minds</title>
 </head>
 <body>
@@ -53,6 +67,7 @@
         <article class="product-card">
           <div class="product-art product-art-cap">
             <img src="/store/images/rocketgpt-cap.svg" alt="Generated product mockup of an oatmeal cotton cap with a sage-green embroidered RocketGPT orbit-star mark." loading="lazy" />
+            <button class="product-preview-trigger" type="button" data-product-title="Everyday Cap" data-product-image="/store/images/rocketgpt-cap.svg" data-product-alt="Generated concept render of an oatmeal cotton cap with a sage-green RocketGPT orbit-star mark.">Preview concept</button>
             <span class="product-number">01</span>
             <span class="product-render-label">CONCEPT RENDER</span>
           </div>
@@ -66,6 +81,7 @@
         <article class="product-card">
           <div class="product-art product-art-shirt">
             <img src="/store/images/rocketgpt-shirt.svg" alt="Generated product mockup of a heavyweight off-white T-shirt with a small sage-green RocketGPT orbit-star mark." loading="lazy" />
+            <button class="product-preview-trigger" type="button" data-product-title="Daily Tee" data-product-image="/store/images/rocketgpt-shirt.svg" data-product-alt="Generated concept render of a heavyweight off-white T-shirt with a small sage-green RocketGPT orbit-star mark.">Preview concept</button>
             <span class="product-number">02</span>
             <span class="product-render-label">CONCEPT RENDER</span>
           </div>
@@ -79,6 +95,7 @@
         <article class="product-card">
           <div class="product-art product-art-hoodie">
             <img src="/store/images/rocketgpt-hoodie.svg" alt="Generated product mockup of a pale sage pullover hoodie with a small green RocketGPT orbit-star mark." loading="lazy" />
+            <button class="product-preview-trigger" type="button" data-product-title="Pullover Hoodie" data-product-image="/store/images/rocketgpt-hoodie.svg" data-product-alt="Generated concept render of a pale sage pullover hoodie with a small green RocketGPT orbit-star mark.">Preview concept</button>
             <span class="product-number">03</span>
             <span class="product-render-label">CONCEPT RENDER</span>
           </div>
@@ -99,5 +116,14 @@
     <span>Useful AI, built with care.</span>
     <a href="/blog.html">Read the blog</a>
   </footer>
+  <dialog class="product-preview-dialog" id="productPreview" aria-labelledby="previewTitle">
+    <div class="product-preview-heading">
+      <div><p class="eyebrow">Generated concept render</p><h2 id="previewTitle"></h2></div>
+      <button class="product-preview-close" type="button" aria-label="Close preview">×</button>
+    </div>
+    <img id="previewImage" alt="" />
+    <p>Concept mockup only. This is not a stocked product and cannot be purchased.</p>
+  </dialog>
+  <script src="/store.js" defer></script>
 </body>
 </html>

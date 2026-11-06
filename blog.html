@@ -3,18 +3,31 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="color-scheme" content="light" />
-  <meta name="theme-color" content="#ffffff" />
+  <meta name="color-scheme" content="dark light" />
+  <meta name="theme-color" content="#080b12" />
   <meta name="description" content="Product updates and daily notes from RocketGPT, including Rocket 2.0, its large-language-model-powered chat, and NALL-E." />
   <link rel="canonical" href="https://rocketgpt.net/blog.html" />
-  <link rel="icon" type="image/svg+xml" href="/rocketgpt-logo.svg" />
+  <link rel="icon" type="image/svg+xml" href="/pwa-icon.svg" />
+  <link rel="manifest" href="/manifest.json" />
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+  <link rel="alternate" type="application/rss+xml" title="RocketGPT Blog RSS" href="/blog/feed.xml" />
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="RocketGPT" />
   <meta property="og:title" content="Blog | RocketGPT" />
   <meta property="og:description" content="Product updates and daily notes from RocketGPT, including Rocket 2.0, its large-language-model-powered chat, and NALL-E." />
   <meta property="og:url" content="https://rocketgpt.net/blog.html" />
   <meta property="og:image" content="https://rocketgpt.net/rocketgpt-share.png" />
+  <meta property="og:image:type" content="image/png" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:image:alt" content="Rocket 2.0 — a free AI chat workspace for sharper ideas and shareable content." />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Blog | RocketGPT" />
+  <meta name="twitter:description" content="Product updates and daily notes from RocketGPT, including Rocket 2.0 and NALL-E." />
+  <meta name="twitter:image" content="https://rocketgpt.net/rocketgpt-share.png" />
+  <script src="/site.js"></script>
   <link rel="stylesheet" href="/blog.css?v=1" />
+  <link rel="stylesheet" href="/site.css" />
   <title>Blog | RocketGPT</title>
 </head>
 <body>
@@ -39,6 +52,7 @@
       <h1 id="page-title">Ideas, updates, and notes from the team.</h1>
       <p class="intro-copy">A closer look at RocketGPT, Rocket 2.0's large-language-model-powered chat, NALL-E, and the ideas shaping what we build next.</p>
       <p class="publishing-note">New dated notes are published daily. Daily notes share ideas and context; they do not necessarily announce product releases.</p>
+      <a class="rss-link" href="/blog/feed.xml">Subscribe via RSS <span aria-hidden="true">↗</span></a>
     </section>
 
     <section class="posts-section" aria-labelledby="latest-title">
@@ -61,6 +75,6 @@
     <span>Useful AI, built with care.</span>
     <a href="/rocketgpt.html">Open Rocket 2.0</a>
   </footer>
-  <script src="/blog.js?v=1" defer></script>
+  <script src="/blog.js?v=2-rss-share" defer></script>
 </body>
 </html>

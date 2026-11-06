@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version='1.0' encoding='utf-8'?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://rocketgpt.net/</loc>
@@ -24,5 +24,45 @@
     <loc>https://rocketgpt.net/store.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://rocketgpt.net/blog/articles/2026-11-05-how-rocket-2-0-uses-a-large-language-model.html</loc>
+    <changefreq>yearly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://rocketgpt.net/blog/articles/2026-11-05-rocket-2-0-keeps-its-familiar-name.html</loc>
+    <changefreq>yearly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://rocketgpt.net/blog/articles/2026-11-05-a-brief-rocket-3-0-rebrand.html</loc>
+    <changefreq>yearly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://rocketgpt.net/blog/articles/2026-11-05-a-brighter-simpler-rocketgpt.html</loc>
+    <changefreq>yearly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://rocketgpt.net/blog/articles/2026-11-05-nall-e-image-generation-without-an-api-key.html</loc>
+    <changefreq>yearly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://rocketgpt.net/blog/articles/2026-11-04-introducing-rocketgpt.html</loc>
+    <changefreq>yearly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://rocketgpt.net/blog/articles/2026-10-30-a-more-reliable-rocket-2-0-chat.html</loc>
+    <changefreq>yearly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://rocketgpt.net/blog/articles/2026-10-29-a-clearer-identity-for-rocket-2-0.html</loc>
+    <changefreq>yearly</changefreq>
+    <priority>0.5</priority>
   </url>
 </urlset>

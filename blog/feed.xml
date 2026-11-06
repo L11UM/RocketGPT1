@@ -1,0 +1,74 @@
+<?xml version='1.0' encoding='utf-8'?>
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+  <channel>
+    <title>RocketGPT Blog</title>
+    <link>https://rocketgpt.net/blog.html</link>
+    <atom:link href="https://rocketgpt.net/blog/feed.xml" rel="self" type="application/rss+xml" />
+    <description>Product updates and daily notes from RocketGPT.</description>
+    <language>en-us</language>
+    <item>
+      <title>How Rocket 2.0 uses a large language model</title>
+      <link>https://rocketgpt.net/blog/articles/2026-11-05-how-rocket-2-0-uses-a-large-language-model.html</link>
+      <guid isPermaLink="true">https://rocketgpt.net/blog/articles/2026-11-05-how-rocket-2-0-uses-a-large-language-model.html</guid>
+      <description>Rocket 2.0 is an LLM-powered chat product: it sends prompts to a third-party large language model to generate replies.</description>
+      <category>Product update</category>
+      <pubDate>Thu, 05 Nov 2026 00:00:00 GMT</pubDate>
+    </item>
+    <item>
+      <title>Rocket 2.0 keeps its familiar name</title>
+      <link>https://rocketgpt.net/blog/articles/2026-11-05-rocket-2-0-keeps-its-familiar-name.html</link>
+      <guid isPermaLink="true">https://rocketgpt.net/blog/articles/2026-11-05-rocket-2-0-keeps-its-familiar-name.html</guid>
+      <description>We are returning the public chat to its Rocket 2.0 name for now. Its features and third-party AI service remain unchanged.</description>
+      <category>Product update</category>
+      <pubDate>Thu, 05 Nov 2026 00:00:00 GMT</pubDate>
+    </item>
+    <item>
+      <title>A brief Rocket 3.0 rebrand</title>
+      <link>https://rocketgpt.net/blog/articles/2026-11-05-a-brief-rocket-3-0-rebrand.html</link>
+      <guid isPermaLink="true">https://rocketgpt.net/blog/articles/2026-11-05-a-brief-rocket-3-0-rebrand.html</guid>
+      <description>The public chat briefly used the Rocket 3.0 name before returning to Rocket 2.0. The underlying service did not change.</description>
+      <category>Product update</category>
+      <pubDate>Thu, 05 Nov 2026 00:00:00 GMT</pubDate>
+    </item>
+    <item>
+      <title>A brighter, simpler RocketGPT</title>
+      <link>https://rocketgpt.net/blog/articles/2026-11-05-a-brighter-simpler-rocketgpt.html</link>
+      <guid isPermaLink="true">https://rocketgpt.net/blog/articles/2026-11-05-a-brighter-simpler-rocketgpt.html</guid>
+      <description>RocketGPT's homepage, Rocket 2.0 chat, and NALL-E now share a clean white look, with a page directory to make each experience easier to find.</description>
+      <category>Product update</category>
+      <pubDate>Thu, 05 Nov 2026 00:00:00 GMT</pubDate>
+    </item>
+    <item>
+      <title>NALL-E image generation, without an API key</title>
+      <link>https://rocketgpt.net/blog/articles/2026-11-05-nall-e-image-generation-without-an-api-key.html</link>
+      <guid isPermaLink="true">https://rocketgpt.net/blog/articles/2026-11-05-nall-e-image-generation-without-an-api-key.html</guid>
+      <description>NALL-E now sends image prompts to a public image service directly from the browser, so trying it does not require setting up an OpenAI key.</description>
+      <category>Product update</category>
+      <pubDate>Thu, 05 Nov 2026 00:00:00 GMT</pubDate>
+    </item>
+    <item>
+      <title>Introducing RocketGPT</title>
+      <link>https://rocketgpt.net/blog/articles/2026-11-04-introducing-rocketgpt.html</link>
+      <guid isPermaLink="true">https://rocketgpt.net/blog/articles/2026-11-04-introducing-rocketgpt.html</guid>
+      <description>RocketGPT is the company behind Rocket 2.0 and NALL-E, focused on building and bringing practical AI products to people.</description>
+      <category>Company update</category>
+      <pubDate>Wed, 04 Nov 2026 00:00:00 GMT</pubDate>
+    </item>
+    <item>
+      <title>A more reliable Rocket 2.0 chat</title>
+      <link>https://rocketgpt.net/blog/articles/2026-10-30-a-more-reliable-rocket-2-0-chat.html</link>
+      <guid isPermaLink="true">https://rocketgpt.net/blog/articles/2026-10-30-a-more-reliable-rocket-2-0-chat.html</guid>
+      <description>Rocket 2.0 now gives a clearer path through slow or failed responses, including a retry option that keeps your unsent message available.</description>
+      <category>Product update</category>
+      <pubDate>Fri, 30 Oct 2026 00:00:00 GMT</pubDate>
+    </item>
+    <item>
+      <title>A clearer identity for Rocket 2.0</title>
+      <link>https://rocketgpt.net/blog/articles/2026-10-29-a-clearer-identity-for-rocket-2-0.html</link>
+      <guid isPermaLink="true">https://rocketgpt.net/blog/articles/2026-10-29-a-clearer-identity-for-rocket-2-0.html</guid>
+      <description>Rocket 2.0 became the public name for the chat experience, giving the product a more consistent identity across its landing page and app.</description>
+      <category>Product update</category>
+      <pubDate>Thu, 29 Oct 2026 00:00:00 GMT</pubDate>
+    </item>
+  </channel>
+</rss>
