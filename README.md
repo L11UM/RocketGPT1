@@ -21,6 +21,8 @@ The homepage and chat page include native sharing with a clipboard fallback, and
 
 The RocketGPT blog is at `blog.html`; dated product updates and daily editorial notes live in `blog/posts.json`. GitHub Actions runs `scripts/publish_daily_blog.py` daily, adds one editorial note from its curated rotation, and deploys the updated static site. Daily notes are not claims of new product releases.
 
+The showcase-only merchandise preview is at `store.html`. It displays concept art for a RocketGPT hat, shirt, and hoodie; it does not take orders or payments.
+
 Enable **Viral mode** from the welcome callout or composer to ask the model for more shareable, platform-aware content with stronger hooks and concise wording. The feature changes the model instructions; it cannot guarantee that content will go viral.
 
 `nall-e.html` is RocketGPT's NALL-E text-to-image experience. It sends prompts directly from the browser to Pollinations' public image service and displays a downloadable result; no OpenAI key, Render image endpoint, or owner account is required. The provider controls availability and may rate-limit or reject requests. Prompts are sent to Pollinations, so users should not enter sensitive information. NALL-E uses a third-party image service rather than a model trained from scratch by RocketGPT.

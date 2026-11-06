@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 600" role="img">
+  <defs>
+    <linearGradient id="shirt" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#fff"/>
+      <stop offset="1" stop-color="#e7eae6"/>
+    </linearGradient>
+    <filter id="shadow" x="-30%" y="-30%" width="160%" height="180%">
+      <feGaussianBlur stdDeviation="14"/>
+    </filter>
+  </defs>
+  <ellipse cx="302" cy="532" rx="166" ry="24" fill="#748078" opacity=".14" filter="url(#shadow)"/>
+  <path d="m219 91 57-31c15 22 33 33 54 33s39-11 54-33l57 31 98 82-58 75-58-45v293H190V203l-58 45-58-75Z" fill="url(#shirt)" stroke="#c9ceca" stroke-width="5" stroke-linejoin="round"/>
+  <path d="M276 60c8 34 27 50 54 50s46-16 54-50" fill="none" stroke="#c0c6c1" stroke-width="6"/>
+  <path d="M190 204v290m224-290v290" fill="none" stroke="#d9ddd9" stroke-width="4"/>
+  <path d="m300 203 10-21 10 21 24 2-18 15 6 23-22-13-21 13 6-23-18-15 23-2Z" fill="#6c8b5c"/>
+</svg>

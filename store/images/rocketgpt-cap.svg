@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 500" role="img">
+  <defs>
+    <linearGradient id="cap" x1="0" y1="0" x2="0.85" y2="1">
+      <stop offset="0" stop-color="#fff"/>
+      <stop offset="1" stop-color="#dfe4da"/>
+    </linearGradient>
+    <filter id="shadow" x="-30%" y="-30%" width="160%" height="180%">
+      <feGaussianBlur stdDeviation="13"/>
+    </filter>
+  </defs>
+  <ellipse cx="306" cy="409" rx="188" ry="25" fill="#72816b" opacity=".16" filter="url(#shadow)"/>
+  <path d="M124 305c8-111 82-184 186-190 100-6 164 58 170 166l-126 76-230 5Z" fill="url(#cap)" stroke="#b7c0b1" stroke-width="5"/>
+  <path d="M126 304c-31 6-56 24-66 48-8 20 5 38 29 42 79 14 178-4 285-44-44-34-157-59-248-46Z" fill="#e8ece4" stroke="#b7c0b1" stroke-width="5"/>
+  <path d="M309 116c11 70 15 150 8 237" fill="none" stroke="#d0d7ca" stroke-width="5"/>
+  <path d="m295 203 13-27 13 27 30 2-23 19 8 29-28-16-26 16 8-29-23-19 29-2Z" fill="#6c8b5c"/>
+  <circle cx="310" cy="118" r="6" fill="#c4ccbd"/>
+</svg>
