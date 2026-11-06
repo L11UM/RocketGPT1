@@ -1,8 +1,8 @@
 # MakingGPT
 
-The MakingGPT project page and guide are accessible online from any computer with a web browser and internet connection. MakingGPT is an experimental instruction-tuning project aiming to help an AI model follow human instructions more reliably. The model is not hosted: it uses the open Qwen2.5-1.5B-Instruct model with a RocketGPT LoRA adapter that you train and run locally. MakingGPT is not a foundation model trained from scratch, is much smaller than GPT-3, and is not equivalent to GPT-3. It has not been shown to follow instructions better than Rocket 2.0; that claim would require a trained adapter and fair evaluation on the same held-out prompts. The public RocketGPT site continues to use Pollinations' third-party AI service; this local experiment does not replace it.
+The MakingGPT project page and guide are accessible online from any computer with a web browser and internet connection. MakingGPT is an experimental instruction-tuning project aiming to help an AI model follow human instructions more reliably. Its planned human-feedback workflow is inspired by the broad three-stage approach used by InstructGPT—supervised fine-tuning (SFT), a reward model trained from human-ranked answer pairs, and reinforcement learning with PPO. This is an independent, small-scale experiment, not an exact reproduction of InstructGPT.
 
-The model runs on supported Apple Silicon hardware using MLX-LM. The checked-in data files are format samples only—61 training examples and 8 examples in each evaluation split—and are far too few to establish useful model quality. Adapter weights are not included in the repository. Replace or expand the data with original, carefully reviewed examples before training an adapter or making quality claims.
+The existing local adapter workflow uses MLX-LM. A separate Transformers/TRL workflow implements SFT, reward-model training, and PPO; its checkpoints are local and are not hosted. The checked-in SFT data files are format samples only—61 training examples and 8 examples in each evaluation split—and are far too few to establish useful model quality. No SFT/RLHF checkpoint is included in the repository. MakingGPT is not a foundation model trained from scratch, is much smaller than GPT-3, and is not equivalent to GPT-3. It has not been shown to follow instructions better than Rocket 2.0; that claim would require a trained model and a fair evaluation on held-out prompts. The public RocketGPT site continues to use Pollinations' third-party AI service; this local experiment does not replace it.
 
 ## Requirements
 
@@ -54,6 +54,39 @@ ADAPTER_PATH=adapters/runs/<experiment-id> sh scripts/start_local_demo.sh
 Open the local URL printed by the script in a browser. By default, the preview uses ports 3000 and 8080. It sends prompts only to the local model server; prompts are not sent to the public RocketGPT site or a hosted AI service. Keep the terminal open while using it, and press Ctrl+C there to stop the preview and any model server started by the script. If the matching MakingGPT model server is already running on your device, the script reuses it and leaves it running. To choose different available ports, run `MODEL_PORT=8081 WEB_PORT=3001 sh scripts/start_local_demo.sh`.
 
 The preview loads the Qwen2.5-1.5B-Instruct base model with your locally trained RocketGPT LoRA adapter. It is an early local prototype, not GPT-3 and not the model used by the public RocketGPT chat.
+
+## Human-feedback training workflow
+
+The separate Transformers/TRL workflow uses three stages:
+
+1. **SFT:** fine-tune Qwen2.5-1.5B-Instruct on reviewed instruction/answer examples.
+2. **Reward model:** train a scalar scoring model to prefer the answer humans rank higher.
+3. **PPO:** optimize the SFT policy against the reward model while using the SFT model as a reference policy.
+
+This is the same broad family of human-feedback steps as InstructGPT, not a reproduction of its data, model, infrastructure, or results. The pipeline requires `data/preference_train.jsonl`, `data/preference_valid.jsonl`, and `data/preference_test.jsonl`. Each line must contain a prompt conversation ending in a user message and two different answers:
+
+```json
+{"messages":[{"role":"user","content":"Explain photosynthesis in one sentence."}],"chosen":"The human-preferred answer.","rejected":"The less-preferred answer."}
+```
+
+These are schema instructions, not labeled training data. Add only genuine, reviewed human rankings. Do not copy prompts between preference splits or reuse SFT prompts in preference data. Rank consistently for correctness, helpfulness, instruction-following, honesty, and safety; do not include private data. Aim for at least 1,000 training comparisons and 100 independent comparisons in each validation and test split. The test split stays held out from training and model selection. These minimums still do not guarantee useful alignment.
+
+The training environment is separate from the MLX environment. It uses Transformers and TRL, downloads the base model, and runs SFT/reward/PPO checkpoints locally. PPO loads policy, reference, reward, and value models together and needs a high-memory CUDA GPU; this workflow is not expected to run on a typical laptop. Checkpoint files and local preference split files are ignored by Git; nothing is uploaded or hosted by these scripts.
+
+```sh
+python3.11 -m venv .venv-rlhf
+source .venv-rlhf/bin/activate
+python -m pip install -r requirements-rlhf.txt
+python scripts/validate_data.py
+python scripts/validate_preferences.py
+python scripts/train_sft_rlhf.py
+python scripts/train_reward_model.py
+python scripts/evaluate_reward_model.py
+python scripts/train_ppo.py
+python scripts/generate_rlhf.py --prompt "Explain photosynthesis in one sentence."
+```
+
+The reward-model evaluator reports agreement with the held-out preference test pairs before PPO. Review that result and generated responses; the score is not a general capability or safety measure. The sample SFT splits currently fail the documented minimums, and no preference rankings are included, so training will stop until you add reviewed data. `ALLOW_SMALL_DATASET=1` bypasses the count gate for smoke tests only; it does not make results meaningful. Run a separate held-out comparison before making claims about model quality or performance versus Rocket 2.0.
 
 ## Evaluate and serve an experiment
 

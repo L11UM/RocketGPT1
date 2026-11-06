@@ -1,7 +1,10 @@
 .venv/
+.venv-rlhf/
 __pycache__/
 *.py[cod]
 adapters/
+checkpoints/
+data/preference_*.jsonl
 fused_model/
 mlx_model/
 *.safetensors
