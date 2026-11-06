@@ -1,11 +1,11 @@
 # RocketGPT
 
-RocketGPT is an American artificial intelligence research and deployment company. Rocket 2.0 and NALL-E are RocketGPT products; they currently use third-party AI models and services rather than models trained from scratch by RocketGPT.
+RocketGPT is an American artificial intelligence research and deployment company. Rocket 3.0 and NALL-E are RocketGPT products; they currently use third-party AI models and services rather than models trained from scratch by RocketGPT.
 
 ## Run locally
 
 1. Install Node.js 18 or newer from https://nodejs.org.
-2. Start Rocket 2.0:
+2. Start Rocket 3.0:
 
 ```sh
 npm start
@@ -13,9 +13,9 @@ npm start
 
 3. Open http://localhost:3000/rocketgpt.html.
 
-Rocket chat uses the free anonymous GPT-OSS model from Pollinations, directly from the browser; no account or API key is required. The free service is best-effort and rate-limited to one response per public IP every 30 seconds. Do not send sensitive information. Web search is not available in this mode.
+Rocket 3.0 uses Pollinations' free third-party text model directly from the browser; no account or API key is required. The model is not trained or hosted by RocketGPT. The free service is best-effort and rate-limited to one response per public IP every 30 seconds. Do not send sensitive information. Web search is not available in this mode.
 
-The public homepage contains search-friendly information about Rocket 2.0, with an XML sitemap at `https://rocketgpt.net/sitemap.xml`. To request Google indexing, verify `rocketgpt.net` in Google Search Console and submit that sitemap. Google decides whether and when to index or rank pages; no code change can guarantee viral reach or instant results.
+The public homepage contains search-friendly information about Rocket 3.0, with an XML sitemap at `https://rocketgpt.net/sitemap.xml`. To request Google indexing, verify `rocketgpt.net` in Google Search Console and submit that sitemap. Google decides whether and when to index or rank pages; no code change can guarantee viral reach or instant results.
 
 The homepage and chat page include native sharing with a clipboard fallback, and use a 1200×630 branded social preview image when shared. Share links include UTM tags for basic referral attribution.
 
@@ -37,4 +37,4 @@ Use the helpful/not helpful buttons below an answer to submit a rating. The feed
 
 ## Publish AI chat
 
-GitHub Pages hosts the frontend. Chat requests go directly from each visitor's browser to Pollinations' free text API, so chat does not depend on the Render service or a server-side API key. Answer feedback still uses the optional Render API.
+GitHub Pages hosts the frontend. Rocket 3.0 chat requests go directly from each visitor's browser to Pollinations' free third-party text API, so chat does not depend on the Render service or a server-side API key. The public chat is not powered by a language model trained or hosted by RocketGPT. Answer feedback still uses the optional Render API.

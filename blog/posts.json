@@ -2,6 +2,18 @@
   {
     "date": "2026-11-05",
     "category": "Product update",
+    "title": "Rocket 3.0: a new name for RocketGPT chat",
+    "image": "/blog/images/rocketgpt-update.svg",
+    "imageAlt": "A small rocket following a green orbital path against a soft background.",
+    "summary": "RocketGPT chat is now called Rocket 3.0. The product name is new; the public chat still uses a third-party AI service.",
+    "body": [
+      "We have renamed the public RocketGPT chat experience to Rocket 3.0. The new name updates the product identity across the website, navigation, and sharing previews.",
+      "This is a product rename, not a claim that RocketGPT has trained or deployed its own language model for the public chat. Rocket 3.0 continues to send requests to Pollinations' third-party AI service. A separate experimental RocketGPT fine-tune can be run locally on a Mac."
+    ]
+  },
+  {
+    "date": "2026-11-05",
+    "category": "Product update",
     "title": "A brighter, simpler RocketGPT",
     "image": "/blog/images/rocketgpt-update.svg",
     "imageAlt": "A small rocket following a green orbital path against a soft background.",
