@@ -1,13 +1,13 @@
 # MakingGPT
 
-MakingGPT is a local language-model experiment, not a foundation model trained from scratch. It uses the open Qwen2.5-1.5B-Instruct model with a RocketGPT LoRA adapter that you train locally. This is a much smaller model than GPT-3 and is not equivalent to GPT-3. The public RocketGPT site continues to use Pollinations' third-party AI service; this local experiment does not replace it.
+The MakingGPT project page and guide are accessible online from any computer with a web browser and internet connection. The experimental chat model itself is not hosted: it uses the open Qwen2.5-1.5B-Instruct model with a RocketGPT LoRA adapter that you train and run locally. MakingGPT is not a foundation model trained from scratch, is much smaller than GPT-3, and is not equivalent to GPT-3. The public RocketGPT site continues to use Pollinations' third-party AI service; this local experiment does not replace it.
 
-The model runs on Apple Silicon using Apple's MLX-LM. The checked-in data files are format samples only—61 training examples and 8 examples in each evaluation split—and are far too few to establish useful model quality. Adapter weights are not included in the repository. Replace or expand the data with original, carefully reviewed examples before training an adapter or making quality claims.
+The model runs on supported Apple Silicon hardware using MLX-LM. The checked-in data files are format samples only—61 training examples and 8 examples in each evaluation split—and are far too few to establish useful model quality. Adapter weights are not included in the repository. Replace or expand the data with original, carefully reviewed examples before training an adapter or making quality claims.
 
 ## Requirements
 
-- Apple Silicon Mac and macOS
-- Python 3.11 or newer (the system Python 3.9 is too old for current MLX-LM)
+- Apple Silicon hardware with a supported MLX-LM environment
+- Python 3.11 or newer (older system Python versions may not support current MLX-LM)
 - Several GB of free disk space for the environment and model download
 
 ## Set up
@@ -22,7 +22,7 @@ python -m pip install -r requirements.txt
 python scripts/validate_data.py
 ```
 
-If `python3.11` is not installed, install a current Python 3.11+ build for macOS first. Keep `.venv/` inside this project; it is ignored by Git.
+If `python3.11` is not installed, install a current Python 3.11+ build for your environment first. Keep `.venv/` inside this project; it is ignored by Git.
 
 ## Prepare examples
 
@@ -51,7 +51,7 @@ After training an adapter, start the local chat page from this directory. Use th
 ADAPTER_PATH=adapters/runs/<experiment-id> sh scripts/start_local_demo.sh
 ```
 
-Open the local URL printed by the script in a browser. By default, the preview uses ports 3000 and 8080. It sends prompts only to the local model server; prompts are not sent to the public RocketGPT site or a hosted AI service. Keep the terminal open while using it, and press Ctrl+C there to stop the preview and any model server started by the script. If the matching MakingGPT model server is already running on your Mac, the script reuses it and leaves it running. To choose different available ports, run `MODEL_PORT=8081 WEB_PORT=3001 sh scripts/start_local_demo.sh`.
+Open the local URL printed by the script in a browser. By default, the preview uses ports 3000 and 8080. It sends prompts only to the local model server; prompts are not sent to the public RocketGPT site or a hosted AI service. Keep the terminal open while using it, and press Ctrl+C there to stop the preview and any model server started by the script. If the matching MakingGPT model server is already running on your device, the script reuses it and leaves it running. To choose different available ports, run `MODEL_PORT=8081 WEB_PORT=3001 sh scripts/start_local_demo.sh`.
 
 The preview loads the Qwen2.5-1.5B-Instruct base model with your locally trained RocketGPT LoRA adapter. It is an early local prototype, not GPT-3 and not the model used by the public RocketGPT chat.
 
@@ -81,4 +81,4 @@ curl http://127.0.0.1:8080/v1/chat/completions \\
   -d '{"messages":[{"role":"user","content":"Explain photosynthesis in one sentence."}],"max_tokens":100}'
 ```
 
-Requests are processed by the model on this Mac and are not sent to a hosted AI service.
+Requests are processed by the model on this device and are not sent to a hosted AI service.

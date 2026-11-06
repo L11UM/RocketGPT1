@@ -79,7 +79,7 @@ async function sendMessage(message) {
     const reply = await getReply();
     conversation.push({ role: 'assistant', content: reply });
     addMessage('assistant', reply);
-    statusMessage.textContent = 'Prompts stay on this Mac. The local model may make mistakes.';
+    statusMessage.textContent = 'Prompts stay on this device. The local model may make mistakes.';
   } catch (error) {
     conversation.pop();
     statusMessage.textContent = error.name === 'AbortError'
@@ -125,7 +125,7 @@ clearButton.addEventListener('click', () => {
   conversation.length = 0;
   messagesElement.replaceChildren();
   welcomeElement.hidden = false;
-  statusMessage.textContent = 'Prompts stay on this Mac. The local model may make mistakes.';
+  statusMessage.textContent = 'Prompts stay on this device. The local model may make mistakes.';
   statusMessage.removeAttribute('data-error');
   promptInput.focus();
 });
