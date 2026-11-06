@@ -2,13 +2,25 @@
   {
     "date": "2026-11-05",
     "category": "Product update",
+    "title": "How Rocket 2.0 uses a large language model",
+    "image": "/blog/images/rocketgpt-update.svg",
+    "imageAlt": "A small rocket following a green orbital path against a soft background.",
+    "summary": "Rocket 2.0 is an LLM-powered chat product: it sends prompts to a third-party large language model to generate replies.",
+    "body": [
+      "Rocket 2.0 is a browser-based chat experience powered by a large language model (LLM), a type of AI model that generates text in response to prompts.",
+      "The public chat uses Pollinations' third-party AI service. RocketGPT has not trained or hosted the underlying model, and the service provider controls its availability and limits."
+    ]
+  },
+  {
+    "date": "2026-11-05",
+    "category": "Product update",
     "title": "Rocket 2.0 keeps its familiar name",
     "image": "/blog/images/rocketgpt-update.svg",
     "imageAlt": "A small rocket following a green orbital path against a soft background.",
     "summary": "We are returning the public chat to its Rocket 2.0 name for now. Its features and third-party AI service remain unchanged.",
     "body": [
       "The public chat is back to being called Rocket 2.0. We are keeping the familiar name for now; this update changes the branding, not how the chat works.",
-      "Rocket 2.0 continues to use Pollinations' third-party AI service. It is not powered by a language model trained or hosted by RocketGPT."
+      "Rocket 2.0 continues to use Pollinations' third-party AI service and its large language model, rather than a model trained or hosted by RocketGPT."
     ]
   },
   {
