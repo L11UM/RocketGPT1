@@ -1,5 +1,17 @@
 [
   {
+    "date": "2026-11-06",
+    "category": "Daily note",
+    "image": "/blog/images/daily-note.svg",
+    "imageAlt": "An open notebook with a green star drawn on its page.",
+    "title": "Start with the rough idea",
+    "summary": "A useful first prompt does not need to be polished. Give Rocket 2.0 the rough idea and ask it to help find a clear starting point.",
+    "body": [
+      "Try describing what you want to make, who it is for, and what feels difficult about getting started. Then ask for a few directions rather than a finished answer.",
+      "Treat the suggestions as a first draft: keep what fits, adjust what does not, and verify important facts before using them."
+    ]
+  },
+  {
     "date": "2026-11-05",
     "category": "Product update",
     "title": "How Rocket 2.0 uses a large language model",

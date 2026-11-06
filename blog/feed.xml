@@ -7,6 +7,14 @@
     <description>Product updates and daily notes from RocketGPT.</description>
     <language>en-us</language>
     <item>
+      <title>Start with the rough idea</title>
+      <link>https://rocketgpt.net/blog/articles/2026-11-06-start-with-the-rough-idea.html</link>
+      <guid isPermaLink="true">https://rocketgpt.net/blog/articles/2026-11-06-start-with-the-rough-idea.html</guid>
+      <description>A useful first prompt does not need to be polished. Give Rocket 2.0 the rough idea and ask it to help find a clear starting point.</description>
+      <category>Daily note</category>
+      <pubDate>Fri, 06 Nov 2026 00:00:00 GMT</pubDate>
+    </item>
+    <item>
       <title>How Rocket 2.0 uses a large language model</title>
       <link>https://rocketgpt.net/blog/articles/2026-11-05-how-rocket-2-0-uses-a-large-language-model.html</link>
       <guid isPermaLink="true">https://rocketgpt.net/blog/articles/2026-11-05-how-rocket-2-0-uses-a-large-language-model.html</guid>
