@@ -568,3 +568,70 @@ textarea::placeholder { color: #999; }
   .send { width: 34px; height: 34px; }
   .composer-meta { gap: 8px; font-size: 8px; }
 }
+
+:root {
+  color-scheme: light;
+  --ink: #171717;
+  --muted: #666;
+  --line: #e5e5e5;
+  --paper: #fff;
+  --panel: #f7f7f7;
+  --green: #53763a;
+  --green-deep: #405c2e;
+  --shadow: 0 12px 36px rgba(0, 0, 0, .08);
+}
+
+html, body { background: #fff; color: #171717; }
+.app-shell, .main, .chat-wrap, .messages, .message, .message.user { background: #fff; }
+.sidebar { border-right-color: #e5e5e5; background: #fafafa; color: #171717; }
+.brand-name, .welcome-mark { color: #171717; }
+.brand-credit, .brand-name span, .local-status small, .history-heading, .history-privacy { color: #666; }
+.new-chat { border-color: #ddd; color: #222; background: #fff; }
+.new-chat:hover { border-color: #aaa; background: #f5f5f5; }
+.new-chat kbd { border-color: #ddd; color: #666; }
+.side-bottom { border-top-color: #e5e5e5; }
+.local-status { color: #333; }
+.history-search { border-color: #ddd; color: #666; background: #fff; }
+.history-search input { color: #222; }
+.history-search input::placeholder { color: #777; }
+.thread { color: #444; }
+.thread:hover, .thread.active { color: #171717; background: #ededed; }
+.thread.active { border-color: #dedede; }
+.thread time, .thread-delete { color: #666; }
+.thread-delete:hover { color: #171717; background: #e5e5e5; }
+.topbar { background: #fff; color: #171717; }
+.empty-state h1, .empty-state h1 em { color: #171717; }
+.welcome-mark { color: #444; }
+.empty-copy, .suggestion .suggestion-detail { color: #555; }
+.suggestion { border-color: #e5e5e5; color: #222; background: #fff; }
+.suggestion:hover { border-color: #bbb; color: #171717; background: #f8f8f8; }
+.suggestion-index { color: #53763a; }
+.message.assistant { background: #f8f8f8; }
+.bubble, .bubble p, .bubble ul, .user .bubble { color: #222; }
+.message-avatar { color: #333; background: #e8eee3; }
+.message.user .message-avatar { color: #333; background: #ededed; }
+.message-sources { color: #555; }
+.message-sources span { color: #666; }
+.message-sources a { color: #496a34; }
+.message-sources a:hover { color: #314923; }
+.next-vector, .share-answer, .feedback-vote { border-color: #ddd; color: #333; background: #fff; }
+.next-vector:hover, .share-answer:hover, .feedback-vote:hover:not(:disabled) { border-color: #aaa; color: #171717; background: #f5f5f5; }
+.retry-request { border-color: #d7e3cf; color: #405c2e; background: #f3f7ef; }
+.retry-request:hover { border-color: #8ca878; background: #eaf1e4; }
+.feedback-status, .composer-meta, .composer-meta span:last-child { color: #666; }
+.viral-toggle { border-color: #ddd; color: #333; background: #fff; }
+.viral-toggle:hover, .viral-toggle.is-active { border-color: #9ab38a; color: #405c2e; background: #f0f4ed; }
+.composer-area { background: #fff; }
+.composer { border-color: #d8d8d8; background: #fff; box-shadow: 0 4px 18px rgba(0, 0, 0, .08); }
+textarea { color: #171717; }
+textarea::placeholder { color: #777; }
+.send { color: #fff; background: #171717; }
+.send:hover { color: #fff; background: #3a3a3a; }
+.typing { color: #53763a; }
+.launch-screen { background: #fff; color: #171717; }
+.sidebar-backdrop:not([hidden]) { background: rgba(0, 0, 0, .25); }
+
+@media (max-width: 680px) {
+  .topbar { background: #fff; }
+  .sidebar.is-open { background: #fafafa; }
+}

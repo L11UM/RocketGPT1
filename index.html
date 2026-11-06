@@ -6,7 +6,7 @@
   <title>RocketGPT | American AI Research &amp; Deployment</title>
   <meta name="description" content="RocketGPT is an American artificial intelligence research and deployment company building AI products including Rocket 2.0 and NALL-E." />
   <meta name="robots" content="index, follow, max-image-preview:large" />
-  <meta name="theme-color" content="#171717" />
+  <meta name="theme-color" content="#ffffff" />
   <link rel="canonical" href="https://rocketgpt.net/" />
   <link rel="icon" type="image/svg+xml" href="/rocketgpt-logo.svg" />
   <meta property="og:type" content="website" />
@@ -52,16 +52,16 @@
     }
   </script>
   <style>
-    :root { color-scheme: dark; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; background: #171717; color: #ededed; }
+    :root { color-scheme: light; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; background: #fff; color: #171717; }
     * { box-sizing: border-box; }
-    body { min-height: 100vh; margin: 0; background: radial-gradient(ellipse at 65% 0, #20271f 0, #171717 45rem); }
+    body { min-height: 100vh; margin: 0; background: #fff; }
     main { width: min(1120px, calc(100% - 48px)); margin: 0 auto; padding: 0 0 56px; }
     header { display: flex; align-items: center; justify-content: space-between; width: 100vw; min-height: 72px; margin-left: calc(50% - 50vw); padding: 12px max(24px, calc((100vw - 1120px) / 2)); border-bottom: 1px solid #e7e7e7; background: #fff; color: #171717; }
     .brand { display: flex; align-items: center; gap: 11px; color: inherit; text-decoration: none; }
     .brand img { width: 34px; height: 43px; object-fit: contain; }
     .brand-copy { display: grid; gap: 2px; }
     .brand-copy strong { font-size: 19px; letter-spacing: -.04em; }
-    .brand-copy span, .model { color: #929292; font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 10px; letter-spacing: .08em; }
+    .brand-copy span, .model { color: #666; font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 10px; letter-spacing: .08em; }
     .header-actions { display: flex; align-items: center; gap: 24px; }
     .site-nav { display: flex; align-items: center; gap: 24px; }
     .site-nav a { color: #444; font-size: 13px; text-decoration: none; transition: color .18s; }
@@ -78,23 +78,23 @@
     .site-directory-links a { display: block; padding: 9px 10px; border-radius: 5px; color: #222; font-size: 13px; text-decoration: none; }
     .site-directory-links a:hover, .site-directory-links a[aria-current="page"] { background: #f0f4ed; color: #405c2e; }
     .hero { max-width: 850px; padding: 84px 0 66px; }
-    .eyebrow { margin: 0 0 18px; color: #a9cf8d; font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 12px; font-weight: 600; letter-spacing: .12em; text-transform: uppercase; }
+    .eyebrow { margin: 0 0 18px; color: #53763a; font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 12px; font-weight: 600; letter-spacing: .12em; text-transform: uppercase; }
     h1 { max-width: 780px; margin: 0 0 20px; font-size: clamp(42px, 7vw, 68px); line-height: 1.04; letter-spacing: -.055em; }
-    .lead { max-width: 690px; margin: 0; color: #b6b6b6; font-size: clamp(17px, 2.5vw, 20px); line-height: 1.65; }
+    .lead { max-width: 690px; margin: 0; color: #4b4b4b; font-size: clamp(17px, 2.5vw, 20px); line-height: 1.65; }
     .cta { display: inline-flex; min-height: 48px; align-items: center; justify-content: center; gap: 10px; margin-top: 26px; padding: 0 20px; border: 1px solid #a9cf8d; border-radius: 7px; background: #a9cf8d; color: #171717; font-weight: 700; text-decoration: none; transition: background .18s, transform .18s; }
     .cta:hover { transform: translateY(-1px); background: #c1e3a8; }
-    .share-cta { min-height: 44px; margin: 0 0 0 12px; padding: 0 16px; border: 1px solid #555; background: transparent; color: #ededed; }
-    .share-cta:hover { border-color: #a9cf8d; background: #202020; color: #ededed; }
-    .share-status { min-height: 20px; margin: 10px 0 0; color: #a9cf8d; font-size: 13px; }
+    .share-cta { min-height: 44px; margin: 0 0 0 12px; padding: 0 16px; border: 1px solid #d5d5d5; background: #fff; color: #222; }
+    .share-cta:hover { border-color: #888; background: #f7f7f7; color: #171717; }
+    .share-status { min-height: 20px; margin: 10px 0 0; color: #53763a; font-size: 13px; }
     h2 { margin: 34px 0 10px; font-size: 22px; letter-spacing: -.02em; }
-    p, li { color: #b6b6b6; font-size: 15px; line-height: 1.75; }
+    p, li { color: #4b4b4b; font-size: 15px; line-height: 1.75; }
     .features { display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 12px; margin: 0 0 40px; }
-    .feature { padding: 19px; border: 1px solid #383838; border-radius: 9px; background: #202020; }
-    .feature h2 { margin: 0 0 8px; font-size: 16px; }
+    .feature { padding: 19px; border: 1px solid #e5e5e5; border-radius: 9px; background: #fafafa; }
+    .feature h2 { margin: 0 0 8px; font-size: 16px; color: #171717; }
     .feature p { margin: 0; font-size: 13px; }
-    a { color: #a9cf8d; }
+    a { color: #496a34; }
     .cta, .cta:hover { color: #171717; }
-    footer { margin-top: 54px; padding-top: 18px; border-top: 1px solid #383838; color: #898989; font-size: 12px; line-height: 1.6; }
+    footer { margin-top: 54px; padding-top: 18px; border-top: 1px solid #e5e5e5; color: #666; font-size: 12px; line-height: 1.6; }
     @media (max-width: 760px) { main { width: calc(100% - 36px); padding-top: 0; } header { gap: 10px; padding: 12px 18px; } .hero { padding: 64px 0 46px; } .brand img { width: 30px; height: 38px; } .brand-copy strong { font-size: 17px; } .header-actions { gap: 8px; } .site-nav { display: none; } .site-directory { display: block; } .nav-cta { min-height: 38px; padding: 0 10px; font-size: 12px; } .share-cta { margin: 10px 0 0; } }
     @media (max-width: 420px) { .nav-cta { display: none; } }
   </style>
