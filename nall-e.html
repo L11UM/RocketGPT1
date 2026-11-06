@@ -33,8 +33,15 @@
     .brand-name { font-size: 16px; font-weight: 720; letter-spacing: -.04em; }
     .brand-caption, .eyebrow, .stage-label, .ratio-label { color: #9c9f93; font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 10px; letter-spacing: .12em; text-transform: uppercase; }
     .brand-caption { margin-top: 3px; font-size: 9px; }
-    .top-link { color: #bdc1b4; font-size: 13px; text-decoration: none; }
-    .top-link:hover { color: #c4ee9c; }
+    .site-directory { position: relative; }
+    .site-directory summary { padding: 9px 12px; border: 1px solid #44493f; border-radius: 7px; color: #e6e8df; cursor: pointer; font-size: 13px; list-style: none; }
+    .site-directory summary::-webkit-details-marker { display: none; }
+    .site-directory summary::after { margin-left: 8px; color: #b7dd91; content: "▾"; }
+    .site-directory summary:hover, .site-directory[open] summary { border-color: #b7dd91; }
+    .site-directory summary:focus-visible, .site-directory a:focus-visible { outline: 2px solid #d5f4b4; outline-offset: 3px; }
+    .site-directory-links { position: absolute; top: calc(100% + 8px); right: 0; z-index: 5; min-width: 170px; padding: 6px; border: 1px solid #44493f; border-radius: 8px; background: #191c18; box-shadow: 0 12px 30px rgba(0, 0, 0, .4); }
+    .site-directory-links a { display: block; padding: 9px 10px; border-radius: 5px; color: #e6e8df; font-size: 13px; text-decoration: none; }
+    .site-directory-links a:hover, .site-directory-links a[aria-current="page"] { background: #252e20; color: #d8f6bb; }
     .intro { max-width: 680px; padding: 58px 0 34px; }
     .eyebrow { color: #b7dd91; }
     h1 { margin: 12px 0; font-size: clamp(38px, 6vw, 58px); letter-spacing: -.06em; line-height: 1; }
@@ -89,6 +96,7 @@
 
     @media (max-width: 760px) {
       .page { width: min(100% - 28px, 560px); padding-top: 18px; }
+      .brand-caption { font-size: 8px; }
       .intro { padding: 42px 0 24px; }
       .workspace { grid-template-columns: 1fr; }
       .controls { order: 1; }
@@ -108,7 +116,14 @@
         <span class="brand-mark" aria-hidden="true">✦</span>
         <span class="brand-copy"><span class="brand-name">NALL-E</span><span class="brand-caption">A ROCKETGPT PRODUCT</span></span>
       </a>
-      <a class="top-link" href="/">Rocket 2.0 home ↗</a>
+      <details class="site-directory">
+        <summary aria-label="Open page directory">Pages</summary>
+        <nav class="site-directory-links" aria-label="Page directory">
+          <a href="/">Home</a>
+          <a href="/rocketgpt.html">Rocket 2.0</a>
+          <a href="/nall-e.html" aria-current="page">NALL-E</a>
+        </nav>
+      </details>
     </header>
 
     <section class="intro" aria-labelledby="page-title">
