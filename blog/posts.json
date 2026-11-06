@@ -1,0 +1,62 @@
+[
+  {
+    "date": "2026-11-05",
+    "category": "Product update",
+    "title": "A brighter, simpler RocketGPT",
+    "image": "/blog/images/rocketgpt-update.svg",
+    "imageAlt": "A small rocket following a green orbital path against a soft background.",
+    "summary": "RocketGPT's homepage, Rocket 2.0 chat, and NALL-E now share a clean white look, with a page directory to make each experience easier to find.",
+    "body": [
+      "The updated design brings a white background and clearer contrast across the full site, including the Rocket 2.0 chat workspace. The shared navigation now connects Home, Rocket 2.0, and NALL-E.",
+      "RocketGPT is the company brand; Rocket 2.0 and NALL-E remain the names of the products. The design is intended to make those destinations easier to recognize and move between."
+    ]
+  },
+  {
+    "date": "2026-11-05",
+    "category": "Product update",
+    "title": "NALL-E image generation, without an API key",
+    "image": "/blog/images/nalle-visual.svg",
+    "imageAlt": "Abstract landscape artwork with a bright sun and layered hills.",
+    "summary": "NALL-E now sends image prompts to a public image service directly from the browser, so trying it does not require setting up an OpenAI key.",
+    "body": [
+      "The image generator uses Pollinations' public image service. Enter a description, choose a shape, and preview the generated image from the NALL-E page.",
+      "Because the service is public and third-party, availability and rate limits are controlled by its provider. Prompts are sent to that service, so avoid including sensitive information."
+    ]
+  },
+  {
+    "date": "2026-11-04",
+    "category": "Company update",
+    "title": "Introducing RocketGPT",
+    "image": "/blog/images/rocketgpt-mark.svg",
+    "imageAlt": "A green star surrounded by a thin circular orbit.",
+    "summary": "RocketGPT is the company behind Rocket 2.0 and NALL-E, focused on building and bringing practical AI products to people.",
+    "body": [
+      "The homepage now explains how the RocketGPT brand relates to its products. Rocket 2.0 is a browser-based AI chat workspace, and NALL-E is a text-to-image experience.",
+      "The products currently use third-party models and services rather than models trained from scratch by RocketGPT. We aim to identify those providers where they are used."
+    ]
+  },
+  {
+    "date": "2026-10-30",
+    "category": "Product update",
+    "title": "A more reliable Rocket 2.0 chat",
+    "image": "/blog/images/rocketgpt-update.svg",
+    "imageAlt": "A small rocket following a green orbital path against a soft background.",
+    "summary": "Rocket 2.0 now gives a clearer path through slow or failed responses, including a retry option that keeps your unsent message available.",
+    "body": [
+      "Chat requests have a timeout, and when a request fails, Rocket keeps the message in the composer so it can be retried. Failed turns are not added to the conversation context.",
+      "The AI provider still controls response quality and availability. These changes make failures easier to recover from, but cannot guarantee that an external service is always online."
+    ]
+  },
+  {
+    "date": "2026-10-29",
+    "category": "Product update",
+    "title": "A clearer identity for Rocket 2.0",
+    "image": "/blog/images/rocketgpt-mark.svg",
+    "imageAlt": "A green star surrounded by a thin circular orbit.",
+    "summary": "Rocket 2.0 became the public name for the chat experience, giving the product a more consistent identity across its landing page and app.",
+    "body": [
+      "The naming update distinguishes the chat product, Rocket 2.0, from the RocketGPT company brand. The goal is to make the product easier to identify wherever people arrive on the site.",
+      "Rocket 2.0 remains a browser-based AI chat experience for questions, writing, planning, and creative ideas."
+    ]
+  }
+]

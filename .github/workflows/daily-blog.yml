@@ -1,0 +1,52 @@
+name: Publish daily RocketGPT blog
+
+on:
+  schedule:
+    - cron: "0 17 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+
+concurrency:
+  group: rocketgpt-pages
+  cancel-in-progress: false
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Check out the site
+        uses: actions/checkout@v4
+
+      - name: Add today's editorial note
+        run: |
+          python3 scripts/publish_daily_blog.py
+          if git diff --quiet -- blog/posts.json; then
+            echo "No new daily note was needed."
+          else
+            git config user.name "github-actions[bot]"
+            git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+            git add blog/posts.json
+            git commit -m "Publish RocketGPT daily blog note"
+            git push origin "HEAD:${GITHUB_REF_NAME}"
+          fi
+
+      - name: Prepare Pages artifact
+        run: |
+          mkdir _site
+          git archive HEAD | tar -x -C _site
+
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: _site
+
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4

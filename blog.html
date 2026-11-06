@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="color-scheme" content="light" />
+  <meta name="theme-color" content="#ffffff" />
+  <meta name="description" content="Product updates and daily notes from RocketGPT, including Rocket 2.0 and NALL-E." />
+  <link rel="canonical" href="https://rocketgpt.net/blog.html" />
+  <link rel="icon" type="image/svg+xml" href="/rocketgpt-logo.svg" />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="RocketGPT" />
+  <meta property="og:title" content="Blog | RocketGPT" />
+  <meta property="og:description" content="Product updates and daily notes from RocketGPT, including Rocket 2.0 and NALL-E." />
+  <meta property="og:url" content="https://rocketgpt.net/blog.html" />
+  <meta property="og:image" content="https://rocketgpt.net/rocketgpt-share.png" />
+  <link rel="stylesheet" href="/blog.css?v=1" />
+  <title>Blog | RocketGPT</title>
+</head>
+<body>
+  <header class="site-header">
+    <a class="brand" href="/" aria-label="RocketGPT home">
+      <img src="/rocketgpt-logo.svg" alt="" />
+      <span>RocketGPT</span>
+    </a>
+    <nav class="site-nav" aria-label="Main navigation">
+      <a href="/">Home</a>
+      <a href="/rocketgpt.html">Rocket 2.0</a>
+      <a href="/nall-e.html">NALL-E</a>
+      <a href="/blog.html" aria-current="page">Blog</a>
+    </nav>
+    <a class="header-cta" href="/rocketgpt.html">Try Rocket 2.0 <span aria-hidden="true">→</span></a>
+  </header>
+
+  <main>
+    <section class="intro" aria-labelledby="page-title">
+      <p class="eyebrow">The RocketGPT blog</p>
+      <h1 id="page-title">Ideas, updates, and notes from the team.</h1>
+      <p class="intro-copy">A closer look at RocketGPT, Rocket 2.0, NALL-E, and the ideas shaping what we build next.</p>
+      <p class="publishing-note">New dated notes are published daily. Daily notes share ideas and context; they do not necessarily announce product releases.</p>
+    </section>
+
+    <section class="posts-section" aria-labelledby="latest-title">
+      <div class="section-heading">
+        <div>
+          <p class="eyebrow">From RocketGPT</p>
+          <h2 id="latest-title">Latest stories</h2>
+        </div>
+        <p class="post-count" id="postCount" aria-live="polite"></p>
+      </div>
+      <div class="posts" id="posts" aria-live="polite" aria-busy="true">
+        <p class="loading-message">Loading the latest notes…</p>
+      </div>
+      <p class="load-error" id="loadError" role="alert" hidden>We couldn't load the blog right now. Please refresh to try again.</p>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <a href="/">RocketGPT</a>
+    <span>Useful AI, built with care.</span>
+    <a href="/rocketgpt.html">Open Rocket 2.0</a>
+  </footer>
+  <script src="/blog.js?v=1" defer></script>
+</body>
+</html>
