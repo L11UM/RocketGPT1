@@ -4,8 +4,9 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="color-scheme" content="dark light" />
+  <meta name="default-theme" content="light" />
   <meta name="theme-color" content="#080b12" />
-  <meta name="description" content="Product updates and daily notes from RocketGPT, including Rocket 2.0, its large-language-model-powered chat, and NALL-E." />
+  <meta name="description" content="The latest product updates, ideas, and news from RocketGPT." />
   <link rel="canonical" href="https://rocketgpt.net/blog.html" />
   <link rel="icon" type="image/svg+xml" href="/pwa-icon.svg" />
   <link rel="manifest" href="/manifest.json" />
@@ -14,7 +15,7 @@
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="RocketGPT" />
   <meta property="og:title" content="Blog | RocketGPT" />
-  <meta property="og:description" content="Product updates and daily notes from RocketGPT, including Rocket 2.0, its large-language-model-powered chat, and NALL-E." />
+  <meta property="og:description" content="The latest product updates, ideas, and news from RocketGPT." />
   <meta property="og:url" content="https://rocketgpt.net/blog.html" />
   <meta property="og:image" content="https://rocketgpt.net/rocketgpt-share.png" />
   <meta property="og:image:type" content="image/png" />
@@ -26,11 +27,11 @@
   <meta name="twitter:description" content="Product updates and daily notes from RocketGPT, including Rocket 2.0 and NALL-E." />
   <meta name="twitter:image" content="https://rocketgpt.net/rocketgpt-share.png" />
   <script src="/site.js"></script>
-  <link rel="stylesheet" href="/blog.css?v=1" />
   <link rel="stylesheet" href="/site.css" />
+  <link rel="stylesheet" href="/blog.css?v=3-editorial" />
   <title>Blog | RocketGPT</title>
 </head>
-<body>
+<body class="blog-page">
   <header class="site-header">
     <a class="brand" href="/" aria-label="RocketGPT home">
       <img src="/rocketgpt-logo.svg" alt="" />
@@ -48,20 +49,29 @@
 
   <main>
     <section class="intro" aria-labelledby="page-title">
-      <p class="eyebrow">The RocketGPT blog</p>
-      <h1 id="page-title">Ideas, updates, and notes from the team.</h1>
-      <p class="intro-copy">A closer look at RocketGPT, Rocket 2.0's large-language-model-powered chat, NALL-E, and the ideas shaping what we build next.</p>
-      <p class="publishing-note">New dated notes are published daily. Daily notes share ideas and context; they do not necessarily announce product releases.</p>
-      <a class="rss-link" href="/blog/feed.xml">Subscribe via RSS <span aria-hidden="true">↗</span></a>
+      <div class="intro-heading">
+        <p class="eyebrow">RocketGPT journal</p>
+        <h1 id="page-title">News</h1>
+      </div>
+      <div class="intro-aside">
+        <p class="intro-copy">Product updates, ideas, and notes from RocketGPT.</p>
+        <p class="publishing-note">Daily notes share ideas and context; they do not necessarily announce product releases.</p>
+        <a class="rss-link" href="/blog/feed.xml">RSS feed <span aria-hidden="true">↗</span></a>
+      </div>
     </section>
 
     <section class="posts-section" aria-labelledby="latest-title">
       <div class="section-heading">
-        <div>
-          <p class="eyebrow">From RocketGPT</p>
-          <h2 id="latest-title">Latest stories</h2>
-        </div>
+        <h2 id="latest-title">Latest</h2>
         <p class="post-count" id="postCount" aria-live="polite"></p>
+      </div>
+      <div class="blog-toolbar">
+        <div class="category-filters" id="categoryFilters" role="group" aria-label="Filter stories by category"></div>
+        <label class="blog-search">
+          <span class="sr-only">Search stories</span>
+          <input id="blogSearch" type="search" placeholder="Search stories" autocomplete="off" />
+          <span aria-hidden="true">⌕</span>
+        </label>
       </div>
       <div class="posts" id="posts" aria-live="polite" aria-busy="true">
         <p class="loading-message">Loading the latest notes…</p>

@@ -1,7 +1,12 @@
 const postsContainer = document.getElementById('posts');
 const postCount = document.getElementById('postCount');
 const loadError = document.getElementById('loadError');
+const categoryFilters = document.getElementById('categoryFilters');
+const searchInput = document.getElementById('blogSearch');
 const canonicalLink = document.querySelector('link[rel="canonical"]');
+let allPosts = [];
+let selectedCategory = 'All';
+
 const postSlug = (post) => {
   const titleSlug = post.title.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
   return `${post.date}-${titleSlug}`;
@@ -43,7 +48,7 @@ function updateMeta(post) {
 
 function makePost(post, { detail = false, featured = false } = {}) {
   const article = document.createElement('article');
-  article.className = `post${detail ? ' post-detail' : ''}${featured ? ' post-featured' : ''}`;
+  article.className = `post${detail ? ' post-detail' : ''}${featured ? ' post-featured' : ' post-card'}`;
 
   if (detail) {
     const image = document.createElement('img');
@@ -53,16 +58,16 @@ function makePost(post, { detail = false, featured = false } = {}) {
     image.decoding = 'async';
     article.append(image);
   } else {
-    const imageLink = document.createElement('a');
-    imageLink.className = 'post-image-link';
-    imageLink.href = articleUrlFor(post);
-    imageLink.setAttribute('aria-label', `Read: ${post.title}`);
     const image = document.createElement('img');
     image.className = 'post-image';
     image.src = post.image;
     image.alt = post.imageAlt;
     image.loading = featured ? 'eager' : 'lazy';
     image.decoding = 'async';
+    const imageLink = document.createElement('a');
+    imageLink.className = 'post-image-link';
+    imageLink.href = articleUrlFor(post);
+    imageLink.setAttribute('aria-label', `Read: ${post.title}`);
     imageLink.append(image);
     article.append(imageLink);
   }
@@ -85,7 +90,7 @@ function makePost(post, { detail = false, featured = false } = {}) {
   }).format(new Date(`${post.date}T12:00:00Z`));
   meta.append(category, date);
 
-  const title = document.createElement('h3');
+  const title = document.createElement(detail ? 'h1' : 'h3');
   if (detail) {
     title.textContent = post.title;
   } else {
@@ -120,7 +125,7 @@ function makePost(post, { detail = false, featured = false } = {}) {
     shareStatus.setAttribute('role', 'status');
     shareStatus.setAttribute('aria-live', 'polite');
     shareButton.addEventListener('click', async () => {
-      const url = new URL(`/blog.html?post=${encodeURIComponent(postSlug(post))}`, window.location.origin).href;
+      const url = new URL(articleUrlFor(post), window.location.origin).href;
       try {
         if (navigator.share) {
           await navigator.share({ title: post.title, text: post.summary, url });
@@ -141,13 +146,57 @@ function makePost(post, { detail = false, featured = false } = {}) {
     const readLink = document.createElement('a');
     readLink.className = 'read-story';
     readLink.href = articleUrlFor(post);
-    readLink.textContent = 'Read story';
     readLink.setAttribute('aria-label', `Read story: ${post.title}`);
+    const readLabel = document.createElement('span');
+    readLabel.textContent = 'Read story';
+    const arrow = document.createElement('span');
+    arrow.setAttribute('aria-hidden', 'true');
+    arrow.textContent = '↗';
+    readLink.append(readLabel, arrow);
     content.append(readLink);
   }
 
   article.append(content);
   return article;
+}
+
+function renderFilters(posts) {
+  if (!categoryFilters) return;
+  const categories = ['All', ...new Set(posts.map((post) => post.category))];
+  categoryFilters.replaceChildren(...categories.map((category) => {
+    const button = document.createElement('button');
+    button.type = 'button';
+    button.className = 'category-filter';
+    button.textContent = category === 'All' ? 'All stories' : category;
+    button.setAttribute('aria-pressed', String(category === selectedCategory));
+    button.addEventListener('click', () => {
+      selectedCategory = category;
+      categoryFilters.querySelectorAll('.category-filter').forEach((filter) => {
+        filter.setAttribute('aria-pressed', String(filter.textContent === (category === 'All' ? 'All stories' : category)));
+      });
+      renderList();
+    });
+    return button;
+  }));
+}
+
+function renderList() {
+  const query = searchInput?.value.trim().toLocaleLowerCase() || '';
+  const visiblePosts = allPosts.filter((post) => {
+    const matchesCategory = selectedCategory === 'All' || post.category === selectedCategory;
+    const matchesQuery = !query || `${post.title} ${post.summary} ${post.category}`.toLocaleLowerCase().includes(query);
+    return matchesCategory && matchesQuery;
+  });
+  postsContainer.classList.remove('is-detail');
+  if (visiblePosts.length === 0) {
+    const empty = document.createElement('p');
+    empty.className = 'empty-results';
+    empty.textContent = 'No stories match that search. Try another title or category.';
+    postsContainer.replaceChildren(empty);
+  } else {
+    postsContainer.replaceChildren(...visiblePosts.map((post, index) => makePost(post, { featured: index === 0 })));
+  }
+  postCount.textContent = `${visiblePosts.length} ${visiblePosts.length === 1 ? 'story' : 'stories'}`;
 }
 
 async function loadPosts() {
@@ -161,9 +210,10 @@ async function loadPosts() {
     if (!Array.isArray(posts) || posts.length === 0) {
       throw new Error('The blog archive is empty or invalid.');
     }
+    allPosts = posts.slice().sort((first, second) => second.date.localeCompare(first.date));
 
     const selectedSlug = new URL(window.location.href).searchParams.get('post');
-    const selectedPost = selectedSlug && posts.find((post) => postSlug(post) === selectedSlug);
+    const selectedPost = selectedSlug && allPosts.find((post) => postSlug(post) === selectedSlug);
 
     if (selectedSlug && !selectedPost) {
       throw new Error(`The requested blog story was not found: ${selectedSlug}`);
@@ -178,10 +228,12 @@ async function loadPosts() {
       postsContainer.replaceChildren(backLink, makePost(selectedPost, { detail: true }));
       postCount.textContent = '1 story';
       updateMeta(selectedPost);
+      categoryFilters?.setAttribute('hidden', '');
+      searchInput?.closest('.blog-search')?.setAttribute('hidden', '');
     } else {
-      postsContainer.classList.remove('is-detail');
-      postsContainer.replaceChildren(...posts.map((post, index) => makePost(post, { featured: index === 0 })));
-      postCount.textContent = `${posts.length} ${posts.length === 1 ? 'story' : 'stories'}`;
+      renderFilters(allPosts);
+      renderList();
+      searchInput?.addEventListener('input', renderList);
     }
   } catch (error) {
     console.error(error);

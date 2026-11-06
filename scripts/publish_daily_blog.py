@@ -166,6 +166,7 @@ def generate_article_pages(posts_path: Path, articles_dir: Path) -> None:
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="color-scheme" content="dark light" />
+  <meta name="default-theme" content="light" />
   <meta name="theme-color" content="#080b12" />
   <meta name="description" content="{summary}" />
   <link rel="canonical" href="{url}" />
@@ -188,11 +189,11 @@ def generate_article_pages(posts_path: Path, articles_dir: Path) -> None:
   <meta name="twitter:title" content="{title} | RocketGPT Blog" />
   <meta name="twitter:description" content="{summary}" />
   <meta name="twitter:image" content="{SITE_URL}/rocketgpt-share.png" />
-  <link rel="stylesheet" href="/blog.css?v=2-rss-share" />
   <link rel="stylesheet" href="/site.css" />
+  <link rel="stylesheet" href="/blog.css?v=3-editorial" />
   <title>{title} | RocketGPT Blog</title>
 </head>
-<body>
+<body class="blog-page">
   <header class="site-header">
     <a class="brand" href="/" aria-label="RocketGPT home">
       <img src="/rocketgpt-logo.svg" alt="" />

@@ -3,7 +3,7 @@
 
   const storageKey = 'rocketgpt-color-theme';
   const root = document.documentElement;
-  let theme = 'dark';
+  let theme = document.querySelector('meta[name="default-theme"]')?.content === 'light' ? 'light' : 'dark';
 
   try {
     const savedTheme = localStorage.getItem(storageKey);
