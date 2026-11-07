@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>RocketGPT | Rocket 2.0 Code &amp; Text Tools</title>
-  <meta name="description" content="Generate computer code and automate common natural language processing tasks with Rocket 2.0. Create, classify, summarize, translate, or extract text." />
+  <meta name="description" content="Write natural-sounding text, generate computer code, or summarize, translate, rewrite, and find key details in text with Rocket 2.0." />
   <meta name="robots" content="index, follow, max-image-preview:large" />
   <meta name="color-scheme" content="light" />
   <meta name="theme-color" content="#ffffff" />
@@ -14,17 +14,17 @@
   <link rel="icon" type="image/svg+xml" href="/pwa-icon.svg" />
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="RocketGPT" />
-  <meta property="og:title" content="Rocket 2.0 | Code &amp; Natural Language Tools" />
-  <meta property="og:description" content="Generate computer code and automate common natural language processing tasks with Rocket 2.0." />
+  <meta property="og:title" content="Rocket 2.0 | Text and Code Tools" />
+  <meta property="og:description" content="Write natural-sounding text, generate computer code, or summarize, translate, rewrite, and find key details in text with Rocket 2.0." />
   <meta property="og:url" content="https://rocketgpt.net/rocketgpt.html" />
   <meta property="og:image" content="https://rocketgpt.net/rocketgpt-share.png?v=text-code-nlp-20261106" />
   <meta property="og:image:type" content="image/png" />
   <meta property="og:image:width" content="1200" />
   <meta property="og:image:height" content="630" />
-  <meta property="og:image:alt" content="Rocket 2.0 — task-based computer code and natural language processing tools, not a chatbot." />
+  <meta property="og:image:alt" content="Rocket 2.0 — easy-to-use text and computer code tools, not a chatbot." />
   <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="Rocket 2.0 | Code &amp; Natural Language Tools" />
-  <meta name="twitter:description" content="Generate computer code and automate common natural language processing tasks with Rocket 2.0." />
+  <meta name="twitter:title" content="Rocket 2.0 | Text and Code Tools" />
+  <meta name="twitter:description" content="Write natural-sounding text, generate computer code, or summarize, translate, rewrite, and find key details in text with Rocket 2.0." />
   <meta name="twitter:image" content="https://rocketgpt.net/rocketgpt-share.png?v=text-code-nlp-20261106" />
   <link rel="stylesheet" href="rocketgpt.css?v=rocketgpt-tools-20261106" />
   <link rel="stylesheet" href="/site.css" />
@@ -49,16 +49,16 @@
     <main class="tool-main">
       <section class="tool-intro" aria-labelledby="tool-title">
         <p class="tool-eyebrow">ROCKETGPT · ROCKET 2.0</p>
-        <h1 id="tool-title">Computer code and NLP tools.<br /><span>Not a chatbot.</span></h1>
-        <p class="tool-lead">Generate computer code, draft natural-sounding text, or automate common natural language processing tasks—one focused result at a time.</p>
+        <h1 id="tool-title">Text and code tools.<br /><span>Not a chatbot.</span></h1>
+        <p class="tool-lead">Write something new, get help with code, or work with text you already have—summarize it, translate it, make it clearer, or find key details.</p>
         <p class="tool-disclosure">Powered by a third-party AI model. Generated code is not executed. Avoid entering sensitive information.</p>
       </section>
 
       <section class="tool-card" aria-label="Rocket 2.0 tools">
         <div class="tool-tabs" role="tablist" aria-label="Choose a Rocket 2.0 tool">
-          <button id="textTab" type="button" role="tab" aria-selected="true" aria-controls="textPanel" data-tool="text">Generate text</button>
+          <button id="textTab" type="button" role="tab" aria-selected="true" aria-controls="textPanel" data-tool="text">Write text</button>
           <button id="codeTab" type="button" role="tab" aria-selected="false" aria-controls="codePanel" data-tool="code" tabindex="-1">Generate code</button>
-          <button id="nlpTab" type="button" role="tab" aria-selected="false" aria-controls="nlpPanel" data-tool="nlp" tabindex="-1">Automate NLP</button>
+          <button id="nlpTab" type="button" role="tab" aria-selected="false" aria-controls="nlpPanel" data-tool="nlp" tabindex="-1">Work with text</button>
         </div>
 
         <form id="toolForm">
@@ -86,21 +86,21 @@
           </section>
 
           <section id="nlpPanel" class="tool-panel" role="tabpanel" aria-labelledby="nlpTab" data-tool-panel="nlp" hidden>
-            <label for="nlpOperation">Text-processing task</label>
+            <label for="nlpOperation">What would you like to do?</label>
             <select id="nlpOperation">
-              <option value="summarize">Summarize</option>
-              <option value="classify">Classify topics or sentiment</option>
-              <option value="translate">Translate</option>
-              <option value="extract">Extract key information</option>
-              <option value="rewrite">Rewrite for clarity</option>
+              <option value="summarize">Summarize in a few sentences</option>
+              <option value="classify">Find the main topic or tone</option>
+              <option value="translate">Translate into another language</option>
+              <option value="extract">Find key details, names, or dates</option>
+              <option value="rewrite">Make it clearer and easier to read</option>
             </select>
             <div id="targetLanguageField" hidden>
               <label for="targetLanguage">Translate into</label>
               <input id="targetLanguage" type="text" maxlength="80" placeholder="For example: Spanish" />
             </div>
-            <label for="nlpTask">Text to process</label>
-            <p class="field-help">Only process text you have permission to share. For best results, keep the input focused.</p>
-            <textarea id="nlpTask" rows="7" maxlength="12000" placeholder="Paste or type the text for Rocket 2.0 to process."></textarea>
+            <label for="nlpTask">Paste or type your text</label>
+            <p class="field-help">Use text you have permission to share. Remove private details before pasting.</p>
+            <textarea id="nlpTask" rows="7" maxlength="12000" placeholder="Paste an email, notes, or other text here."></textarea>
           </section>
 
           <div class="tool-submit-row">

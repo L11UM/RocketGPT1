@@ -26,7 +26,7 @@ function updateMeta(post) {
   document.querySelector('meta[property="og:image:type"]').content = 'image/png';
   document.querySelector('meta[property="og:image:width"]').content = '1200';
   document.querySelector('meta[property="og:image:height"]').content = '630';
-  document.querySelector('meta[property="og:image:alt"]').content = 'Rocket 2.0 — task-based computer code and natural language processing tools, not a chatbot.';
+  document.querySelector('meta[property="og:image:alt"]').content = 'Rocket 2.0 — easy-to-use text and computer code tools, not a chatbot.';
   document.querySelector('meta[name="twitter:title"]').content = document.title;
   document.querySelector('meta[name="twitter:description"]').content = post.summary;
   document.querySelector('meta[name="twitter:image"]').content = imageUrl;

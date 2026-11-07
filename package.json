@@ -2,7 +2,7 @@
   "name": "rocketgpt",
   "version": "2.0.0",
   "private": true,
-  "description": "RocketGPT AI workspace for text, code, and language-processing tasks",
+  "description": "RocketGPT AI tools for writing, code, and working with text",
   "scripts": {
     "start": "node server.js"
   }

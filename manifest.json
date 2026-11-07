@@ -2,7 +2,7 @@
   "id": "/",
   "name": "RocketGPT",
   "short_name": "RocketGPT",
-  "description": "Rocket 2.0 is a task-based code and natural language processing tool, not a chatbot.",
+  "description": "Rocket 2.0 helps write text, generate code, summarize, translate, and find key details—not chat.",
   "start_url": "/",
   "scope": "/",
   "display": "standalone",

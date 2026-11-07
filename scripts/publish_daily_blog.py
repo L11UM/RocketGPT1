@@ -182,7 +182,7 @@ def generate_article_pages(posts_path: Path, articles_dir: Path) -> None:
   <meta property="og:image:type" content="image/png" />
   <meta property="og:image:width" content="1200" />
   <meta property="og:image:height" content="630" />
-  <meta property="og:image:alt" content="Rocket 2.0 — task-based computer code and natural language processing tools, not a chatbot." />
+  <meta property="og:image:alt" content="Rocket 2.0 — easy-to-use text and computer code tools, not a chatbot." />
   <meta property="article:published_time" content="{published.isoformat()}T00:00:00Z" />
   <meta property="article:section" content="{category}" />
   <meta name="twitter:card" content="summary_large_image" />

@@ -1,6 +1,6 @@
 # RocketGPT
 
-RocketGPT is a static website with browser-based AI tools and image generation. Rocket 2.0 is a task-based tool, not a chatbot: it generates computer code, drafts natural-sounding text, and automates common natural language processing tasks using a third-party large language model through Pollinations. It does not execute generated code or independently run external workflows. NALL-E uses Pollinations' public image service. RocketGPT has not trained or hosted the model powering Rocket 2.0.
+RocketGPT is a static website with browser-based AI tools and image generation. Rocket 2.0 is a task-based tool, not a chatbot: it writes text, generates computer code, and helps summarize, translate, rewrite, or find key details in text using a third-party AI model through Pollinations. It does not execute generated code or independently run external workflows. NALL-E uses Pollinations' public image service. RocketGPT has not trained or hosted the model powering Rocket 2.0.
 
 ## Run locally
 
@@ -17,7 +17,7 @@ Open [http://localhost:8000/](http://localhost:8000/) for the homepage. Direct A
 ## Site structure
 
 - `index.html`, `home.css`, and `home.js` — homepage, prompt examples, and sharing.
-- `rocketgpt.html`, `rocketgpt.css`, and `rocketgpt.js` — Rocket 2.0 text, code, and language-processing workspace.
+- `rocketgpt.html`, `rocketgpt.css`, and `rocketgpt.js` — Rocket 2.0 writing, code, and text tools.
 - `MakingGPT/` — experimental model training code and instructions; not currently linked from the public site while model training is in progress.
 - `nall-e.html`, `nall-e.css`, and `nall-e.js` — NALL-E image generation and its temporary gallery.
 - `blog.html`, `blog.css`, `blog.js`, and `blog/posts.json` — blog archive and story pages.
@@ -27,7 +27,7 @@ Open [http://localhost:8000/](http://localhost:8000/) for the homepage. Direct A
 - `site.css` and `site.js` — shared theme, navigation styles, and homepage prompt-of-the-day behavior.
 - `manifest.json`, the PWA icon assets, `robots.txt`, and `sitemap.xml` — install, crawler, and discovery metadata.
 
-Rocket 2.0 sends prompts to Pollinations' free third-party text model directly from the browser; no account or API key is required. It can draft natural-sounding text and code, and help summarize, classify, translate, or extract information from text. It does not execute generated code or independently run external workflows. The model is not trained or hosted by RocketGPT. The free service is best-effort and rate-limited to one response per public IP every 30 seconds. Do not send sensitive information. Web search is not available.
+Rocket 2.0 sends prompts to Pollinations' free third-party AI model directly from the browser; no account or API key is required. It can draft natural-sounding text and code, summarize or translate text, make it clearer, identify its main topic or tone, and find details such as names or dates. It does not execute generated code or independently run external workflows. The model is not trained or hosted by RocketGPT. The free service is best-effort and rate-limited to one response per public IP every 30 seconds. Do not send sensitive information. Web search is not available.
 
 The public homepage contains search-friendly information about Rocket 2.0, with an XML sitemap at `https://rocketgpt.net/sitemap.xml`. To request Google indexing, verify `rocketgpt.net` in Google Search Console and submit that sitemap. Google decides whether and when to index or rank pages; no code change can guarantee viral reach or instant results.
 
@@ -37,7 +37,7 @@ The RocketGPT blog is at `blog.html`; dated product updates and daily editorial 
 
 The showcase-only merchandise preview is at `store.html`. It displays concept art for a RocketGPT hat, shirt, and hoodie; it does not take orders or payments.
 
-The Rocket 2.0 page is task-based rather than a chat interface. Its three tools generate natural-sounding text, draft computer code in a selected programming language, and automate common NLP tasks (summarize, classify, translate, extract, or rewrite text). Each submission produces a standalone result; there is no multi-turn chat history. Results can be copied or downloaded as text. The provider's rate limit allows about one response per public IP every 30 seconds.
+The Rocket 2.0 page is task-based rather than a chat interface. Its three tools write natural-sounding text, draft computer code in a selected programming language, and work with text you provide: summarize it, find its main topic or tone, translate it, pull out key details, or make it clearer. Each submission produces a standalone result; there is no multi-turn chat history. Results can be copied or downloaded as text. The provider's rate limit allows about one response per public IP every 30 seconds.
 
 `nall-e.html` is RocketGPT's NALL-E text-to-image experience. It sends prompts directly from the browser to Pollinations' public image service and displays a downloadable result; no OpenAI key, Render image endpoint, or owner account is required. The provider controls availability and may rate-limit or reject requests. Prompts are sent to Pollinations, so users should not enter sensitive information. NALL-E uses a third-party image service rather than a model trained from scratch by RocketGPT.
 
