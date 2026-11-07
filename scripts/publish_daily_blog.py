@@ -71,7 +71,7 @@ DAILY_NOTES = (
         "summary": "AI can be a useful starting point, but important details deserve a second look—especially facts, dates, and advice.",
         "body": [
             "Ask Rocket 2.0 to explain its reasoning or identify which parts need verification. Then check those claims against sources you trust.",
-            "Rocket 2.0's current free chat does not browse the web, so it cannot confirm live information. Do not rely on it for emergencies or professional advice."
+            "Rocket 2.0's current free experience does not browse the web, so it cannot confirm live information. Do not rely on it for emergencies or professional advice."
         ]
     },
     {
@@ -178,17 +178,17 @@ def generate_article_pages(posts_path: Path, articles_dir: Path) -> None:
   <meta property="og:title" content="{title} | RocketGPT Blog" />
   <meta property="og:description" content="{summary}" />
   <meta property="og:url" content="{url}" />
-  <meta property="og:image" content="{SITE_URL}/rocketgpt-share.png" />
+  <meta property="og:image" content="{SITE_URL}/rocketgpt-share.png?v=text-code-nlp-20261106" />
   <meta property="og:image:type" content="image/png" />
   <meta property="og:image:width" content="1200" />
   <meta property="og:image:height" content="630" />
-  <meta property="og:image:alt" content="Rocket 2.0 — a free AI chat workspace for sharper ideas and shareable content." />
+  <meta property="og:image:alt" content="Rocket 2.0 — task-based computer code and natural language processing tools, not a chatbot." />
   <meta property="article:published_time" content="{published.isoformat()}T00:00:00Z" />
   <meta property="article:section" content="{category}" />
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="{title} | RocketGPT Blog" />
   <meta name="twitter:description" content="{summary}" />
-  <meta name="twitter:image" content="{SITE_URL}/rocketgpt-share.png" />
+  <meta name="twitter:image" content="{SITE_URL}/rocketgpt-share.png?v=text-code-nlp-20261106" />
   <link rel="stylesheet" href="/site.css" />
   <link rel="stylesheet" href="/blog.css?v=3-editorial" />
   <title>{title} | RocketGPT Blog</title>

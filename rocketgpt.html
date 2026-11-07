@@ -3,126 +3,138 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>RocketGPT | Rocket 2.0 AI Chat</title>
-  <meta name="description" content="Chat with Rocket 2.0, a free AI chat powered by a third-party large language model. Ask questions, improve writing, plan projects, and create shareable content—no account or API key required." />
+  <title>RocketGPT | Rocket 2.0 Code &amp; Text Tools</title>
+  <meta name="description" content="Generate computer code and automate common natural language processing tasks with Rocket 2.0. Create, classify, summarize, translate, or extract text." />
   <meta name="robots" content="index, follow, max-image-preview:large" />
-  <meta name="color-scheme" content="dark light" />
-  <meta name="theme-color" content="#080b12" />
+  <meta name="color-scheme" content="light" />
+  <meta name="theme-color" content="#ffffff" />
   <link rel="canonical" href="https://rocketgpt.net/rocketgpt.html" />
   <link rel="manifest" href="/manifest.json" />
   <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+  <link rel="icon" type="image/svg+xml" href="/pwa-icon.svg" />
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="RocketGPT" />
-  <meta property="og:title" content="RocketGPT — Turn ideas into attention with Rocket 2.0" />
-  <meta property="og:description" content="Rocket 2.0 is a free AI chat powered by a third-party large language model. No account or API key required." />
+  <meta property="og:title" content="Rocket 2.0 | Code &amp; Natural Language Tools" />
+  <meta property="og:description" content="Generate computer code and automate common natural language processing tasks with Rocket 2.0." />
   <meta property="og:url" content="https://rocketgpt.net/rocketgpt.html" />
-  <meta property="og:image" content="https://rocketgpt.net/rocketgpt-share.png?v=rocketgpt-2-name-745bcbf" />
+  <meta property="og:image" content="https://rocketgpt.net/rocketgpt-share.png?v=text-code-nlp-20261106" />
   <meta property="og:image:type" content="image/png" />
   <meta property="og:image:width" content="1200" />
   <meta property="og:image:height" content="630" />
-  <meta property="og:image:alt" content="Rocket 2.0 — a free AI chat workspace for sharper ideas and shareable content." />
+  <meta property="og:image:alt" content="Rocket 2.0 — task-based computer code and natural language processing tools, not a chatbot." />
   <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="RocketGPT — Turn ideas into attention with Rocket 2.0" />
-  <meta name="twitter:description" content="Rocket 2.0 is a free AI chat powered by a third-party large language model. No account or API key required." />
-  <meta name="twitter:image" content="https://rocketgpt.net/rocketgpt-share.png?v=rocketgpt-2-name-745bcbf" />
-  <link rel="icon" type="image/svg+xml" href="/pwa-icon.svg" />
-  <meta name="api-base-url" content="https://rocketgpt1.onrender.com" />
-  <script src="/site.js"></script>
-  <link rel="stylesheet" href="rocketgpt.css?v=rocketgpt-2-name-745bcbf" />
+  <meta name="twitter:title" content="Rocket 2.0 | Code &amp; Natural Language Tools" />
+  <meta name="twitter:description" content="Generate computer code and automate common natural language processing tasks with Rocket 2.0." />
+  <meta name="twitter:image" content="https://rocketgpt.net/rocketgpt-share.png?v=text-code-nlp-20261106" />
+  <link rel="stylesheet" href="rocketgpt.css?v=rocketgpt-tools-20261106" />
   <link rel="stylesheet" href="/site.css" />
 </head>
 <body>
-  <div class="app-shell">
-    <aside class="sidebar">
-      <a class="brand" href="/" aria-label="RocketGPT home"><img class="brand-mark" src="rocketgpt-logo.svg" alt="" /><div class="brand-copy"><div class="brand-name">RocketGPT</div><div class="brand-credit">AI CHAT WORKSPACE</div></div></a>
-      <button class="new-chat" id="newChat"><span class="plus" aria-hidden="true">+</span><span>New chat</span><kbd>⌘ K</kbd></button>
-      <section class="history-section" aria-label="Chat history">
-        <label class="history-search"><span aria-hidden="true">⌕</span><input id="historySearch" type="search" placeholder="Search chats" aria-label="Search chats" /></label>
-        <div class="history-heading">RECENT</div>
-        <div class="thread-list" id="threadList" role="list"></div>
-        <div class="history-tools" aria-label="Export active chat">
-          <button type="button" id="exportMarkdown" disabled>Export .md</button>
-          <button type="button" id="exportText" disabled>Export .txt</button>
-        </div>
-        <p class="history-privacy" id="historyStatus" role="status" aria-live="polite">Saved only in this browser</p>
+  <div class="tool-app">
+    <header class="tool-topbar">
+      <a class="brand" href="/" aria-label="RocketGPT home">
+        <img class="brand-mark" src="/rocketgpt-logo.svg" alt="" />
+        <span class="brand-copy"><strong>RocketGPT</strong><small>AI TOOLS</small></span>
+      </a>
+      <nav class="tool-nav" aria-label="Main navigation">
+        <a href="/">Home</a>
+        <a href="/rocketgpt.html" aria-current="page">Rocket 2.0</a>
+        <a href="/nall-e.html">NALL-E</a>
+        <a href="/blog.html">Blog</a>
+        <a href="/store.html">Store</a>
+      </nav>
+      <button class="tool-share" id="shareApp" type="button">Share Rocket 2.0 ↗</button>
+    </header>
+
+    <main class="tool-main">
+      <section class="tool-intro" aria-labelledby="tool-title">
+        <p class="tool-eyebrow">ROCKETGPT · ROCKET 2.0</p>
+        <h1 id="tool-title">Computer code and NLP tools.<br /><span>Not a chatbot.</span></h1>
+        <p class="tool-lead">Generate computer code, draft natural-sounding text, or automate common natural language processing tasks—one focused result at a time.</p>
+        <p class="tool-disclosure">Powered by a third-party AI model. Generated code is not executed. Avoid entering sensitive information.</p>
       </section>
-      <div class="side-bottom">
-        <div class="local-status"><span class="status-dot"></span><div><strong>Third-party LLM</strong><small>FREE LLM CHAT</small></div></div>
-      </div>
-    </aside>
-    <button class="sidebar-backdrop" id="sidebarBackdrop" type="button" aria-label="Close chat history" hidden></button>
 
-    <main class="main">
-      <header class="topbar"><div class="topbar-kicker"><button class="mobile-history" id="mobileHistory" type="button" aria-expanded="false" aria-controls="threadList">Chats</button><span>ROCKETGPT 2.0</span><span class="topbar-divider">/</span><span>LLM CHAT</span></div><div class="topbar-actions"><nav class="site-nav" aria-label="Main navigation"><a href="/">Home</a><a href="/rocketgpt.html" aria-current="page">Rocket 2.0</a><a href="/nall-e.html">NALL-E</a><a href="/blog.html">Blog</a><a href="/store.html">Store</a></nav><details class="site-directory"><summary aria-label="Open page directory">Pages</summary><nav class="site-directory-links" aria-label="Page directory"><a href="/">Home</a><a href="/rocketgpt.html" aria-current="page">Rocket 2.0</a><a href="/nall-e.html">NALL-E</a><a href="/blog.html">Blog</a><a href="/store.html">Store</a></nav></details><button class="share-app" id="shareApp" type="button" aria-label="Share Rocket 2.0"><span class="share-app-label">Share Rocket 2.0 ↗</span><span class="share-app-short" aria-hidden="true">Share ↗</span><span class="share-app-copied" aria-hidden="true">Copied</span><span class="share-app-unavailable" aria-hidden="true">Unavailable</span></button><div class="topbar-model"><span class="model-dot" aria-hidden="true"></span>Third-party LLM</div></div></header>
-      <div class="chat-wrap">
-        <section class="empty-state" id="emptyState">
-          <div class="welcome-mark"><img class="welcome-logo" src="rocketgpt-logo.svg" alt="RocketGPT logo" /><span>ROCKETGPT 2.0</span></div>
-          <h1>Turn ideas into attention.</h1>
-          <p class="empty-copy">Chat with a large language model to explore questions, draft ideas, and create sharper content. Rocket 2.0 uses a third-party AI service.</p>
-
-          <div class="hero-strip" aria-label="Creator features">
-            <div class="hero-card">
-              <span>Hook</span>
-              <strong>Make the first sentence impossible to ignore.</strong>
-            </div>
-            <div class="hero-card">
-              <span>Pitch</span>
-              <strong>Turn a messy idea into a clear founder-style story.</strong>
-            </div>
-            <div class="hero-card">
-              <span>Share</span>
-              <strong>Turn insights into posts, threads, and follow-ups.</strong>
-            </div>
-          </div>
-
-          <button class="viral-callout" id="viralModeCallout" type="button" aria-pressed="false">
-            <span class="callout-badge">Viral mode</span>
-            <strong>Build a sharper story, hook, pitch, or post in one go.</strong>
-            <span class="callout-action">Turn on ↗</span>
-          </button>
-          <div class="prompt-grid" aria-label="Prompt ideas">
-            <button class="suggestion" type="button" data-prompt="Help me think through this problem and recommend a practical next step: "><span class="suggestion-index">01</span><strong>Think through a problem</strong><span class="suggestion-detail">Compare options and tradeoffs</span></button>
-            <button class="suggestion" type="button" data-prompt="Help me make a clear project plan with milestones and next steps: "><span class="suggestion-index">02</span><strong>Plan a project</strong><span class="suggestion-detail">Turn a goal into concrete steps</span></button>
-            <button class="suggestion" type="button" data-prompt="Help me write a clear first draft about: "><span class="suggestion-index">03</span><strong>Write a first draft</strong><span class="suggestion-detail">Start from a rough idea</span></button>
-            <button class="suggestion viral" type="button" data-prompt="Give me 5 punchy hooks for a viral post about: "><span class="suggestion-index">04</span><strong>Viral hooks</strong><span class="suggestion-detail">Turn an idea into attention</span></button>
-            <button class="suggestion viral" type="button" data-prompt="Turn this into a short founder-style pitch with a clear hook, proof, and CTA: "><span class="suggestion-index">05</span><strong>Pitch it better</strong><span class="suggestion-detail">Make it clear and memorable</span></button>
-            <button class="suggestion viral" type="button" data-prompt="Turn my rough idea into a tweet thread, a concise summary, and a shareable takeaway: "><span class="suggestion-index">06</span><strong>Share it wider</strong><span class="suggestion-detail">Make it instantly postable</span></button>
-          </div>
-        </section>
-        <section class="messages" id="messages" aria-live="polite"></section>
-        <div class="composer-area">
-          <div class="fuel-status" id="fuelStatus" role="status" aria-live="polite" hidden>
-            <span class="fuel-label">Rocket fuel refilling</span>
-            <progress id="fuelProgress" max="30" value="0" aria-label="Rocket fuel cooldown progress"></progress>
-            <span class="fuel-countdown" id="fuelCountdown">30s</span>
-          </div>
-          <form class="composer" id="composer">
-            <textarea id="prompt" rows="1" placeholder="Message Rocket 2.0" aria-label="Message Rocket 2.0"></textarea>
-            <button class="send" aria-label="Send message">↑</button>
-          </form>
-          <div class="composer-options">
-            <label class="mode-control" id="modeControl" data-mode="creator" for="launchMode">
-              <span class="mode-icon" aria-hidden="true">✦</span>
-              <span class="mode-label">Launch mode</span>
-              <select id="launchMode" aria-label="Choose a launch mode">
-                <option value="creator">✍️ Creator</option>
-                <option value="coach">🧭 Coach</option>
-                <option value="explainer">💡 Explainer</option>
-                <option value="hype-writer">🚀 Hype Writer</option>
-                <option value="brainstormer">🧠 Brainstormer</option>
-              </select>
-            </label>
-            <button class="viral-toggle" id="viralMode" type="button" aria-pressed="false">Viral mode: Off</button>
-            <span class="service-note">Free AI · one reply per IP every 30 seconds · don't send sensitive info</span>
-          </div>
-          <div class="composer-meta">
-            <span>AI can make mistakes. Check important info.</span>
-            <span><kbd>Enter</kbd> send · <kbd>Shift+Enter</kbd> new line · <kbd>/</kbd> focus</span>
-          </div>
+      <section class="tool-card" aria-label="Rocket 2.0 tools">
+        <div class="tool-tabs" role="tablist" aria-label="Choose a Rocket 2.0 tool">
+          <button id="textTab" type="button" role="tab" aria-selected="true" aria-controls="textPanel" data-tool="text">Generate text</button>
+          <button id="codeTab" type="button" role="tab" aria-selected="false" aria-controls="codePanel" data-tool="code" tabindex="-1">Generate code</button>
+          <button id="nlpTab" type="button" role="tab" aria-selected="false" aria-controls="nlpPanel" data-tool="nlp" tabindex="-1">Automate NLP</button>
         </div>
-      </div>
+
+        <form id="toolForm">
+          <section id="textPanel" class="tool-panel" role="tabpanel" aria-labelledby="textTab" data-tool-panel="text">
+            <label for="textTask">What should Rocket 2.0 write?</label>
+            <p class="field-help">Describe the content, tone, audience, and format you need.</p>
+            <textarea id="textTask" rows="5" maxlength="8000" placeholder="For example: Write a friendly, concise product description for a reusable water bottle."></textarea>
+          </section>
+
+          <section id="codePanel" class="tool-panel" role="tabpanel" aria-labelledby="codeTab" data-tool-panel="code" hidden>
+            <label for="codeLanguage">Programming language</label>
+            <select id="codeLanguage">
+              <option>Python</option>
+              <option>JavaScript</option>
+              <option>TypeScript</option>
+              <option>HTML and CSS</option>
+              <option>SQL</option>
+              <option>Java</option>
+              <option>Go</option>
+              <option>Other</option>
+            </select>
+            <label for="codeTask">What should the code do?</label>
+            <p class="field-help">Describe the goal, inputs, and any requirements. Rocket 2.0 drafts code but does not run it.</p>
+            <textarea id="codeTask" rows="5" maxlength="8000" placeholder="For example: Read a CSV file and print the five most common values in its category column."></textarea>
+          </section>
+
+          <section id="nlpPanel" class="tool-panel" role="tabpanel" aria-labelledby="nlpTab" data-tool-panel="nlp" hidden>
+            <label for="nlpOperation">Text-processing task</label>
+            <select id="nlpOperation">
+              <option value="summarize">Summarize</option>
+              <option value="classify">Classify topics or sentiment</option>
+              <option value="translate">Translate</option>
+              <option value="extract">Extract key information</option>
+              <option value="rewrite">Rewrite for clarity</option>
+            </select>
+            <div id="targetLanguageField" hidden>
+              <label for="targetLanguage">Translate into</label>
+              <input id="targetLanguage" type="text" maxlength="80" placeholder="For example: Spanish" />
+            </div>
+            <label for="nlpTask">Text to process</label>
+            <p class="field-help">Only process text you have permission to share. For best results, keep the input focused.</p>
+            <textarea id="nlpTask" rows="7" maxlength="12000" placeholder="Paste or type the text for Rocket 2.0 to process."></textarea>
+          </section>
+
+          <div class="tool-submit-row">
+            <p id="toolStatus" class="tool-status" role="status" aria-live="polite"></p>
+            <button id="runTool" type="submit">Generate result <span aria-hidden="true">↗</span></button>
+          </div>
+        </form>
+
+        <section id="fuelStatus" class="fuel-status" role="status" aria-live="polite" hidden>
+          <span>Free service cooldown</span>
+          <progress id="fuelProgress" max="30" value="0" aria-label="Cooldown progress"></progress>
+          <span id="fuelCountdown">30s</span>
+        </section>
+
+        <section id="toolResult" class="tool-result" aria-labelledby="resultTitle" hidden>
+          <div class="result-heading">
+            <div>
+              <p class="tool-eyebrow">YOUR RESULT</p>
+              <h2 id="resultTitle">Generated result</h2>
+            </div>
+            <div class="result-actions">
+              <button id="copyResult" type="button" disabled>Copy</button>
+              <button id="downloadResult" type="button" disabled>Download .txt</button>
+              <button id="newTask" type="button">New task</button>
+            </div>
+          </div>
+          <div id="resultContent" class="result-content" aria-live="polite"></div>
+          <p id="resultStatus" class="result-status" role="status" aria-live="polite"></p>
+        </section>
+      </section>
+
+      <p class="tool-footnote">Rocket 2.0 sends your request to Pollinations' free third-party AI service. The provider controls availability and rate limits. Results may be inaccurate—review text and code before using them.</p>
     </main>
   </div>
-  <script src="rocketgpt.js?v=rocketgpt-2-name-745bcbf" defer></script>
+  <script src="rocketgpt.js?v=rocketgpt-tools-20261106" defer></script>
 </body>
 </html>

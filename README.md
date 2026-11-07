@@ -1,6 +1,6 @@
 # RocketGPT
 
-RocketGPT is a static website with a browser-based AI chat and image-generation experience. Rocket 2.0 uses a third-party large language model through Pollinations; NALL-E uses Pollinations' public image service. RocketGPT has not trained or hosted the model powering the public chat.
+RocketGPT is a static website with browser-based AI tools and image generation. Rocket 2.0 is a task-based tool, not a chatbot: it generates computer code, drafts natural-sounding text, and automates common natural language processing tasks using a third-party large language model through Pollinations. It does not execute generated code or independently run external workflows. NALL-E uses Pollinations' public image service. RocketGPT has not trained or hosted the model powering Rocket 2.0.
 
 ## Run locally
 
@@ -12,12 +12,12 @@ python3 -m http.server 8000
 
 Open [http://localhost:8000/](http://localhost:8000/) for the homepage. Direct API calls to Pollinations require an internet connection and remain subject to the provider's availability and limits.
 
-`npm start` runs the optional Node.js service used for answer feedback. It is not required to browse the site, use the public chat, or create NALL-E images.
+`npm start` runs the optional Node.js service used for feedback. It is not required to browse the site, use Rocket 2.0's tools, or create NALL-E images.
 
 ## Site structure
 
 - `index.html`, `home.css`, and `home.js` — homepage, prompt examples, and sharing.
-- `rocketgpt.html`, `rocketgpt.css`, and `rocketgpt.js` — Rocket 2.0 chat.
+- `rocketgpt.html`, `rocketgpt.css`, and `rocketgpt.js` — Rocket 2.0 text, code, and language-processing workspace.
 - `MakingGPT/` — experimental model training code and instructions; not currently linked from the public site while model training is in progress.
 - `nall-e.html`, `nall-e.css`, and `nall-e.js` — NALL-E image generation and its temporary gallery.
 - `blog.html`, `blog.css`, `blog.js`, and `blog/posts.json` — blog archive and story pages.
@@ -27,27 +27,23 @@ Open [http://localhost:8000/](http://localhost:8000/) for the homepage. Direct A
 - `site.css` and `site.js` — shared theme, navigation styles, and homepage prompt-of-the-day behavior.
 - `manifest.json`, the PWA icon assets, `robots.txt`, and `sitemap.xml` — install, crawler, and discovery metadata.
 
-Rocket 2.0 is an LLM-powered chat experience. It sends requests to Pollinations' free third-party text model directly from the browser; no account or API key is required. The model is not trained or hosted by RocketGPT. The free service is best-effort and rate-limited to one response per public IP every 30 seconds. Do not send sensitive information. Web search is not available in this mode.
+Rocket 2.0 sends prompts to Pollinations' free third-party text model directly from the browser; no account or API key is required. It can draft natural-sounding text and code, and help summarize, classify, translate, or extract information from text. It does not execute generated code or independently run external workflows. The model is not trained or hosted by RocketGPT. The free service is best-effort and rate-limited to one response per public IP every 30 seconds. Do not send sensitive information. Web search is not available.
 
 The public homepage contains search-friendly information about Rocket 2.0, with an XML sitemap at `https://rocketgpt.net/sitemap.xml`. To request Google indexing, verify `rocketgpt.net` in Google Search Console and submit that sitemap. Google decides whether and when to index or rank pages; no code change can guarantee viral reach or instant results.
 
-The homepage and chat page include native sharing with a clipboard fallback, and use a 1200×630 branded social preview image when shared. No analytics or tracking are installed.
+The homepage and Rocket 2.0 tools page include native sharing with a clipboard fallback, and use a 1200×630 branded social preview image when shared. No analytics or tracking are installed.
 
 The RocketGPT blog is at `blog.html`; dated product updates and daily editorial notes live in `blog/posts.json`. GitHub Actions runs `scripts/publish_daily_blog.py` daily, adds one editorial note from its curated rotation, regenerates `blog/feed.xml` and static story pages, updates `sitemap.xml`, and deploys the updated static site. Daily notes are not claims of new product releases.
 
 The showcase-only merchandise preview is at `store.html`. It displays concept art for a RocketGPT hat, shirt, and hoodie; it does not take orders or payments.
 
-Enable **Viral mode** from the welcome callout or composer to ask the model for more shareable, platform-aware content with stronger hooks and concise wording. The feature changes the model instructions; it cannot guarantee that content will go viral.
+The Rocket 2.0 page is task-based rather than a chat interface. Its three tools generate natural-sounding text, draft computer code in a selected programming language, and automate common NLP tasks (summarize, classify, translate, extract, or rewrite text). Each submission produces a standalone result; there is no multi-turn chat history. Results can be copied or downloaded as text. The provider's rate limit allows about one response per public IP every 30 seconds.
 
 `nall-e.html` is RocketGPT's NALL-E text-to-image experience. It sends prompts directly from the browser to Pollinations' public image service and displays a downloadable result; no OpenAI key, Render image endpoint, or owner account is required. The provider controls availability and may rate-limit or reject requests. Prompts are sent to Pollinations, so users should not enter sensitive information. NALL-E uses a third-party image service rather than a model trained from scratch by RocketGPT.
 
-Recent chats are saved in the current browser only. They are not uploaded or synced between devices.
-
-Chat requests time out after 90 seconds. When a request fails, Rocket keeps the unsent message in the composer and offers a retry action; failed turns are not included in later AI context. The AI provider still controls response quality and availability.
-
 ## Answer feedback
 
-Use the helpful/not helpful buttons below an answer to submit a rating. The feedback endpoint stores only the rating and server submission time in JSON Lines format; it does not link the rating to the chat or store the prompt or reply. By default, the file is written to the operating system's temporary directory as `rocketgpt-feedback.jsonl`; set `FEEDBACK_FILE` to change the path. Temporary storage can be lost when the service restarts or redeploys. These unlinked ratings can show aggregate sentiment, but they do not train the hosted model or provide examples for RLHF.
+The optional feedback endpoint stores only a submitted rating and server submission time in JSON Lines format; it does not store submitted text or generated results. By default, the file is written to the operating system's temporary directory as `rocketgpt-feedback.jsonl`; set `FEEDBACK_FILE` to change the path. Temporary storage can be lost when the service restarts or redeploys. These unlinked ratings do not train the hosted model or provide examples for RLHF.
 
 ## Deploy
 

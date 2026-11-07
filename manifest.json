@@ -2,7 +2,7 @@
   "id": "/",
   "name": "RocketGPT",
   "short_name": "RocketGPT",
-  "description": "Explore ideas with Rocket 2.0 and create images with NALL-E.",
+  "description": "Rocket 2.0 is a task-based code and natural language processing tool, not a chatbot.",
   "start_url": "/",
   "scope": "/",
   "display": "standalone",

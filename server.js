@@ -136,7 +136,7 @@ async function handleChat(request, response) {
     }
 
     if (!process.env.OPENAI_API_KEY) {
-      sendJson(response, 503, { error: 'AI chat is not configured. Add OPENAI_API_KEY to the server environment.' });
+      sendJson(response, 503, { error: 'The AI service is not configured. Add OPENAI_API_KEY to the server environment.' });
       return;
     }
 

@@ -55,7 +55,7 @@
     "imageAlt": "A small rocket following a green orbital path against a soft background.",
     "summary": "RocketGPT's homepage, Rocket 2.0 chat, and NALL-E now share a clean white look, with a page directory to make each experience easier to find.",
     "body": [
-      "The updated design brings a white background and clearer contrast across the full site, including the Rocket 2.0 chat workspace. The shared navigation now connects Home, Rocket 2.0, and NALL-E.",
+      "The updated design brings a white background and clearer contrast across the full site, including the Rocket 2.0 creative workspace. The shared navigation now connects Home, Rocket 2.0, and NALL-E.",
       "RocketGPT is the company brand; Rocket 2.0 and NALL-E remain the names of the products. The design is intended to make those destinations easier to recognize and move between."
     ]
   },
@@ -79,7 +79,7 @@
     "imageAlt": "A green star surrounded by a thin circular orbit.",
     "summary": "RocketGPT is the company behind Rocket 2.0 and NALL-E, focused on building and bringing practical AI products to people.",
     "body": [
-      "The homepage now explains how the RocketGPT brand relates to its products. Rocket 2.0 is a browser-based AI chat workspace, and NALL-E is a text-to-image experience.",
+      "The homepage now explains how the RocketGPT brand relates to its products. Rocket 2.0 is a browser-based AI creative workspace, and NALL-E is a text-to-image experience.",
       "The products currently use third-party models and services rather than models trained from scratch by RocketGPT. We aim to identify those providers where they are used."
     ]
   },
@@ -104,7 +104,7 @@
     "summary": "Rocket 2.0 became the public name for the chat experience, giving the product a more consistent identity across its landing page and app.",
     "body": [
       "The naming update distinguishes the chat product, Rocket 2.0, from the RocketGPT company brand. The goal is to make the product easier to identify wherever people arrive on the site.",
-      "Rocket 2.0 remains a browser-based AI chat experience for questions, writing, planning, and creative ideas."
+      "Rocket 2.0 is a browser-based AI workspace for questions, writing, planning, and creative ideas."
     ]
   }
 ]

@@ -633,3 +633,75 @@ textarea::placeholder { color: #777; }
   .topbar { background: #fff; }
   .sidebar.is-open { background: #fafafa; }
 }
+
+.tool-app { min-height: 100vh; background: #fff; color: #171717; }
+.tool-topbar { display: flex; min-height: 72px; align-items: center; justify-content: space-between; gap: 24px; padding: 12px max(24px, calc((100vw - 1120px) / 2)); border-bottom: 1px solid #e7e7e7; background: #fff; }
+.tool-topbar .brand { display: flex; flex: none; align-items: center; gap: 10px; color: inherit; text-decoration: none; }
+.tool-topbar .brand-mark { width: 30px; height: 38px; object-fit: contain; }
+.tool-topbar .brand-copy { display: grid; gap: 3px; }
+.tool-topbar .brand-copy strong { font-size: 17px; }
+.tool-topbar .brand-copy small { color: #666; font-family: 'DM Mono', monospace; font-size: 9px; letter-spacing: .08em; }
+.tool-nav { display: flex; align-items: center; gap: 22px; }
+.tool-nav a { color: #444; font-size: 13px; text-decoration: none; }
+.tool-nav a:hover, .tool-nav a[aria-current="page"] { color: #53763a; }
+.tool-share { min-height: 38px; padding: 0 12px; border: 1px solid #ddd; border-radius: 7px; background: #fff; color: #222; font-size: 12px; }
+.tool-share:hover, .result-actions button:hover:not(:disabled) { border-color: #aaa; background: #f5f5f5; }
+.tool-main { width: min(900px, calc(100% - 40px)); margin: 0 auto; padding: 58px 0 50px; }
+.tool-intro { max-width: 720px; margin-bottom: 30px; }
+.tool-eyebrow { margin: 0 0 12px; color: #53763a; font-family: 'DM Mono', monospace; font-size: 10px; font-weight: 700; letter-spacing: .12em; }
+.tool-intro h1 { max-width: none; margin: 0; font-size: clamp(36px, 6vw, 58px); line-height: 1.04; letter-spacing: -.055em; }
+.tool-intro h1 span { color: #53763a; }
+.tool-lead { max-width: 670px; margin: 17px 0 8px; color: #444; font-size: 18px; line-height: 1.6; }
+.tool-disclosure, .tool-footnote { color: #666; font-size: 12px; line-height: 1.6; }
+.tool-disclosure { margin: 0; }
+.tool-card { overflow: hidden; border: 1px solid #e2e2e2; border-radius: 14px; background: #fff; box-shadow: 0 12px 36px rgba(0, 0, 0, .07); }
+.tool-tabs { display: flex; gap: 4px; padding: 10px 12px 0; border-bottom: 1px solid #e7e7e7; background: #fafafa; }
+.tool-tabs button { position: relative; min-height: 44px; padding: 0 16px; border-radius: 7px 7px 0 0; background: transparent; color: #555; font-size: 13px; font-weight: 600; }
+.tool-tabs button[aria-selected="true"] { background: #fff; color: #171717; box-shadow: 0 -2px 0 #53763a inset; }
+.tool-tabs button:focus-visible, .tool-share:focus-visible, .tool-panel :focus-visible, .tool-submit-row button:focus-visible, .result-actions button:focus-visible { outline: 2px solid #53763a; outline-offset: 3px; }
+#toolForm { padding: 24px; }
+.tool-panel { display: grid; gap: 8px; }
+.tool-panel[hidden], #targetLanguageField[hidden], .tool-result[hidden], .fuel-status[hidden] { display: none; }
+.tool-panel label { margin-top: 6px; color: #222; font-size: 13px; font-weight: 700; }
+.tool-panel select, .tool-panel input, .tool-panel textarea { width: 100%; min-height: 44px; padding: 10px 12px; border: 1px solid #d5d5d5; border-radius: 7px; background: #fff; color: #171717; font: inherit; font-size: 14px; }
+.tool-panel textarea { min-height: 132px; resize: vertical; line-height: 1.55; }
+.tool-panel select { max-width: 100%; }
+.tool-panel select:focus, .tool-panel input:focus, .tool-panel textarea:focus { border-color: #53763a; outline: 2px solid rgba(83, 118, 58, .15); }
+.tool-panel textarea::placeholder, .tool-panel input::placeholder { color: #777; }
+.field-help { margin: -4px 0 2px; color: #666; font-size: 12px; line-height: 1.5; }
+.tool-submit-row { display: flex; min-height: 48px; align-items: center; justify-content: space-between; gap: 16px; margin-top: 20px; }
+.tool-status { margin: 0; color: #a13724; font-size: 12px; line-height: 1.5; }
+.tool-submit-row button { min-height: 44px; flex: none; padding: 0 17px; border-radius: 7px; background: #171717; color: #fff; font-size: 13px; font-weight: 700; }
+.tool-submit-row button:hover:not(:disabled) { background: #3a3a3a; }
+.tool-submit-row button:disabled, .result-actions button:disabled { cursor: not-allowed; opacity: .55; }
+.fuel-status { display: flex; align-items: center; gap: 12px; margin: 0 24px 20px; color: #53763a; font-size: 12px; }
+.fuel-status progress { width: min(250px, 40vw); height: 8px; accent-color: #53763a; }
+.tool-result { margin: 0 24px 24px; padding: 20px; border: 1px solid #e2e2e2; border-radius: 10px; background: #fafafa; }
+.result-heading { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding-bottom: 14px; border-bottom: 1px solid #e5e5e5; }
+.result-heading .tool-eyebrow { margin-bottom: 5px; }
+.result-heading h2 { margin: 0; font-size: 18px; letter-spacing: -.02em; }
+.result-actions { display: flex; flex-wrap: wrap; gap: 7px; }
+.result-actions button { min-height: 34px; padding: 0 10px; border: 1px solid #ddd; border-radius: 6px; background: #fff; color: #333; font-size: 11px; }
+.result-content { padding-top: 12px; color: #222; font-size: 14px; line-height: 1.65; overflow-wrap: anywhere; }
+.result-content p { margin: 0 0 12px; }
+.result-content h3 { margin: 17px 0 8px; font-size: 15px; }
+.result-content ul, .result-content ol { padding-left: 22px; }
+.result-content pre { overflow-x: auto; margin: 12px 0; padding: 15px; border: 1px solid #e1e1e1; border-radius: 8px; background: #f1f1f1; }
+.result-content code { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 12px; }
+.result-status { margin: 14px 0 0; color: #666; font-size: 11px; line-height: 1.5; }
+.tool-footnote { max-width: 800px; margin: 17px auto 0; }
+@media (max-width: 760px) {
+  .tool-topbar { min-height: 60px; gap: 10px; padding: 10px 16px; }
+  .tool-nav { display: none; }
+  .tool-share { min-height: 34px; padding: 0 9px; font-size: 11px; }
+  .tool-main { width: calc(100% - 30px); padding: 38px 0 32px; }
+  .tool-lead { font-size: 16px; }
+  #toolForm { padding: 18px; }
+  .tool-tabs { padding: 8px 8px 0; }
+  .tool-tabs button { min-height: 42px; flex: 1; padding: 0 5px; font-size: 11px; }
+  .tool-result { margin: 0 12px 12px; padding: 14px; }
+  .result-heading { align-items: flex-start; flex-direction: column; }
+  .result-actions { width: 100%; }
+  .result-actions button { flex: 1; }
+  .fuel-status { margin: 0 18px 18px; }
+}

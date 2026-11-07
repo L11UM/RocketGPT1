@@ -15,7 +15,7 @@ const articleUrlFor = (post) => `/blog/articles/${postSlug(post)}.html`;
 
 function updateMeta(post) {
   const url = new URL(articleUrlFor(post), window.location.origin);
-  const imageUrl = new URL('/rocketgpt-share.png', window.location.origin).href;
+  const imageUrl = new URL('/rocketgpt-share.png?v=text-code-nlp-20261106', window.location.origin).href;
   document.title = `${post.title} | RocketGPT Blog`;
   document.querySelector('meta[name="description"]').content = post.summary;
   document.querySelector('meta[property="og:type"]').content = 'article';
@@ -26,7 +26,7 @@ function updateMeta(post) {
   document.querySelector('meta[property="og:image:type"]').content = 'image/png';
   document.querySelector('meta[property="og:image:width"]').content = '1200';
   document.querySelector('meta[property="og:image:height"]').content = '630';
-  document.querySelector('meta[property="og:image:alt"]').content = 'Rocket 2.0 — a free AI chat workspace for sharper ideas and shareable content.';
+  document.querySelector('meta[property="og:image:alt"]').content = 'Rocket 2.0 — task-based computer code and natural language processing tools, not a chatbot.';
   document.querySelector('meta[name="twitter:title"]').content = document.title;
   document.querySelector('meta[name="twitter:description"]').content = post.summary;
   document.querySelector('meta[name="twitter:image"]').content = imageUrl;
