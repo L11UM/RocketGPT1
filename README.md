@@ -1,6 +1,6 @@
 # RocketGPT
 
-RocketGPT is a static website with browser-based AI tools and image generation. Rocket 2.0 is a task-based tool, not a chatbot: it writes text, generates computer code, and helps summarize, translate, rewrite, or find key details in text using a third-party AI model through Pollinations. It does not execute generated code or independently run external workflows. NALL-E uses Pollinations' public image service. RocketGPT has not trained or hosted the model powering Rocket 2.0.
+RocketGPT is a static website with browser-based AI tools and image generation. Rocket 2.0 is a task-focused AI tool powered by a third-party large language model through Pollinations. It writes text, generates computer code, and helps summarize, translate, rewrite, or find key details in text. It does not execute generated code or independently run external workflows. NALL-E uses Pollinations' public image service. RocketGPT has not trained or hosted the model powering Rocket 2.0.
 
 ## Run locally
 
@@ -37,7 +37,7 @@ The RocketGPT blog is at `blog.html`; dated product updates and daily editorial 
 
 The showcase-only merchandise preview is at `store.html`. It displays concept art for a RocketGPT hat, shirt, and hoodie; it does not take orders or payments.
 
-The Rocket 2.0 page is task-based rather than a chat interface. Its three tools write natural-sounding text, draft computer code in a selected programming language, and work with text you provide: summarize it, find its main topic or tone, translate it, pull out key details, or make it clearer. Each submission produces a standalone result; there is no multi-turn chat history. Results can be copied or downloaded as text. The provider's rate limit allows about one response per public IP every 30 seconds.
+The Rocket 2.0 page provides three focused tools powered by a large language model: write natural-sounding text, draft computer code in a selected programming language, and work with text you provide by summarizing, finding its main topic or tone, translating, pulling out key details, or making it clearer. Each submission produces a standalone result. Results can be copied or downloaded as text. The provider's rate limit allows about one response per public IP every 30 seconds.
 
 `nall-e.html` is RocketGPT's NALL-E text-to-image experience. It sends prompts directly from the browser to Pollinations' public image service and displays a downloadable result; no OpenAI key, Render image endpoint, or owner account is required. The provider controls availability and may rate-limit or reject requests. Prompts are sent to Pollinations, so users should not enter sensitive information. NALL-E uses a third-party image service rather than a model trained from scratch by RocketGPT.
 

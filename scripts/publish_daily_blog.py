@@ -79,7 +79,7 @@ DAILY_NOTES = (
         "summary": "A little context can turn a broad request into a more useful answer: explain the goal, the audience, and the format you need.",
         "body": [
             "Instead of asking for general ideas, describe where the ideas will be used and what a good result should accomplish. If you have constraints, include them up front.",
-            "If the answer is not quite right, say what to change. Prompting is a conversation; a clear follow-up can be more effective than starting over."
+            "If the answer is not quite right, say what to change. A clear follow-up can improve the result without starting over."
         ]
     },
     {
@@ -134,7 +134,9 @@ DAILY_NOTES = (
 
 
 def post_slug(post: dict) -> str:
-    title_slug = re.sub(r"[^a-z0-9]+", "-", post["title"].lower()).strip("-")
+    title_slug = re.sub(
+        r"[^a-z0-9]+", "-", post.get("slug", post["title"]).lower()
+    ).strip("-")
     return f'{post["date"]}-{title_slug}'
 
 
@@ -178,17 +180,17 @@ def generate_article_pages(posts_path: Path, articles_dir: Path) -> None:
   <meta property="og:title" content="{title} | RocketGPT Blog" />
   <meta property="og:description" content="{summary}" />
   <meta property="og:url" content="{url}" />
-  <meta property="og:image" content="{SITE_URL}/rocketgpt-share.png?v=text-code-nlp-20261106" />
+  <meta property="og:image" content="{SITE_URL}/rocketgpt-share.png?v=llm-tools-20261107" />
   <meta property="og:image:type" content="image/png" />
   <meta property="og:image:width" content="1200" />
   <meta property="og:image:height" content="630" />
-  <meta property="og:image:alt" content="Rocket 2.0 — easy-to-use text and computer code tools, not a chatbot." />
+  <meta property="og:image:alt" content="Rocket 2.0 — text and code tools powered by a large language model." />
   <meta property="article:published_time" content="{published.isoformat()}T00:00:00Z" />
   <meta property="article:section" content="{category}" />
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="{title} | RocketGPT Blog" />
   <meta name="twitter:description" content="{summary}" />
-  <meta name="twitter:image" content="{SITE_URL}/rocketgpt-share.png?v=text-code-nlp-20261106" />
+  <meta name="twitter:image" content="{SITE_URL}/rocketgpt-share.png?v=llm-tools-20261107" />
   <link rel="stylesheet" href="/site.css" />
   <link rel="stylesheet" href="/blog.css?v=3-editorial" />
   <title>{title} | RocketGPT Blog</title>

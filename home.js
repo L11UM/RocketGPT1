@@ -3,7 +3,7 @@ const shareButton = document.getElementById('shareRocket');
     shareButton.addEventListener('click', async () => {
       const shareData = {
         title: 'Rocket 2.0 — Turn ideas into attention',
-        text: 'Try Rocket 2.0 to write text, generate code, summarize, translate, or find key details—not chat.',
+        text: 'Try Rocket 2.0, powered by a large language model, to write text, generate code, summarize, translate, or find key details.',
         url: 'https://rocketgpt.net/'
       };
       try {

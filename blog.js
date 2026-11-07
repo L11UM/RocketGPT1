@@ -8,14 +8,14 @@ let allPosts = [];
 let selectedCategory = 'All';
 
 const postSlug = (post) => {
-  const titleSlug = post.title.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
+  const titleSlug = (post.slug || post.title).toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
   return `${post.date}-${titleSlug}`;
 };
 const articleUrlFor = (post) => `/blog/articles/${postSlug(post)}.html`;
 
 function updateMeta(post) {
   const url = new URL(articleUrlFor(post), window.location.origin);
-  const imageUrl = new URL('/rocketgpt-share.png?v=text-code-nlp-20261106', window.location.origin).href;
+  const imageUrl = new URL('/rocketgpt-share.png?v=llm-tools-20261107', window.location.origin).href;
   document.title = `${post.title} | RocketGPT Blog`;
   document.querySelector('meta[name="description"]').content = post.summary;
   document.querySelector('meta[property="og:type"]').content = 'article';
@@ -26,7 +26,7 @@ function updateMeta(post) {
   document.querySelector('meta[property="og:image:type"]').content = 'image/png';
   document.querySelector('meta[property="og:image:width"]').content = '1200';
   document.querySelector('meta[property="og:image:height"]').content = '630';
-  document.querySelector('meta[property="og:image:alt"]').content = 'Rocket 2.0 — easy-to-use text and computer code tools, not a chatbot.';
+  document.querySelector('meta[property="og:image:alt"]').content = 'Rocket 2.0 — text and code tools powered by a large language model.';
   document.querySelector('meta[name="twitter:title"]').content = document.title;
   document.querySelector('meta[name="twitter:description"]').content = post.summary;
   document.querySelector('meta[name="twitter:image"]').content = imageUrl;

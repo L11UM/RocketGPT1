@@ -190,7 +190,7 @@ async function handleChat(request, response) {
   } catch (error) {
     const message = error.name === 'TimeoutError'
       ? 'The AI request timed out. Please try again.'
-      : error.message || 'Invalid chat request.';
+      : error.message || 'Invalid AI request.';
     sendJson(response, error.name === 'TimeoutError' ? 504 : 502, { error: message });
   }
 }

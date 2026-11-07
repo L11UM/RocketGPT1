@@ -53,7 +53,7 @@ ADAPTER_PATH=adapters/runs/<experiment-id> sh scripts/start_local_demo.sh
 
 Open the local URL printed by the script in a browser. By default, the preview uses ports 3000 and 8080. It sends prompts only to the local model server; prompts are not sent to the public RocketGPT site or a hosted AI service. Keep the terminal open while using it, and press Ctrl+C there to stop the preview and any model server started by the script. If the matching MakingGPT model server is already running on your device, the script reuses it and leaves it running. To choose different available ports, run `MODEL_PORT=8081 WEB_PORT=3001 sh scripts/start_local_demo.sh`.
 
-The preview loads the Qwen2.5-1.5B-Instruct base model with your locally trained RocketGPT LoRA adapter. It is an early local prototype, not GPT-3 and not the model used by the public RocketGPT chat.
+The preview loads the Qwen2.5-1.5B-Instruct base model with your locally trained RocketGPT LoRA adapter. It is an early local prototype, not GPT-3 and not the model used by the public RocketGPT tools.
 
 ## Human-feedback training workflow
 

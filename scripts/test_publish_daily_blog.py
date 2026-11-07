@@ -6,6 +6,7 @@ from pathlib import Path
 import xml.etree.ElementTree as ET
 
 from scripts.publish_daily_blog import (
+    article_url,
     append_daily_post,
     generate_article_pages,
     update_sitemap,
@@ -88,6 +89,18 @@ class PublishDailyBlogTests(unittest.TestCase):
         )
         self.assertIn("A &lt;safe&gt; change &amp; launch", page)
         self.assertIn("Keep &lt;script&gt; text as content.", page)
+
+    def test_explicit_slug_preserves_existing_article_url_after_title_change(self):
+        post = {
+            "date": "2026-10-30",
+            "title": "A more reliable Rocket 2.0 experience",
+            "slug": "a-more-reliable-rocket-2-0-chat"
+        }
+
+        self.assertEqual(
+            article_url(post),
+            "https://rocketgpt.net/blog/articles/2026-10-30-a-more-reliable-rocket-2-0-chat.html"
+        )
 
     def test_adds_static_story_to_sitemap_without_duplicate_entries(self):
         sitemap_path = Path(self.temp_dir.name) / "sitemap.xml"

@@ -17,10 +17,10 @@
     "title": "How Rocket 2.0 uses a large language model",
     "image": "/blog/images/rocketgpt-update.svg",
     "imageAlt": "A small rocket following a green orbital path against a soft background.",
-    "summary": "Rocket 2.0 is an LLM-powered chat product: it sends prompts to a third-party large language model to generate replies.",
+    "summary": "Rocket 2.0 is a task-focused AI tool powered by a third-party large language model (LLM), which generates text from prompts.",
     "body": [
-      "Rocket 2.0 is a browser-based chat experience powered by a large language model (LLM), a type of AI model that generates text in response to prompts.",
-      "The public chat uses Pollinations' third-party AI service. RocketGPT has not trained or hosted the underlying model, and the service provider controls its availability and limits."
+      "Rocket 2.0 is a browser-based AI tool powered by a large language model (LLM), a type of AI model that generates text in response to prompts.",
+      "The tool uses Pollinations' third-party AI service and its large language model. RocketGPT has not trained or hosted the underlying model, and the service provider controls its availability and limits."
     ]
   },
   {
@@ -29,10 +29,10 @@
     "title": "Rocket 2.0 keeps its familiar name",
     "image": "/blog/images/rocketgpt-update.svg",
     "imageAlt": "A small rocket following a green orbital path against a soft background.",
-    "summary": "We are returning the public chat to its Rocket 2.0 name for now. Its features and third-party AI service remain unchanged.",
+    "summary": "We are returning the public AI tool to its Rocket 2.0 name for now. Its features and third-party AI service remain unchanged.",
     "body": [
-      "The public chat is back to being called Rocket 2.0. We are keeping the familiar name for now; this update changes the branding, not how the chat works.",
-      "Rocket 2.0 continues to use Pollinations' third-party AI service and its large language model, rather than a model trained or hosted by RocketGPT."
+      "The public AI tool is back to being called Rocket 2.0. We are keeping the familiar name for now; this update changes the branding, not how the tool works.",
+      "Rocket 2.0 continues to use Pollinations' third-party large language model, rather than a model trained or hosted by RocketGPT."
     ]
   },
   {
@@ -41,10 +41,10 @@
     "title": "A brief Rocket 3.0 rebrand",
     "image": "/blog/images/rocketgpt-update.svg",
     "imageAlt": "A small rocket following a green orbital path against a soft background.",
-    "summary": "The public chat briefly used the Rocket 3.0 name before returning to Rocket 2.0. The underlying service did not change.",
+    "summary": "The public AI tool briefly used the Rocket 3.0 name before returning to Rocket 2.0. The underlying service did not change.",
     "body": [
-      "The RocketGPT chat briefly used the Rocket 3.0 name. It has since returned to Rocket 2.0, the familiar name for the public chat.",
-      "The chat continues to send requests to Pollinations' third-party AI service. The brief rename did not introduce a model trained or hosted by RocketGPT."
+      "RocketGPT briefly used the Rocket 3.0 name for its AI tool. It has since returned to Rocket 2.0, its familiar name.",
+      "Rocket 2.0 continues to use Pollinations' third-party large language model. The brief rename did not introduce a model trained or hosted by RocketGPT."
     ]
   },
   {
@@ -53,7 +53,7 @@
     "title": "A brighter, simpler RocketGPT",
     "image": "/blog/images/rocketgpt-update.svg",
     "imageAlt": "A small rocket following a green orbital path against a soft background.",
-    "summary": "RocketGPT's homepage, Rocket 2.0 chat, and NALL-E now share a clean white look, with a page directory to make each experience easier to find.",
+    "summary": "RocketGPT's homepage, Rocket 2.0 tools, and NALL-E now share a clean white look, with a page directory to make each experience easier to find.",
     "body": [
       "The updated design brings a white background and clearer contrast across the full site, including the Rocket 2.0 creative workspace. The shared navigation now connects Home, Rocket 2.0, and NALL-E.",
       "RocketGPT is the company brand; Rocket 2.0 and NALL-E remain the names of the products. The design is intended to make those destinations easier to recognize and move between."
@@ -86,12 +86,13 @@
   {
     "date": "2026-10-30",
     "category": "Product update",
-    "title": "A more reliable Rocket 2.0 chat",
+    "title": "A more reliable Rocket 2.0 experience",
+    "slug": "a-more-reliable-rocket-2-0-chat",
     "image": "/blog/images/rocketgpt-update.svg",
     "imageAlt": "A small rocket following a green orbital path against a soft background.",
     "summary": "Rocket 2.0 now gives a clearer path through slow or failed responses, including a retry option that keeps your unsent message available.",
     "body": [
-      "Chat requests have a timeout, and when a request fails, Rocket keeps the message in the composer so it can be retried. Failed turns are not added to the conversation context.",
+      "Requests have a timeout, and when a generation fails, Rocket keeps the original instructions available to retry. Failed attempts are not included in later AI context.",
       "The AI provider still controls response quality and availability. These changes make failures easier to recover from, but cannot guarantee that an external service is always online."
     ]
   },
@@ -101,10 +102,10 @@
     "title": "A clearer identity for Rocket 2.0",
     "image": "/blog/images/rocketgpt-mark.svg",
     "imageAlt": "A green star surrounded by a thin circular orbit.",
-    "summary": "Rocket 2.0 became the public name for the chat experience, giving the product a more consistent identity across its landing page and app.",
+    "summary": "Rocket 2.0 became the public name for the large-language-model-powered tools, giving the product a more consistent identity across its landing page and app.",
     "body": [
-      "The naming update distinguishes the chat product, Rocket 2.0, from the RocketGPT company brand. The goal is to make the product easier to identify wherever people arrive on the site.",
-      "Rocket 2.0 is a browser-based AI workspace for questions, writing, planning, and creative ideas."
+      "The naming update distinguishes the Rocket 2.0 AI tool from the RocketGPT company brand. The goal is to make the product easier to identify wherever people arrive on the site.",
+      "Rocket 2.0 is a browser-based AI workspace powered by a large language model for writing, planning, and creative tasks."
     ]
   }
 ]
