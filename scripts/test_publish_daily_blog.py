@@ -56,6 +56,30 @@ class PublishDailyBlogTests(unittest.TestCase):
 
         self.assertEqual(posts[0]["date"], "2026-11-07")
 
+    def test_backfills_each_missed_daily_post(self):
+        append_daily_post(self.posts_path, date(2026, 11, 6))
+
+        self.assertTrue(append_daily_post(self.posts_path, date(2026, 11, 10)))
+        posts = json.loads(self.posts_path.read_text(encoding="utf-8"))
+        daily_dates = [
+            post["date"] for post in posts if post["category"] == "Daily note"
+        ]
+
+        self.assertEqual(
+            daily_dates,
+            ["2026-11-10", "2026-11-09", "2026-11-08", "2026-11-07", "2026-11-06"]
+        )
+
+        posts = [post for post in posts if post["date"] != "2026-11-08"]
+        self.posts_path.write_text(json.dumps(posts), encoding="utf-8")
+        self.assertTrue(append_daily_post(self.posts_path, date(2026, 11, 10)))
+        posts = json.loads(self.posts_path.read_text(encoding="utf-8"))
+        self.assertIn(
+            "2026-11-08",
+            [post["date"] for post in posts if post["category"] == "Daily note"]
+        )
+        self.assertFalse(append_daily_post(self.posts_path, date(2026, 11, 10)))
+
     def test_writes_rss_items_with_article_links_and_dates(self):
         feed_path = Path(self.temp_dir.name) / "feed.xml"
         write_rss_feed(self.posts_path, feed_path)

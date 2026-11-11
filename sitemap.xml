@@ -70,4 +70,24 @@
     <changefreq>yearly</changefreq>
     <priority>0.5</priority>
   </url>
+  <url>
+    <loc>https://rocketgpt.net/blog/articles/2026-11-10-use-nall-e-to-explore-a-visual-direction.html</loc>
+    <changefreq>yearly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://rocketgpt.net/blog/articles/2026-11-09-make-the-first-line-do-more-work.html</loc>
+    <changefreq>yearly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://rocketgpt.net/blog/articles/2026-11-08-give-a-draft-a-clearer-voice.html</loc>
+    <changefreq>yearly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://rocketgpt.net/blog/articles/2026-11-07-turn-a-big-goal-into-a-next-step.html</loc>
+    <changefreq>yearly</changefreq>
+    <priority>0.5</priority>
+  </url>
 </urlset>

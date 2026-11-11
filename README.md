@@ -33,7 +33,7 @@ The public homepage contains search-friendly information about Rocket 2.0, with 
 
 The homepage and Rocket 2.0 tools page include native sharing with a clipboard fallback, and use a 1200×630 branded social preview image when shared. No analytics or tracking are installed.
 
-The RocketGPT blog is at `blog.html`; dated product updates and daily editorial notes live in `blog/posts.json`. GitHub Actions runs `scripts/publish_daily_blog.py` daily, adds one editorial note from its curated rotation, regenerates `blog/feed.xml` and static story pages, updates `sitemap.xml`, and deploys the updated static site. Daily notes are not claims of new product releases.
+The RocketGPT blog is at `blog.html`; dated product updates and daily editorial notes live in `blog/posts.json`. GitHub Actions is scheduled to run `scripts/publish_daily_blog.py` daily, add an editorial note from its curated rotation, regenerate `blog/feed.xml` and static story pages, update `sitemap.xml`, and deploy the updated static site. If scheduled runs miss days, the next successful run fills in the missing daily notes. GitHub Actions must be enabled and the account must be in good standing for scheduled publishing and deployment. Daily notes are not claims of new product releases.
 
 The showcase-only merchandise preview is at `store.html`. It displays concept art for a RocketGPT hat, shirt, and hoodie; it does not take orders or payments.
 

@@ -1,5 +1,53 @@
 [
   {
+    "date": "2026-11-10",
+    "category": "Daily note",
+    "image": "/blog/images/daily-note.svg",
+    "imageAlt": "An open notebook with a green star drawn on its page.",
+    "title": "Use NALL-E to explore a visual direction",
+    "summary": "A helpful image prompt describes the subject, setting, mood, and composition—not just a list of objects.",
+    "body": [
+      "Start with the main subject and add a few details about light, color, framing, or style. Change one detail at a time when you want to explore alternatives.",
+      "NALL-E sends prompts to a public third-party image service. Avoid private information, and remember that service availability can vary."
+    ]
+  },
+  {
+    "date": "2026-11-09",
+    "category": "Daily note",
+    "image": "/blog/images/daily-note.svg",
+    "imageAlt": "An open notebook with a green star drawn on its page.",
+    "title": "Make the first line do more work",
+    "summary": "For a post or pitch, ask Rocket 2.0 for several opening lines that make the main idea clear without overpromising.",
+    "body": [
+      "Include the audience and the central point, then request a few different openings: direct, curious, and story-led. Seeing alternatives can make the strongest angle easier to spot.",
+      "Choose a hook that the rest of the piece can genuinely deliver on; clarity is more useful than a dramatic claim."
+    ]
+  },
+  {
+    "date": "2026-11-08",
+    "category": "Daily note",
+    "image": "/blog/images/daily-note.svg",
+    "imageAlt": "An open notebook with a green star drawn on its page.",
+    "title": "Give a draft a clearer voice",
+    "summary": "A draft is easier to improve when you name the audience, tone, and one thing you want readers to remember.",
+    "body": [
+      "Ask Rocket 2.0 to revise a paragraph for a specific audience and tone, then compare the revision with your original. A focused instruction usually gives you more useful options.",
+      "Keep your own judgment in the loop. Check the facts, preserve your intent, and make the final wording sound like you."
+    ]
+  },
+  {
+    "date": "2026-11-07",
+    "category": "Daily note",
+    "image": "/blog/images/daily-note.svg",
+    "imageAlt": "An open notebook with a green star drawn on its page.",
+    "title": "Turn a big goal into a next step",
+    "summary": "When a project feels too large, ask Rocket 2.0 to break it into small actions and identify the first one you can do today.",
+    "body": [
+      "Share the outcome you want, any deadline, and the resources or limits you are working with. Ask for a short sequence of steps and a realistic first task.",
+      "The plan is a starting point, not a guarantee. Review it against your actual schedule and revise it as the work changes."
+    ]
+  },
+  {
     "date": "2026-11-06",
     "category": "Daily note",
     "image": "/blog/images/daily-note.svg",

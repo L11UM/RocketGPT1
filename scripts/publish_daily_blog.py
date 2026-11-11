@@ -5,7 +5,7 @@ import argparse
 from email.utils import format_datetime
 from html import escape
 import json
-from datetime import date, datetime, time, timezone
+from datetime import date, datetime, time, timedelta, timezone
 from pathlib import Path
 import re
 import xml.etree.ElementTree as ET
@@ -276,21 +276,35 @@ def append_daily_post(posts_path: Path, posted_date: date) -> bool:
     if not isinstance(posts, list):
         raise ValueError(f"{posts_path} must contain a JSON array")
 
-    if any(
-        post.get("date") == posted_date.isoformat()
-        and post.get("category") == "Daily note"
+    daily_dates = {
+        date.fromisoformat(post["date"])
         for post in posts
-    ):
+        if post.get("category") == "Daily note"
+    }
+    if daily_dates:
+        next_date = min(daily_dates) + timedelta(days=1)
+    else:
+        next_date = posted_date
+
+    added_dates = []
+    while next_date <= posted_date:
+        if next_date not in daily_dates:
+            note = DAILY_NOTES[
+                (next_date - date(2026, 11, 6)).days % len(DAILY_NOTES)
+            ]
+            posts.insert(0, {
+                "date": next_date.isoformat(),
+                "category": "Daily note",
+                "image": "/blog/images/daily-note.svg",
+                "imageAlt": "An open notebook with a green star drawn on its page.",
+                **note
+            })
+            added_dates.append(next_date)
+        next_date += timedelta(days=1)
+
+    if not added_dates:
         return False
 
-    note = DAILY_NOTES[(posted_date - date(2026, 11, 6)).days % len(DAILY_NOTES)]
-    posts.insert(0, {
-        "date": posted_date.isoformat(),
-        "category": "Daily note",
-        "image": "/blog/images/daily-note.svg",
-        "imageAlt": "An open notebook with a green star drawn on its page.",
-        **note
-    })
     posts.sort(key=lambda post: post["date"], reverse=True)
     posts_path.write_text(
         f"{json.dumps(posts, ensure_ascii=False, indent=2)}\n",
@@ -360,7 +374,7 @@ def main() -> None:
     articles_dir = posts_path.parent / "articles"
     sitemap_path = posts_path.parent.parent / "sitemap.xml"
     if append_daily_post(posts_path, posted_date):
-        print(f"Added RocketGPT daily blog post for {posted_date.isoformat()}.")
+        print(f"Added missing RocketGPT daily blog posts through {posted_date.isoformat()}.")
     else:
         print(f"A daily blog post for {posted_date.isoformat()} already exists.")
     write_rss_feed(posts_path, feed_path)
