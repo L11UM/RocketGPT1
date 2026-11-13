@@ -1,5 +1,41 @@
 [
   {
+    "date": "2026-11-13",
+    "category": "Daily note",
+    "image": "/blog/images/daily-note.svg",
+    "imageAlt": "An open notebook with a green star drawn on its page.",
+    "title": "Make a prompt more specific",
+    "summary": "A little context can turn a broad request into a more useful answer: explain the goal, the audience, and the format you need.",
+    "body": [
+      "Instead of asking for general ideas, describe where the ideas will be used and what a good result should accomplish. If you have constraints, include them up front.",
+      "If the answer is not quite right, say what to change. A clear follow-up can improve the result without starting over."
+    ]
+  },
+  {
+    "date": "2026-11-12",
+    "category": "Daily note",
+    "image": "/blog/images/daily-note.svg",
+    "imageAlt": "An open notebook with a green star drawn on its page.",
+    "title": "Check an AI answer that matters",
+    "summary": "AI can be a useful starting point, but important details deserve a second look—especially facts, dates, and advice.",
+    "body": [
+      "Ask Rocket 2.0 to explain its reasoning or identify which parts need verification. Then check those claims against sources you trust.",
+      "Rocket 2.0's current free experience does not browse the web, so it cannot confirm live information. Do not rely on it for emergencies or professional advice."
+    ]
+  },
+  {
+    "date": "2026-11-11",
+    "category": "Daily note",
+    "image": "/blog/images/daily-note.svg",
+    "imageAlt": "An open notebook with a green star drawn on its page.",
+    "title": "Ask for options before choosing",
+    "summary": "When you are deciding between directions, ask Rocket 2.0 to compare the trade-offs using criteria that matter to you.",
+    "body": [
+      "Name the options and what you value—such as time, simplicity, or cost—and ask for a concise comparison. This can help surface questions you still need to answer.",
+      "The model may miss context or make mistakes. Use its comparison to support your decision, not to replace your own research."
+    ]
+  },
+  {
     "date": "2026-11-10",
     "category": "Daily note",
     "image": "/blog/images/daily-note.svg",
